@@ -16,7 +16,7 @@ class ProductClass
         //SQL
         $query = $conn->prepare("INSERT INTO Products (product_id, title, price, color, product_description, imagepath, stock, date_created, date_updated, is_published)
         VALUES ('?', '?', '?', '?', '?', '?', '?', '?', '?', '?')");
-        $query->bind_param('isdsssiddi', $pruduct_id, $title, $price, $color, $product_description, $imagepath, $stock, $date_created, $date_updated, $is_published, );
+        $query->bind_param('isdsssissi', $pruduct_id, $title, $price, $color, $product_description, $imagepath, $stock, $date_created, $date_updated, $is_published);
         $query->execute();
         $result = $query->get_result();
         $r = $result->fetch_array(MYSQLI_ASSOC);
@@ -57,6 +57,58 @@ class ProductClass
             echo "Error: " . $query . "<br>" . $conn->error;
         }
     }
-
+    //ADMIN Function
+    static function updateproduct($title)
+    {
+        //Varible title in database sent in by calling function
+        // Create connection
+        $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+        // Check connection
+        if ($conn->connect_error) 
+        {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        //SQL
+        $query = $conn->prepare("UPDATE products SET title, price, color, product_description, imagepath, stock, date_created, date_updated, is_published WHERE product_id=?");
+        $query->bind_param('sdsssissii', $title, $price, $color, $product_description, $imagepath, $stock, $date_created, $date_updated, $is_published, $product_id, );
+        $query->execute();
+        $result = $query->get_result();
+        $r = $result->fetch_array(MYSQLI_ASSOC);
+        //Return selected product in array 
+        if ($conn->query($query) === TRUE) 
+        {
+            echo "New record updated successfully";
+        }
+        else 
+        {
+            echo "Error: " . $query . "<br>" . $conn->error;
+        }
+    }
+    static function publishORnotproduct($title)
+    {
+        //Varible title in database sent in by calling function
+        // Create connection
+        $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+        // Check connection
+        if ($conn->connect_error) 
+        {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        //SQL
+        $query = $conn->prepare("UPDATE products SET is_published WHERE product_id=?");
+        $query->bind_param('ii', $is_published, $product_id);
+        $query->execute();
+        $result = $query->get_result();
+        $r = $result->fetch_array(MYSQLI_ASSOC);
+        //Return selected product in array 
+        if ($conn->query($query) === TRUE) 
+        {
+            echo "New record updated successfully";
+        }
+        else 
+        {
+            echo "Error: " . $query . "<br>" . $conn->error;
+        }
+    }
 }
 ?>
