@@ -92,7 +92,7 @@ class ProductClass
     }
     //ADMIN
     //ADMIN Function
-    static function ADMINaddproduct($pruduct_id, $title, $price, $color, $product_description, $imagepath, $stock, $date_created, $date_updated, $is_published)
+    static function ADMINaddproduct($product)
     {
         //Varibles in database sent in by calling function
         // Create connection
@@ -105,7 +105,7 @@ class ProductClass
         //SQL
         $query = $conn->prepare("INSERT INTO products (product_id, title, price, color, product_description, imagepath, stock, date_created, date_updated, is_published)
         VALUES ('?', '?', '?', '?', '?', '?', '?', '?', '?', '?')");
-        $query->bind_param('isdsssissi', $pruduct_id, $title, $price, $color, $product_description, $imagepath, $stock, $date_created, $date_updated, $is_published);
+        $query->bind_param('isdsssissi', $product['pruduct_id'], $product['title'], $product['price'], $product['color'], $product['product_description'], $product['imagepath'], $product['stock'], $product['date_created'], $product['date_updated'], $product['is_published']);
         $query->execute();
         $result = $query->get_result();
         $r = $result->fetch_array(MYSQLI_ASSOC);
@@ -132,7 +132,7 @@ class ProductClass
         return $r;
     }
     //ADMIN Function
-    static function ADMINupdateproduct($title)
+    static function ADMINupdateproduct($product)
     {
         //Varible title in database sent in by calling function
         // Create connection
@@ -144,7 +144,7 @@ class ProductClass
         }
         //SQL
         $query = $conn->prepare("UPDATE products SET title, price, color, product_description, imagepath, stock, date_created, date_updated, is_published WHERE product_id=?");
-        $query->bind_param('sdsssissii', $title, $price, $color, $product_description, $imagepath, $stock, $date_created, $date_updated, $is_published, $product_id, );
+        $query->bind_param('sdsssissii', $product['title'], $product['price'], $product['color'], $product['product_description'], $product['imagepath'], $product['stock'], $product['stock'], $product['date_created'], $product['date_updated'], $product['is_published'], $product['product_id']);
         $query->execute();
         $result = $query->get_result();
         $r = $result->fetch_array(MYSQLI_ASSOC);
