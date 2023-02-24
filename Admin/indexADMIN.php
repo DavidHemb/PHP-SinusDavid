@@ -1,7 +1,7 @@
 <?php 
 include('../Component/admin_header.php');
 require('../Classes/product.php');
-ProductClass::filldatabase($pruduct_id, $title, $price, $color, $product_description, $imagepath, $stock, $date_created, $date_updated, $is_published);
+ProductClass::addproduct($pruduct_id, $title, $price, $color, $product_description, $imagepath, $stock, $date_created, $date_updated, $is_published);
 ?>
     <body>
     
