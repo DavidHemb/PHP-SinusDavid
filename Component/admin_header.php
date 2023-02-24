@@ -11,7 +11,14 @@
         <link rel="stylesheet" href="/CSS/admin.css">
     </head>
 <header>
+    <h1>Sinus Admin Superduper Interface</h1>
     <nav>
-    <button type=""></button>    
+    <nav>
+         <form method="POST">
+            <input type="submit" name="Add New Product" value="Add New Product"></input>
+            <input type="submit" name="Delete Product" value="Delete Product"></input>
+            <input type="submit" name="Update Product" value="Update Product"></input>
+         </form>
+      </nav>
     </nav>
 </header>
