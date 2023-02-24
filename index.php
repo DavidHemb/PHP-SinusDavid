@@ -1,1 +1,1 @@
-Hej
+<?php include('./component/header.php')?>
