@@ -11,9 +11,9 @@ $action = filter_input(INPUT_POST,'action',FILTER_UNSAFE_RAW);
     <?php
     //echo var_dump($_POST['Add_New_Product']);
     // Selects input form
-    // if (isset($_POST['View All'])) {
-    //     include('./Admin/views/add_product.php');
-    // }
+    if (isset($_POST['View_All'])) {
+        include('./Admin/views/add_product.php');
+    }
     if (isset($_POST['Add_New_Product'])) {
         include('./views/add_product.php');
     }
@@ -38,16 +38,22 @@ $action = filter_input(INPUT_POST,'action',FILTER_UNSAFE_RAW);
 switch($action){
     //date('Y/m/d H:i')
    case 'add_product':
+
+    /**
+     * Adds product to the database from form.
+     * $title,
+    $price,
+    $color,
+    $product_description,
+    $imagepath,
+    $stock,
+    $date_created,
+    $date_updated,
+    $is_published
+     * 
+     */
     //    public function __construct(
-    //  $title,
-    //   $price,
-    //    $color,
-    //     $product_description,
-    //     $imagepath,
-    //      $stock,
-    //       $date_created,
-    //        $date_updated,
-    //         $is_published
+    
             $date = date('Y/m/d H:i');
 
             $new_product = new Product(

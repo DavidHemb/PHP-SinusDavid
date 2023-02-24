@@ -29,41 +29,84 @@ class Product
    {
       return $this->product_id;
    }
+
    public function get_title()
    {
       return $this->title;
    }
+
+   public function set_title($title){
+        $this->title = $title;
+   }
+
    public function get_price()
    {
       return $this->price;
    }
+
+   public function set_price($price){
+        $this->price = $price;
+   }
+
    public function get_color()
    {
       return $this->color;
    }
+
+   public function set_color($color){
+    $this->color = $color;
+   }
+
    public function get_product_description()
    {
       return $this->product_description;
    }
+
+
+   public function set_product_description($product_description){
+     $this->product_description = $product_description;
+   }
+
+
    public function get_imagepath()
    {
       return $this->imagepath;
    }
+
+   public function set_imagepath($imagepath){
+    $this ->imagepath= $imagepath;
+    
+   }
+
    public function get_stock()
    {
       return $this->stock;
+   }
+
+   public function set_stock($stock){
+    $this->stock = $stock;
    }
    public function get_date_created()
    {
       return $this->date_created;
    }
+ 
    public function get_date_updated()
    {
       return $this->date_updated;
    }
+
+   public function set_date_updated($date_updated){
+    $this->date_updated = $date_updated;
+   }
+
    public function get_is_published()
    {
       return $this->is_published;
+   }
+
+   public function set_is_published($is_published){
+    $this->is_published = $is_published;
    }
 
     //MAIN
@@ -129,7 +172,7 @@ class Product
         $result = $query->get_result();
         $r = $result->fetch_assoc();
         //Return selected product in array 
-        $r = new Product($r['pruduct_id'],['title'],['price'],['color'],['product_description'],['imagepath'],['stock'],['date_created'],['date_updated'],['is_published']);
+        $r = new Product($r['product_id'],['title'],['price'],['color'],['product_description'],['imagepath'],['stock'],['date_created'],['date_updated'],['is_published']);
         return $r;
     }
     //ADMIN Function
@@ -168,4 +211,3 @@ class Product
         $r = $result->fetch_array(MYSQLI_ASSOC);
     }
 }
-?>
