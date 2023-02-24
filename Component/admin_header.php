@@ -17,7 +17,7 @@
         <nav>
             <form method="POST">
                 <input type="submit" name="View All" value="View All"></input>
-                <input type="submit" name="Add New Product" value="Add New Product"></input>
+                <input type="submit" name="Add_New_Product" value="Add New Product"></input>
                 <input type="submit" name="Delete Product" value="Delete Product"></input>
                 <input type="submit" name="Update Product" value="Update Product"></input>
                 <input type="submit" name="Logout" value="Logout"></input>
