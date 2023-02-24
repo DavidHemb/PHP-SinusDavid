@@ -11,9 +11,8 @@ class Product
     public $date_created;
     public $date_updated;
     public $is_published;
-    public function __construct($product_id, $title, $price, $color, $product_description ,$imagepath, $stock, $date_created, $date_updated, $is_published)
+    public function __construct($title, $price, $color, $product_description ,$imagepath, $stock, $date_created, $date_updated, $is_published)
    {
-      $this->product_id = $product_id;
       $this->title = $title;
       $this->price = $price;
       $this->color = $color;
