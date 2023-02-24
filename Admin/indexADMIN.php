@@ -1,7 +1,7 @@
 <?php
 include('../Component/admin_header.php');
 require('../Classes/product.php');
-
+$action = filter_input(INPUT_POST,'action',FILTER_UNSAFE_RAW);
 ?>
 
 <body>
@@ -9,7 +9,7 @@ require('../Classes/product.php');
     <h2>Här visas massa skit!</h2>
 
     <?php
-    echo var_dump($_POST['Add_New_Product']);
+    //echo var_dump($_POST['Add_New_Product']);
     // Selects input form
     // if (isset($_POST['View All'])) {
     //     include('./Admin/views/add_product.php');
@@ -55,13 +55,13 @@ switch($action){
                 $_POST['price'],
                 $_POST['color'],
                 $_POST['product_description'],
-                $_POST[''],
+                "assets/img/products/hoodie-ash.png",
                 $_POST['stock'],
                 $date,
                 $date,
                 $_POST['published']
              );
-            $new_product->ADMINaddproduct($new_product);
+            $new_product->ADMINaddproduct();
          break;
 
 //    case 'find':

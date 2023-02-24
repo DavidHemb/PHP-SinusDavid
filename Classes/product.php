@@ -1,16 +1,18 @@
 <?php 
+require_once('../config.php');
 class Product
 {
-    public $product_id;
-    public $title;
-    public $price;
-    public $color;
-    public $product_description;
-    public $imagepath;
-    public $stock;
-    public $date_created;
-    public $date_updated;
-    public $is_published;
+    private $product_id;
+    private $title;
+    private $price;
+    private $color;
+    private $product_description;
+    private $imagepath;
+    private $stock;
+    private $date_created;
+    private $date_updated;
+    private $is_published;
+
     public function __construct($title, $price, $color, $product_description ,$imagepath, $stock, $date_created, $date_updated, $is_published)
    {
       $this->title = $title;
@@ -23,49 +25,47 @@ class Product
       $this->date_updated = $date_updated;
       $this->is_published = $is_published;
    }
-   public function product_id()
+   public function get_product_id()
    {
       return $this->product_id;
    }
-   public function title()
+   public function get_title()
    {
       return $this->title;
    }
-   public function price()
+   public function get_price()
    {
       return $this->price;
    }
-   public function color()
+   public function get_color()
    {
       return $this->color;
    }
-   public function product_description()
+   public function get_product_description()
    {
       return $this->product_description;
    }
-   public function imagepath()
+   public function get_imagepath()
    {
       return $this->imagepath;
    }
-   public function stock()
+   public function get_stock()
    {
       return $this->stock;
    }
-   public function date_created()
+   public function get_date_created()
    {
       return $this->date_created;
    }
-   public function date_updated()
+   public function get_date_updated()
    {
       return $this->date_updated;
    }
-   public function is_published()
+   public function get_is_published()
    {
       return $this->is_published;
    }
-}
-class ProductClass
-{
+
     //MAIN
     //MAIN Function
     static function selectproduct()
@@ -91,7 +91,7 @@ class ProductClass
     }
     //ADMIN
     //ADMIN Function
-    static function ADMINaddproduct($product)
+    public function ADMINaddproduct()
     {
         //Varibles in database sent in by calling function
         // Create connection
@@ -102,12 +102,14 @@ class ProductClass
             die("Connection failed: " . $conn->connect_error);
         }
         //SQL
-        $query = $conn->prepare("INSERT INTO products (product_id, title, price, color, product_description, imagepath, stock, date_created, date_updated, is_published)
-        VALUES ('?', '?', '?', '?', '?', '?', '?', '?', '?', '?')");
-        $query->bind_param('isdsssissi', $product['pruduct_id'], $product['title'], $product['price'], $product['color'], $product['product_description'], $product['imagepath'], $product['stock'], $product['date_created'], $product['date_updated'], $product['is_published']);
+        $test = $this->title;
+        $query = $conn->prepare("INSERT INTO products (title, price, color, product_description, imagepath, stock, date_created, date_updated, is_published)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $query->bind_param('sdsssissi', $this->title, $this->price, $this->color, $this->product_description, $this->imagepath, $this->stock, $this->date_created, $this->date_updated, $this->is_published);
         $query->execute();
-        $result = $query->get_result();
-        $r = $result->fetch_array(MYSQLI_ASSOC);
+
+        $conn->close();
+        
     }
     //ADMIN Function
     static function ADMINselectproduct($title)

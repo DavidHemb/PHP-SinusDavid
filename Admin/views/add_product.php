@@ -14,14 +14,17 @@
         <label for="product_description">Product Description:</label>
         <textarea id="product_description" name="product_description" rows="10" cols="33"></textarea>
 
-        <label for="title">Color:</label>
-        <input type="text" id="color" name="Color" required>
+        <label for="color">Color:</label>
+        <input type="text" id="color" name="color" required>
+        
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" required>
 
-        <label for="title">Stock:</label>
-        <input type="number" id="Stock" name="Stock" required>
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" name="stock" required>
 
-        <label for="cars">Publish now?</label>
-        <select id="cars" name="cars">
+        <label for="published">Publish now?</label>
+        <select id="published" name="published">
             <option value="1">Yes</option>
             <option value="0">No</option>
         </select>
