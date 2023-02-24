@@ -35,11 +35,11 @@ require('../Classes/product.php');
 
 
 // Handles input from hidden formaction above
-// switch($action){
-   
-//    case 'add_product':   
-                
-//          break;
+switch($action){
+    //date('Y/m/d H:i')
+   case 'add_product':
+            $new_product = new ProductClass();
+         break;
 
 //    case 'find':
         
@@ -54,7 +54,7 @@ require('../Classes/product.php');
 //    case 'collect':
       
 //          break; 
-// }
+}
 
 
 

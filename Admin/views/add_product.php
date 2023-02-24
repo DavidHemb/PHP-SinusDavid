@@ -22,8 +22,8 @@
 
         <label for="cars">Publish now?</label>
         <select id="cars" name="cars">
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
         </select>
 
         <button>Submit</button>
