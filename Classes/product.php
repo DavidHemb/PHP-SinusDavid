@@ -86,6 +86,7 @@ class ProductClass
         $result = $query->get_result();
         $r = $result->fetch_array(MYSQLI_ASSOC);
         //Return selected product in array 
+        $r = new Product($r['pruduct_id'],['title'],['price'],['color'],['product_description'],['imagepath'],['stock'],['date_created'],['date_updated'],['is_published']);
         return $r;
 
     }
@@ -125,10 +126,10 @@ class ProductClass
         $query->bind_param('s', $title);
         $query->execute();
         $result = $query->get_result();
-        $r = $result->fetch_array(MYSQLI_ASSOC);
+        $r = $result->fetch_assoc();
         //Return selected product in array 
+        $r = new Product($r['pruduct_id'],['title'],['price'],['color'],['product_description'],['imagepath'],['stock'],['date_created'],['date_updated'],['is_published']);
         return $r;
-
     }
     //ADMIN Function
     static function ADMINupdateproduct($title)
