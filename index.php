@@ -1,5 +1,6 @@
 <?php
 require('sinuslib.php');
+include('./component/header.php');
 $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
 if ($conn instanceof mysqli)
 {
