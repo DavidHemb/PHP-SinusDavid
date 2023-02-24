@@ -1,7 +1,7 @@
 <?php
 include('../Component/admin_header.php');
 require('../Classes/product.php');
-ProductClass::addproduct($pruduct_id, $title, $price, $color, $product_description, $imagepath, $stock, $date_created, $date_updated, $is_published);
+
 ?>
 
 <body>
@@ -9,34 +9,58 @@ ProductClass::addproduct($pruduct_id, $title, $price, $color, $product_descripti
     <h2>Här visas massa skit!</h2>
 
     <?php
-
+    echo var_dump($_POST['Add_New_Product']);
     // Selects input form
-    if (isset($_POST['View All'])) {
-        include('view/view_product.php');
+    // if (isset($_POST['View All'])) {
+    //     include('./Admin/views/add_product.php');
+    // }
+    if (isset($_POST['Add_New_Product'])) {
+        include('./views/add_product.php');
     }
-    if (isset($_POST['Add New Product'])) {
-        include('view/add_product.php');
-    }
-    if (isset($_POST['Delete Product'])) {
-        include('view/delete_product.php');
-    }
-    if (isset($_POST['Update Product'])) {
-        include('view/update_product.php');
-    }
-    if (isset($_POST['Find'])) {
-        include('view/find_product.php');
-    }
+    // if (isset($_POST['Delete Product'])) {
+    //     include('view/delete_product.php');
+    // }
+    // if (isset($_POST['Update Product'])) {
+    //     include('view/update_product.php');
+    // }
+    // if (isset($_POST['Find'])) {
+    //     include('view/find_product.php');
+    // }  
+    // if (isset($_POST["Logout"])) {
+    //     session_destroy();
+    //     unset($_SESSION);
+    // }
+
+
+
+
+// Handles input from hidden formaction above
+// switch($action){
+   
+//    case 'add_product':   
+                
+//          break;
+
+//    case 'find':
+        
+//          break;
+
+//    case 'move':
+
+//          break;
+
   
-    if (isset($_POST["Logout"])) {
-        session_destroy();
-        unset($_SESSION);
-    }
 
-    ?>
-
+//    case 'collect':
+      
+//          break; 
+// }
 
 
+
+
+?>
 
 </body>
 
-<?php include('./Component/admin_footer.php') ?>
+<?php include('../Component/admin_footer.php') ?>
