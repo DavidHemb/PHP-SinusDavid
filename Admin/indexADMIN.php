@@ -38,7 +38,30 @@ require('../Classes/product.php');
 switch($action){
     //date('Y/m/d H:i')
    case 'add_product':
-            $new_product = new ProductClass();
+    //    public function __construct(
+    //  $title,
+    //   $price,
+    //    $color,
+    //     $product_description,
+    //     $imagepath,
+    //      $stock,
+    //       $date_created,
+    //        $date_updated,
+    //         $is_published
+            $date = date('Y/m/d H:i');
+
+            $new_product = new Product(
+                $_POST['title'],
+                $_POST['price'],
+                $_POST['color'],
+                $_POST['product_description'],
+                $_POST[''],
+                $_POST['stock'],
+                $date,
+                $date,
+                $_POST['published']
+             );
+            $new_product->ADMINaddproduct($new_product);
          break;
 
 //    case 'find':
