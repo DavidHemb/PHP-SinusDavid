@@ -9,7 +9,9 @@
     <!-- <meta name="description" content="Admin"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.css">
-    <link rel="stylesheet" href="/CSS/admin.css">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="../CSS/admin.css">
 </head>
 <header>
     <h1>Sinus Admin Superduper Interface</h1>

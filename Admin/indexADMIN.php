@@ -4,7 +4,9 @@ require('../Classes/product.php');
 $action = filter_input(INPUT_POST,'action',FILTER_UNSAFE_RAW);
 ?>
 
-<body>
+<main>
+    
+
 
     <h2>Här visas massa skit!</h2>
 
@@ -12,7 +14,7 @@ $action = filter_input(INPUT_POST,'action',FILTER_UNSAFE_RAW);
     //echo var_dump($_POST['Add_New_Product']);
     // Selects input form
     if (isset($_POST['View_All'])) {
-        include('./Admin/views/add_product.php');
+        include('./views/view_products.php');
     }
     if (isset($_POST['Add_New_Product'])) {
         include('./views/add_product.php');
@@ -90,6 +92,6 @@ switch($action){
 
 ?>
 
-</body>
+</main>
 
 <?php include('../Component/admin_footer.php') ?>

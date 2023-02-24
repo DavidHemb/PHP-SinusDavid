@@ -29,6 +29,10 @@ class Product
    {
       return $this->product_id;
    }
+   
+   private function set_product_id($product_id){
+    $this->product_id = $product_id;
+   }
 
    public function get_title()
    {
@@ -89,6 +93,10 @@ class Product
    public function get_date_created()
    {
       return $this->date_created;
+   }
+
+   private function set_date_created($date_created){
+    $this->date_created = $date_created;
    }
  
    public function get_date_updated()
@@ -155,6 +163,41 @@ class Product
         
     }
     //ADMIN Function
+    //Loops all products in the productstable and returns and array of product objects.
+    static function ADMINviewProducts(){
+                 
+        // Create connection
+        $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);             
+
+        $sql = "SELECT * FROM products";
+        $result = $conn->query($sql);
+        $products = array();
+
+
+        /**
+         *    private $product_id;
+    private $title;
+    private $price;
+    private $color;
+    private $product_description;
+    private $imagepath;
+    private $stock;
+    private $date_created;
+    private $date_updated;
+    private $is_published;
+         */
+  
+        while ($row = $result->fetch_assoc()) {
+           
+           $product = new Product($row['title'], $row['price'], $row['color'], $row['product_description'], $row['imagepath'],$row['stock'], $row['date_created'], $row['date_updated'],$row['is_published']);
+           $product->set_product_id($row['product_id']);
+           $products[] = $product;
+        }
+        return $products;
+
+    }
+
+
     static function ADMINselectproduct($title)
     {
         //Varible title in database sent in by calling function
