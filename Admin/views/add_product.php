@@ -9,13 +9,14 @@
     <form method="post">
         <input type="hidden" name="action" value="add_product">
         <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required>
+        <input type="text" id="title" name="title" autofocus required>
 
         <label for="product_description">Product Description:</label>
         <textarea id="product_description" name="product_description" rows="10" cols="33"></textarea>
 
-        <label for="fileToUpload">Select image to upload:</label>
-        <input type="file" name="fileToUpload" id="fileToUpload">
+        
+        <label type="button" for="fileToUpload" class="getFileButton" >Select image</label>
+        <input type="file" name="fileToUpload" id="fileToUpload" style="visibility:hidden">
 
         <label for="color">Color:</label>
         <input type="text" id="color" name="color" required>
