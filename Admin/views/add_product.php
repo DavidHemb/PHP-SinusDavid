@@ -14,9 +14,12 @@
         <label for="product_description">Product Description:</label>
         <textarea id="product_description" name="product_description" rows="10" cols="33"></textarea>
 
+        <label for="fileToUpload">Select image to upload:</label>
+        <input type="file" name="fileToUpload" id="fileToUpload">
+
         <label for="color">Color:</label>
         <input type="text" id="color" name="color" required>
-        
+
         <label for="price">Price:</label>
         <input type="number" id="price" name="price" required>
 
