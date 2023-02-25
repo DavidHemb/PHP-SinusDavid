@@ -26,7 +26,7 @@
             <td><?= $new_product->get_product_description(); ?></td>
             <td><?= $new_product->get_color(); ?></td>
             <td><?= $new_product->get_stock(); ?></td>
-            <td><?= $new_product->get_price(); ?></td>
+            <td><?= $currencyFormatter->formatCurrency($new_product->get_price(), "SEK"); ?></td>
             <?php if ($new_product->get_is_published() == 1) { ?>
                 <td>Yes</td>
             <?php } else { ?>

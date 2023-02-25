@@ -17,7 +17,7 @@
         <p>Only <strong>JPG, JPEG, PNG</strong> & <strong>GIF</strong> files are allowed.</p>
         <p>Max size: <em>2Mb</em></p>
         <label type="button" for="fileToUpload" class="getFileButton" >Select image</label>
-        <input type="file" name="fileToUpload" id="fileToUpload" style="visibility:hidden">
+        <input type="file" name="fileToUpload" id="fileToUpload" style="visibility:hidden" required>
 
         <label for="color">Color:</label>
         <input type="text" id="color" name="color" required>

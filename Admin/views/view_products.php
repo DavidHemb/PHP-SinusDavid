@@ -33,7 +33,7 @@ $products = Product::ADMINviewProducts();
                 <td><?= $products[$i]->get_product_description(); ?></td>
                 <td><?= $products[$i]->get_color(); ?></td>
                 <td><?= $products[$i]->get_stock(); ?></td>
-                <td><?= $products[$i]->get_price(); ?></td>
+                <td><?= $currencyFormatter->formatCurrency($products[$i]->get_price(), "SEK") ; ?></td>
                 <?php if($products[$i]->get_is_published() == 1){?>
                 <td>Yes</td>
                 <?php } else{ ?>

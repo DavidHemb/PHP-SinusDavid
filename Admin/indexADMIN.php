@@ -1,6 +1,7 @@
 <?php
 include('../Component/admin_header.php');
 require('../Classes/product.php');
+require_once('../config.php');
 
 $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
 
