@@ -6,7 +6,7 @@
 
 <fieldset>
     <legend>Add new product!</legend>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="action" value="add_product">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" autofocus required>
