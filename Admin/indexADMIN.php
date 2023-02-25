@@ -3,14 +3,10 @@ include('../Component/admin_header.php');
 require('../Classes/product.php');
 
 $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
+
 ?>
 
 <main>
-
-
-
-    <h2>Här visas massa skit!</h2>
-
     <?php
     //echo var_dump($_POST['Add_New_Product']);
     // Selects input form
@@ -66,7 +62,6 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
             if ($action == "add_product") {
                 $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
                 if ($check !== false) {
-                    echo "File is an image - " . $check["mime"] . ".";
                     $uploadOk = 1;
                 } else {
                     echo "File is not an image.";
@@ -77,21 +72,26 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
             // Check if file already exists
             if (file_exists($target_file)) {
                 echo "Sorry, file already exists.";
+                //try again
                 $uploadOk = 0;
+                //Use existing file
             }
 
-            // Check file size
-            if ($_FILES["fileToUpload"]["size"] > 500000) {
-                echo "Sorry, your file is too large.";
-                $uploadOk = 0;
+            // Check file size - max filesize allowed is 2Mb
+            if ($_FILES["fileToUpload"]["size"] > 2097153) { ?>
+                <h4>Sorry, your file is too large - max filesize allowed for product images is 2Mb</h4> echo 
+                <?php $uploadOk = 0;
             }
 
             // Allow certain file formats
             if (
                 $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                 && $imageFileType != "gif"
-            ) {
-                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            ) {?>
+                
+                <h4>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</h4> echo 
+                <?php
+                
                 $uploadOk = 0;
             }
 
@@ -111,19 +111,21 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
 
             if($uploadOk){
                 $date = date('Y/m/d H:i');
-                $target_file = cleanFilePath($target_file);
+                $web_filePath = webFilePath($target_file);
                 $new_product = new Product(
                     $_POST['title'],
                     $_POST['price'],
                     $_POST['color'],
                     $_POST['product_description'],
-                    $target_file,
+                    $web_filePath,
                     $_POST['stock'],
                     $date,
                     $date,
                     $_POST['published']
                 );
                 $new_product->ADMINaddproduct();
+
+                include('./views/new_product_comfirmation.php');
             }
            
             break;
@@ -152,7 +154,7 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
 
 <?php include('../Component/admin_footer.php') ?>
 <?php 
-    function cleanFilePath($filePath){
+    function webFilePath($filePath){
         $possition = strripos($filePath,"assets");
         $cleanPath = substr($filePath,$possition);
         return $cleanPath;

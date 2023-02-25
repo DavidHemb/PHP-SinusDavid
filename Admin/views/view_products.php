@@ -3,7 +3,7 @@
 $products = Product::ADMINviewProducts();
 
 ?>
-
+<h3>Products</h3>
 <table>
     <thead>
         <tr>
