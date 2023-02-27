@@ -12,11 +12,13 @@ class Category
         $this->description = $description;
     }
 
-    private function set_category_id($category_id){
+    private function set_category_id($category_id)
+    {
         $this->category_id = $category_id;
     }
 
-    public function get_category_id(){
+    public function get_category_id()
+    {
         return $this->category_id;
     }
 
@@ -46,7 +48,7 @@ class Category
         $sql = "SELECT * FROM category";
         $result = $conn->query($sql);
         $categories = array();
-    
+
 
         while ($row = $result->fetch_assoc()) {
 
@@ -80,13 +82,12 @@ class Category
             VALUES (?, ?)");
             $query->bind_param('ss', $this->title, $this->description);
             $query->execute();
-
         }
 
         $conn->close();
         return $titleExist;
     }
-    public function updatecatagory()
+    public static function UpdateCategory($id, $title, $description)
     {
         // Create connection
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
@@ -95,17 +96,18 @@ class Category
             die("Connection failed: " . $conn->connect_error);
         }
 
+        $query = "UPDATE category SET title='$title', description='$description' WHERE category_id=$id";
 
+        if ($conn->query($query) === TRUE) {
+            return "Categorry updated successfully";
+        } else {
+            echo "Error updating record: " . $conn->error;
+        }
 
-
-        //SQL
-        $query = $conn->prepare("UPDATE category 
-        SET(`title`=?, `description`=?");
-        $query->bind_param('ss', $title, $description);
-        $query->execute();
         $conn->close();
     }
-    public function deletecatagory()
+
+    public static function deletecatagory($category_id)
     {
         // Create connection
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
@@ -114,8 +116,8 @@ class Category
             die("Connection failed: " . $conn->connect_error);
         }
         //SQL
-        $query = $conn->prepare("DELETE FROM category WHERE `title`=?");
-        $query->bind_param('s', $title);
+        $query = $conn->prepare("DELETE FROM category WHERE `category_id`=?");
+        $query->bind_param('i', $category_id);
         $query->execute();
         $conn->close();
     }

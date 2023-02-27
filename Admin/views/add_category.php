@@ -11,9 +11,9 @@ include('./views/edit_categories.php');
         <label for="category_title">Title:</label>
         <input type="text" id="category_title" name="category_title" autofocus required>
 
-        <label for="category_description">category Description:</label>
+        <label for="category_description">Description:</label>
         <textarea id="category_description" name="category_description" rows="10" cols="33"></textarea>
-        
+        <br>
         <button>Submit</button>
     </form>
 </fieldset>

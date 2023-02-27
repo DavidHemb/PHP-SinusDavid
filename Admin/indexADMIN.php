@@ -36,8 +36,14 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
         include('./views/delete_category.php');
     }
     if (isset($_POST['update_category'])) {
+        include('./views/select_category.php');
+    }
+    if($action == 'select_category')
+    {
         include('./views/update_category.php');
     }
+        
+    
 
 
 
@@ -116,7 +122,7 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
             ) { ?>
 
                 <h4>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</h4> echo
-    <?php
+            <?php
 
                 $uploadOk = 0;
             }
@@ -155,31 +161,32 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
             }
 
             break;
-      
+
 
         case 'add_category':
 
             $new_category =  new Category($_POST['category_title'], $_POST['category_description']);
 
-            if($new_category->createcatagory() == 0){ ?>
+            if ($new_category->createcatagory() == 0) { ?>
                 <h3>Title <?php echo $new_category->get_title(); ?> already exsist, please try again!</h3>
-            <?php }
-            else{
+            <?php } else {
                 $new_category->createcatagory(); ?>
                 <h3>Title <?php echo $new_category->get_title(); ?> created! </h3>
-            <?php }
+    <?php }
 
             break;
 
-            //    case 'move':
+        case 'update_category':
 
-            //          break;
+            $result = Category::UpdateCategory($_POST['category_id'], $_POST['newTitle'], $_POST['newDescription']); ?>
+            <h3> <?php echo $result ?> </h3>
+            <?php break;
 
 
 
-            //    case 'collect':
+               case 'collect':
 
-            //          break; 
+                     break; 
     }
 
 
