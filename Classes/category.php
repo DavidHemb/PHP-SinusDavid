@@ -1,6 +1,6 @@
 <?php 
 require_once('../config.php');
-class Catagories
+class Category
 {
     private $title;
     private $description;
@@ -37,7 +37,7 @@ class Catagories
         //SQL
         $query = $conn->prepare("INSERT INTO category (`title`, `description`)
         VALUES (?, ?)");
-        $query->bind_param('ss', $title, $description);
+        $query->bind_param('ss', $this->title, $this->description);
         $query->execute();
         $conn->close();
     }

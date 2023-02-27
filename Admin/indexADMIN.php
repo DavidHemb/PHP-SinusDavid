@@ -1,6 +1,7 @@
 <?php
 include('../Component/admin_header.php');
-require('../Classes/product.php');
+require_once('../Classes/product.php');
+require_once('../Classes/category.php');
 require_once('../config.php');
 
 $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
@@ -22,7 +23,6 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
     }
     if (isset($_POST['Edit_categories'])) {
         include('./views/edit_categories.php');
-        
     }
 
     //EDIT CATEGORY MENU!!
@@ -38,8 +38,8 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
     if (isset($_POST['update_category'])) {
         include('./views/update_category.php');
     }
-    
-  
+
+
 
 
     // if (isset($_POST['Delete Product'])) {
@@ -116,7 +116,7 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
             ) { ?>
 
                 <h4>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</h4> echo
-            <?php
+    <?php
 
                 $uploadOk = 0;
             }
@@ -156,11 +156,12 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
 
             break;
 
-    //     case 'get_category_menu':
-          
+        case 'add_category':
 
+            $new_category =  new Category($_POST['category_title'], $_POST['category_description']);
+            $new_category->createcatagory();
 
-    // break;
+            break;
 
             //    case 'move':
 
