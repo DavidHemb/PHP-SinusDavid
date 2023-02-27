@@ -45,7 +45,7 @@ class Category
         // Create connection
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
 
-        $sql = "SELECT * FROM category";
+        $sql = "SELECT * FROM category order BY title";
         $result = $conn->query($sql);
         $categories = array();
 
@@ -59,6 +59,26 @@ class Category
         return $categories;
     }
 
+    private static function TitleExists($title){
+
+        $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $titleToCheck = $title;
+
+        $sql = "SELECT * FROM category WHERE title = '$titleToCheck'";
+        $titleCheck = $conn->query($sql);
+        $titleExist = false;
+        
+        if ($titleCheck->num_rows > 0) {
+            $titleExist = true;
+        }
+        return $titleExist;
+    }
+
     public function createcatagory()
     {
         // Create connection
@@ -68,14 +88,11 @@ class Category
             die("Connection failed: " . $conn->connect_error);
         }
 
-        //Check if category exists
-        $titleToCheck = $this->get_title();
-        $sql = "SELECT * FROM category WHERE title = '$titleToCheck'";
-        $titleCheck = $conn->query($sql);
-        $titleExist = 1;
+        //Check if category title exists in DB
+        $titleExist = true;
 
-        if ($titleCheck->num_rows > 0) {
-            $titleExist = 0;
+        if (Category::TitleExists($this->get_title())) {
+            $titleExist = false;
         } else {
             //SQL
             $query = $conn->prepare("INSERT INTO category (`title`, `description`)
@@ -85,9 +102,10 @@ class Category
         }
 
         $conn->close();
-        return $titleExist;
+        return (bool)$titleExist;
     }
-    public static function UpdateCategory($id, $title, $description)
+
+    public static function UpdateCategory($id, $description)
     {
         // Create connection
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
@@ -95,19 +113,30 @@ class Category
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-
-        $query = "UPDATE category SET title='$title', description='$description' WHERE category_id=$id";
-
-        if ($conn->query($query) === TRUE) {
-            return "Categorry updated successfully";
-        } else {
-            echo "Error updating record: " . $conn->error;
-        }
+        $titleExist = false;
+       
+       
+            
+            $query = "UPDATE category SET description='$description' WHERE category_id=$id";
+            
+            if ($conn->query($query) === TRUE) {
+            
+            } else {
+                echo "Error updating record: " . $conn->error;
+            }
+       
 
         $conn->close();
+        return (bool)$titleExist;
     }
 
-    public static function deletecatagory($category_id)
+    public static function OverwriteCategory($id, $description){
+
+    }
+
+   
+
+    public static function DeleteCategory($category_id)
     {
         // Create connection
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
