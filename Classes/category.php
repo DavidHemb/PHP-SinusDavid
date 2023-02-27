@@ -5,23 +5,19 @@ class Category
     private $category_id;
     private $title;
     private $description;
-
     public function __construct($title, $description)
     {
         $this->title = $title;
         $this->description = $description;
     }
-
     private function set_category_id($category_id)
     {
         $this->category_id = $category_id;
     }
-
     public function get_category_id()
     {
         return $this->category_id;
     }
-
     public function get_title()
     {
         return $this->title;
@@ -38,7 +34,6 @@ class Category
     {
         $this->description = $description;
     }
-
     public static function ViewCategory()
     {
 
@@ -58,7 +53,6 @@ class Category
         }
         return $categories;
     }
-
     public function createcatagory()
     {
         // Create connection

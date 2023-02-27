@@ -13,11 +13,11 @@ if ($conn instanceof mysqli){?>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./CSS/main.css">
-        <title>Park</title>
+        <title>SINUS SKATEOARDS</title>
     </head>
     <body>
         <h1 class="SINUS">SINUS Skateboards</h1>
-        <h2 style="color: white; text-align: right;">(filter)</h2>
+        <a class="filter" href="indexfilter.php">FILTER</a>
     <?php 
     for ($i = 0; $i < count($products); $i++) 
     {  

@@ -43,3 +43,10 @@ body{
     border: 2px solid gray;
     border-radius: 8px;
 }
+.filter{
+    color: white;
+    text-align: right;
+    text-decoration: none;
+    text-decoration: solid;
+    font-size: 40px;
+}

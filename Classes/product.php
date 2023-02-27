@@ -1,5 +1,4 @@
 <?php
-
 class Product
 {
     private $product_id;
@@ -14,7 +13,6 @@ class Product
     private $is_published;
     //Array that contains categories that the product is part of.
     private $categories;
-
     public function __construct($title, $price, $color, $product_description, $imagepath, $stock, $date_created, $date_updated, $is_published)
     {
         $this->title = $title;
@@ -31,70 +29,55 @@ class Product
     {
         return $this->product_id;
     }
-
     private function set_product_id($product_id)
     {
         $this->product_id = $product_id;
     }
-
     public function get_title()
     {
         return $this->title;
     }
-
     public function set_title($title)
     {
         $this->title = $title;
     }
-
     public function get_price()
     {
         return $this->price;
        
     }
-
     public function set_price($price)
     {
         $this->price = $price;
     }
-
     public function get_color()
     {
         return $this->color;
     }
-
     public function set_color($color)
     {
         $this->color = $color;
     }
-
     public function get_product_description()
     {
         return $this->product_description;
     }
-
-
     public function set_product_description($product_description)
     {
         $this->product_description = $product_description;
     }
-
-
     public function get_imagepath()
     {
         return $this->imagepath;
     }
-
     public function set_imagepath($imagepath)
     {
         $this->imagepath = $imagepath;
     }
-
     public function get_stock()
     {
         return $this->stock;
     }
-
     public function set_stock($stock)
     {
         $this->stock = $stock;
@@ -103,42 +86,34 @@ class Product
     {
         return $this->date_created;
     }
-
     private function set_date_created($date_created)
     {
         $this->date_created = $date_created;
     }
-
     public function get_date_updated()
     {
         return $this->date_updated;
     }
-
     public function set_date_updated($date_updated)
     {
         $this->date_updated = $date_updated;
     }
-
     public function get_is_published()
     {
         return $this->is_published;
     }
-
     public function set_is_published($is_published)
     {
         $this->is_published = $is_published;
     }
-
     public function get_categories()
     {
         return $this->categories;
     }
-
     public function set_categories($categories)
     {
         $this->categories[] = $categories;
     }
-
     //MAIN
     //MAIN Function
     static function selectproduct()
@@ -201,10 +176,6 @@ class Product
         }
         return $products;
     }
-
-
-
-
     static function ADMINselectproduct($title)
     {
         //Varible title in database sent in by calling function
