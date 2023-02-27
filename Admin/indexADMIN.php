@@ -5,12 +5,15 @@ require_once('../config.php');
 
 $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
 
+
 ?>
 
 <main>
     <?php
     //echo var_dump($_POST['Add_New_Product']);
     // Selects input form
+
+    //MAIN MENU!!
     if (isset($_POST['View_All'])) {
         include('./views/view_products.php');
     }
@@ -18,8 +21,27 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
         include('./views/add_product.php');
     }
     if (isset($_POST['Edit_categories'])) {
-        header('Location: ./views/edit_categories.php');
+        include('./views/edit_categories.php');
+        
     }
+
+    //EDIT CATEGORY MENU!!
+    if (isset($_POST['view_categories'])) {
+        include('./views/view_category.php');
+    }
+    if (isset($_POST['create_category'])) {
+        include('./views/add_category.php');
+    }
+    if (isset($_POST['delete_category'])) {
+        include('./views/delete_category.php');
+    }
+    if (isset($_POST['update_category'])) {
+        include('./views/update_category.php');
+    }
+    
+  
+
+
     // if (isset($_POST['Delete Product'])) {
     //     include('view/delete_product.php');
     // }
@@ -56,7 +78,7 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
             $is_published
              * 
              */
-            
+
             $target_dir = "../assets/img/products/";
             $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
             $uploadOk = 1;
@@ -83,19 +105,19 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
 
             // Check file size - max filesize allowed is 2Mb
             if ($_FILES["fileToUpload"]["size"] > 2097153) { ?>
-                <h4>Sorry, your file is too large - max filesize allowed for product images is 2Mb</h4> echo 
-                <?php $uploadOk = 0;
+                <h4>Sorry, your file is too large - max filesize allowed for product images is 2Mb</h4> echo
+            <?php $uploadOk = 0;
             }
 
             // Allow certain file formats
             if (
                 $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                 && $imageFileType != "gif"
-            ) {?>
-                
-                <h4>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</h4> echo 
-                <?php
-                
+            ) { ?>
+
+                <h4>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</h4> echo
+            <?php
+
                 $uploadOk = 0;
             }
 
@@ -113,7 +135,7 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
 
             var_dump($uploadOk);
 
-            if($uploadOk){
+            if ($uploadOk) {
                 $date = date('Y/m/d H:i');
                 $web_filePath = webFilePath($target_file);
                 $new_product = new Product(
@@ -131,12 +153,14 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
 
                 include('./views/new_product_comfirmation.php');
             }
-           
+
             break;
 
-            //    case 'find':
+    //     case 'get_category_menu':
+          
 
-            //          break;
+
+    // break;
 
             //    case 'move':
 
@@ -157,10 +181,11 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
 </main>
 
 <?php include('../Component/admin_footer.php') ?>
-<?php 
-    function webFilePath($filePath){
-        $possition = strripos($filePath,"assets");
-        $cleanPath = substr($filePath,$possition);
-        return $cleanPath;
-    }
+<?php
+function webFilePath($filePath)
+{
+    $possition = strripos($filePath, "assets");
+    $cleanPath = substr($filePath, $possition);
+    return $cleanPath;
+}
 ?>
