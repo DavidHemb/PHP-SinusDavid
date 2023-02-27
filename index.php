@@ -42,7 +42,7 @@ if ($conn instanceof mysqli){?>
                 <form action="shoppingcart.php" method="POST">
                 <input style="visibility:hidden" type="text" name ="INDEX" value="<?php echo $i ?>">
                     <p></p>
-                    <input class="button" style="float: right; background-color: green; margin-top: -135;" type="submit" value="Buy now">
+                    <input class="button" style="float: right; background-color: green; margin-top: -125;" type="submit" value="Buy now">
                 </form>
             </tr>
         </div>  
