@@ -1,7 +1,7 @@
 <?php
 require_once('../Classes/user.php');
-$inputusername = strtoupper($_POST['username']);
-$inputpassword = strtoupper($_POST['password']);
+$inputusername = strtolower($_POST['username']);
+$inputpassword = strtolower($_POST['password']);
 if ($inputusername != null)
 {
     $FoundUser = User::selectuser($inputusername);
