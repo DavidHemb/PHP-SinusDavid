@@ -59,7 +59,8 @@ class Category
         return $categories;
     }
 
-    private static function TitleExists($title){
+    private static function TitleExists($title)
+    {
 
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
         // Check connection
@@ -72,7 +73,7 @@ class Category
         $sql = "SELECT * FROM category WHERE title = '$titleToCheck'";
         $titleCheck = $conn->query($sql);
         $titleExist = false;
-        
+
         if ($titleCheck->num_rows > 0) {
             $titleExist = true;
         }
@@ -113,28 +114,16 @@ class Category
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-        $titleExist = false;
-       
-       
-            
-            $query = "UPDATE category SET description='$description' WHERE category_id=$id";
-            
-            if ($conn->query($query) === TRUE) {
-            
-            } else {
-                echo "Error updating record: " . $conn->error;
-            }
-       
 
+        $query = "UPDATE category SET description='$description' WHERE category_id=$id";
+
+        if ($conn->query($query) === TRUE) {
+        } else {
+            echo "Error updating record: " . $conn->error;
+        }
         $conn->close();
-        return (bool)$titleExist;
     }
 
-    public static function OverwriteCategory($id, $description){
-
-    }
-
-   
 
     public static function DeleteCategory($category_id)
     {
