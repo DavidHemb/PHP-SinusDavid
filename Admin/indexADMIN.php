@@ -155,11 +155,19 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
             }
 
             break;
+      
 
         case 'add_category':
 
             $new_category =  new Category($_POST['category_title'], $_POST['category_description']);
-            $new_category->createcatagory();
+
+            if($new_category->createcatagory() == 0){ ?>
+                <h3>Title <?php echo $new_category->get_title(); ?> already exsist, please try again!</h3>
+            <?php }
+            else{
+                $new_category->createcatagory(); ?>
+                <h3>Title <?php echo $new_category->get_title(); ?> created! </h3>
+            <?php }
 
             break;
 
