@@ -22,6 +22,7 @@
                 <input type="submit" name="Add_New_Product" value="Add New Product"></input>
                 <input type="submit" name="Delete Product" value="Delete Product"></input>
                 <input type="submit" name="Update Product" value="Update Product"></input>
+                <input type="submit" name="Edit_categories" value="Edit Categories"></input>
                 <input type="submit" name="Logout" value="Logout"></input>
             </form>
         </nav>

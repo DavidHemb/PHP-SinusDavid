@@ -12,6 +12,8 @@ class Product
     private $date_created;
     private $date_updated;
     private $is_published;
+    //Array that contains categories that the product is part of.
+    private $categories;
 
     public function __construct($title, $price, $color, $product_description, $imagepath, $stock, $date_created, $date_updated, $is_published)
     {
@@ -127,6 +129,16 @@ class Product
         $this->is_published = $is_published;
     }
 
+    public function get_categories()
+    {
+        return $this->categories;
+    }
+
+    public function set_categories($categories)
+    {
+        $this->categories[] = $categories;
+    }
+
     //MAIN
     //MAIN Function
     static function selectproduct()
@@ -179,20 +191,7 @@ class Product
         $sql = "SELECT * FROM products";
         $result = $conn->query($sql);
         $products = array();
-
-
-        /**
-         *    private $product_id;
-    private $title;
-    private $price;
-    private $color;
-    private $product_description;
-    private $imagepath;
-    private $stock;
-    private $date_created;
-    private $date_updated;
-    private $is_published;
-         */
+    
 
         while ($row = $result->fetch_assoc()) {
 

@@ -17,6 +17,9 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
     if (isset($_POST['Add_New_Product'])) {
         include('./views/add_product.php');
     }
+    if (isset($_POST['Edit_categories'])) {
+        header('Location: ./views/edit_categories.php');
+    }
     // if (isset($_POST['Delete Product'])) {
     //     include('view/delete_product.php');
     // }
