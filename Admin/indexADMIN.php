@@ -15,14 +15,21 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
     // Selects input form
 
     //MAIN MENU!!
+   
+    if (isset($_POST['Edit_products'])) {
+        include('./views/edit_products.php');
+    }
+    if (isset($_POST['Edit_categories'])) {
+        include('./views/edit_categories.php');
+    }
+
+
+    //EDIT PRODUCT MENU!!
     if (isset($_POST['View_All'])) {
         include('./views/view_products.php');
     }
     if (isset($_POST['Add_New_Product'])) {
         include('./views/add_product.php');
-    }
-    if (isset($_POST['Edit_categories'])) {
-        include('./views/edit_categories.php');
     }
 
     //EDIT CATEGORY MENU!!

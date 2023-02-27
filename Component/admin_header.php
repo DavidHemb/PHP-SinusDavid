@@ -18,11 +18,9 @@
     <nav>
         <nav>
             <form method="POST">
-                <input type="submit" name="View_All" value="View All Products"></input>
-                <input type="submit" name="Add_New_Product" value="Add New Product"></input>
-                <input type="submit" name="Delete Product" value="Delete Product"></input>
-                <input type="submit" name="Update Product" value="Update Product"></input>
+                <input type="submit" name="Edit_products" value="Edit Products"></input>
                 <input type="submit" name="Edit_categories" value="Edit Categories"></input>
+                <input type="submit" name="Orders" value="Orders"></input>
                 <input type="submit" name="Logout" value="Logout"></input>
             </form>
         </nav>

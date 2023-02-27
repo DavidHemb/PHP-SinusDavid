@@ -1,5 +1,5 @@
 <?php
-
+include('./views/edit_products.php');
 //Anrop till att lägga till produkt
 //ProductClass::addproduct($pruduct_id, +$title, $price, +$color, +$product_description, $imagepath, +$stock, $date_created, $date_updated, $is_published);
 ?>
