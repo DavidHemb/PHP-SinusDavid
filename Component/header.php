@@ -1,69 +1,10 @@
+include()	
+
 <!DOCTYPE html>
+
 <html>
 <head>
 	<title>Header with Dropdown, Cart and Search</title>
-	<style>
-		/* Header styles */
-		header {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			background-color:darkgray;
-			color: #fff;
-			padding: 10px;
-
-		}
-
-		/* Dropdown styles */
-		.dropdown {
-			position: relative;
-			display: inline-block;
-		}
-
-		.dropdown-content {
-			display: none;
-			position: absolute;
-			z-index: 1;
-			color:black;
-		}
-
-		.dropdown:hover .dropdown-content {
-			display: block;
-		}
-
-		/* Cart styles */
-		.cart {
-			display: inline-block;
-			margin-right: 1.25rem;
-			font-size: 1.25rem;
-			color: #fff;
-			cursor: pointer;
-		}
-
-		/* Search styles */
-		.search-container {
-			display: inline-block;
-			text-align: center;
-		}
-
-		.search-box {
-			padding: 0,625rem;
-			border-radius: 0,3125rem;
-			border: none;
-			width: 18,75rem;
-			font-size: 1rem;
-		}
-
-		.search-button {
-			padding: 0,625rem 1,25rem;
-			border-radius: 0,3125rem;
-			border: none;
-			background-color: #4CAF50;
-			color: #fff;
-			font-size: 1rem;
-			cursor: pointer;
-		}
-	</style>
 </head>
 <body>
 	<header>
@@ -71,6 +12,7 @@
 			<button>Menu</button>
 			<div class="dropdown-content">
 				<?php
+				include('header.css');
 					// Generate menu items dynamically from array
 					$menuItems = array('home', 'about', 'contact');
 					$userChoice = isset($_GET['choice']) ? $_GET['choice'] : '';
@@ -102,7 +44,7 @@
 		<?php
 
 	?>
-	</header>
+
 <?php
 require('../config.php');
 // Create connection
@@ -151,9 +93,8 @@ echo 'Product_description' . $row['price'].'<br>';
     }
 }
 
-		
+
 ?>
-	
-    <img alt="A dog on an iPad" src="../assets/img/logo/sinus-logo-landscape - large.png" />
-</body>
+		</header>
+
 </html>

@@ -3,7 +3,40 @@ require_once('./config.php');
 require_once('./classes/product.php');
 $products = Product::ADMINviewProducts();
 ?>
+<header> 
+		<div class="dropdown">
+			<button>Menu</button>
+			<div class="dropdown-content">
+				<?php
+            // Header KIM
+					$menuItems = array('home', 'about', 'contact');
+					$userChoice = isset($_GET['choice']) ? $_GET['choice'] : '';
+					$choices = explode(',',$userChoice);
+					foreach ($choices as $item) {
+						echo '<a href="">' . $item .'<br>'. '</a>';
+						if($choices == 'home')
+						{
+							echo'<a href=" ">' ;
+						}
+						
+						else echo '-1';
+					}
 
+				?>
+			</div>
+		</div>
+			
+		<div class="search-container">
+			<form method="post">
+				<label> Search </label>
+				<input type="text" name= "search">
+				<input type="submit" name = "submit">
+				<div class="cart">Cart</div>
+                
+			</form>
+		</div>
+        <br>
+		</header>	
 <?php 
 $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
 if ($conn instanceof mysqli){?>
@@ -42,7 +75,7 @@ if ($conn instanceof mysqli){?>
                 <p></p>
                 <td>Price:</td>
                 <td><?= $currencyFormatter->formatCurrency($products[$i]->get_price(), "SEK") ; ?></td>
-                <p style="margin-bottum: -50px;"></p>
+                <p style="margin-bottom: -50px;"></p>
                 <form action="productcard.php" method="POST">
                     <input style="visibility:hidden" type="text" name ="INDEX" value="<?php echo $i ?>">
                     <p></p>
