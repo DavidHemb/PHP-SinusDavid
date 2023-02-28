@@ -15,14 +15,21 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
     // Selects input form
 
     //MAIN MENU!!
+   
+    if (isset($_POST['Edit_products'])) {
+        include('./views/edit_products.php');
+    }
+    if (isset($_POST['Edit_categories'])) {
+        include('./views/edit_categories.php');
+    }
+
+
+    //EDIT PRODUCT MENU!!
     if (isset($_POST['View_All'])) {
         include('./views/view_products.php');
     }
     if (isset($_POST['Add_New_Product'])) {
         include('./views/add_product.php');
-    }
-    if (isset($_POST['Edit_categories'])) {
-        include('./views/edit_categories.php');
     }
 
     //EDIT CATEGORY MENU!!
@@ -38,12 +45,11 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
     if (isset($_POST['update_category'])) {
         include('./views/select_category.php');
     }
-    if($action == 'select_category')
-    {
+    if ($action == 'select_category') {
         include('./views/update_category.php');
     }
-        
-    
+
+
 
 
 
@@ -167,26 +173,32 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
 
             $new_category =  new Category($_POST['category_title'], $_POST['category_description']);
 
-            if ($new_category->createcatagory() == 0) { ?>
-                <h3>Title <?php echo $new_category->get_title(); ?> already exsist, please try again!</h3>
-            <?php } else {
-                $new_category->createcatagory(); ?>
+            if ($new_category->createcatagory()) { ?>
                 <h3>Title <?php echo $new_category->get_title(); ?> created! </h3>
-    <?php }
+            <?php } else {
+                //$new_category->createcatagory(); 
+            ?>
+
+                <h3>Title <?php echo $new_category->get_title(); ?> already exsist, please try again!</h3>
+            <?php }
 
             break;
 
         case 'update_category':
 
-            $result = Category::UpdateCategory($_POST['category_id'], $_POST['newTitle'], $_POST['newDescription']); ?>
-            <h3> <?php echo $result ?> </h3>
-            <?php break;
+            Category::UpdateCategory($_POST['category_id'], $_POST['newDescription']);
+            ?> <h3>Category Updated!</h3> <?php
+
+            break;
 
 
 
-               case 'collect':
+        case 'delete_category':
 
-                     break; 
+            Category::DeleteCategory($_POST['category_id']); ?>
+            <h3>Category Deleted</h3>
+
+    <?php break;
     }
 
 

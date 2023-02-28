@@ -1,5 +1,5 @@
 <?php
-
+include('./views/edit_products.php');
 $products = Product::ADMINviewProducts();
 
 ?>
