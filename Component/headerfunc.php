@@ -25,7 +25,6 @@ if(isset($_POST["submit"]))
     }
    
 }
-// Göra en return på alla productid
 }
 function MenuMetod()
 {
