@@ -2,6 +2,7 @@
 require_once('../Classes/user.php');
 $inputusername = strtolower($_POST['username']);
 $inputpassword = strtolower($_POST['password']);
+$date = date('Y/m/d H:i');
 if ($inputusername != null)
 {
     $FoundUser = User::selectuser($inputusername);
@@ -12,6 +13,8 @@ if ($inputusername != null)
     }
     else
     {
-        User::registeruser($inputusername, $inputpassword);
+        User::registeruser($inputusername, $inputpassword, $date);
+        header("Location: ../index.php");
+        exit();
     }
 }

@@ -13,8 +13,11 @@ if ($FoundAdmin['username'] == $inputusername && $FoundAdmin['userpassword'] == 
 //Check for user loggin
 else if ($FoundUser['username'] != $inputusername)
 {
-    /*
-    header("Location: loginpage.php?error=Username already taken!");
+    header("Location: loginpage.php?error= already taken!");
     exit();
-    */
+}
+else
+{
+    header("Location: ../index.php");
+    exit();
 }

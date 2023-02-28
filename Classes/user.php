@@ -2,7 +2,7 @@
 require_once('../config.php');
 class User
 {
-    static public function registeruser($username, $password)
+    static public function registeruser($username, $password, $date)
     {
         //Varibles in database sent in by calling function
         // Create connection
@@ -12,9 +12,9 @@ class User
             die("Connection failed: " . $conn->connect_error);
         }
         //SQL
-        $query = $conn->prepare("INSERT INTO users (username, userpassword)
-        VALUES (?, ?)");
-        $query->bind_param('ss', $username, $password);
+        $query = $conn->prepare("INSERT INTO users (username, userpassword, date_created)
+        VALUES (?, ?, ?)");
+        $query->bind_param('sss', $username, $password, $date);
         $query->execute();
         $conn->close();
     }
