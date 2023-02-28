@@ -314,4 +314,41 @@ class Product
         }
         return $products;
     }
+    static function SearchBarMetod()
+    {
+    // Create connection
+    $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $input = $_POST["search"];
+    if(isset($_POST["submit"]))
+    {
+        $sqlQuery = $conn->prepare("SELECT p.*, c.title AS category_title FROM products p LEFT OUTER JOIN category c ON c.category_id = p.category_id WHERE p.title LIKE ? OR product_description LIKE ?");
+        $input = '%' . $input . '%';
+        $sqlQuery->bind_param("ss", $input, $input);
+        $sqlQuery->execute();
+        $result = $sqlQuery->get_result();
+        $products = array();
+
+        while ($row = $result->fetch_assoc()) {
+
+            $product = new Product($row['category_title'], $row['title'], $row['price'], $row['color'], $row['product_description'], $row['imagepath'], $row['stock'], $row['date_created'], $row['date_updated'], $row['is_published']);
+            $product->set_product_id($row['product_id']);
+            $products[] = $product;
+        }
+        return $products;
+        /*
+        $sqlQuery = $conn->prepare("SELECT * FROM products WHERE title OR product_description LIKE '%?%';");
+        var_dump($sqlQuery);
+        $sqlQuery->bind_param('s', $input);
+        $sqlQuery->execute();
+        $result = $sqlQuery->get_result();
+        
+        var_dump($r);
+           
+        */
+    }
+    }
 }

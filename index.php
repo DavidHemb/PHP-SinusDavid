@@ -4,8 +4,8 @@ require_once('./classes/product.php');
 require_once('./classes/category.php');
 $filteraction = filter_input(INPUT_POST, 'filteraction', FILTER_UNSAFE_RAW);
 $Usefilter = filter_input(INPUT_POST, 'usefilter', FILTER_UNSAFE_RAW);
+$searchaction = filter_input(INPUT_POST, 'searchaction', FILTER_UNSAFE_RAW);
 session_start();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,40 +20,33 @@ session_start();
     <header> 
     <div class="logo";>
     </div>
-    <div class="dropdown">
+		<div class="dropdown">
 			<button>Menu</button>
 			<div class="dropdown-content">
 				<?php
-				include('header.css');
-					// Generate menu items dynamically from array
 					$menuItems = array('home', 'about', 'contact');
 					$userChoice = isset($_GET['choice']) ? $_GET['choice'] : '';
 					$choices = explode(',',$userChoice);
 					foreach ($choices as $item) {
 						echo '<a href="">' . $item .'<br>'. '</a>';
-						if($choices == 'home')
-						{
-							echo'<a href=" ">' ;
-						}
-						
-						else echo '-1';
+					if($choices == 'home')
+					{
+						echo'<a href=" ">' ;
 					}
-
-				?>
+					else echo '-1';
+				} ?>
 			</div>
 		</div>
-
 		<div class="loginbutton";>
             <a href="./User/loginpage.php" style="text-decoration: none;"><p class="logintext">Login</p></a>
         </div>
 		<div class="search-container">
-        <form action="welcome.php" method="post">
-        Name: <input type="text" name="name"><br>
-        <input type="submit">
-        </form>
-                require_once('./Component/header.php');
-                SearchBarMetod(); ?>
-   
+            <p class="searchtext">Search bar</p>
+			<form method="post">
+            <input type="hidden" name="searchaction" value="search">
+				<input type="text" name= "search">
+				<input type="submit" name = "submit" value="Search";>
+			</form>
 		</div>
         <div class="cart">
             <a href="shoppingcart.php" style="text-decoration: none;"><p class="carttext">Cart</p></a>
@@ -87,6 +80,15 @@ session_start();
         {
         case 'filter':
             $products = product::filterproducts($_POST['category_title']);
+            break;
+        }
+    }
+    else if ($searchaction)
+    {
+        switch ($searchaction) 
+        {
+        case 'search':
+            $products = product::SearchBarMetod();
             break;
         }
     }
