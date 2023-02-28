@@ -23,7 +23,7 @@
                 <form action="registerpage.php">
                         <input style="background-color: black; color: white;" type="submit" value="Register new user">
                 </form>
-                <form action="index.php">
+                <form action="../index.php">
                         <input style="background-color: black; color: white;" type="submit" value="Back">
                 </form>
             </div>
