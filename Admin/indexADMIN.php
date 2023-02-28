@@ -15,7 +15,7 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
     // Selects input form
 
     //MAIN MENU!!
-   
+
     if (isset($_POST['Edit_products'])) {
         include('./views/edit_products.php');
     }
@@ -96,60 +96,92 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-            // Check if image file is a actual image or fake image
-            if ($action == "add_product") {
-                $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-                if ($check !== false) {
-                    $uploadOk = 1;
-                } else {
-                    echo "File is not an image.";
+            //echo $target_file;
+            var_dump(strpos(basename($_FILES["fileToUpload"]["name"]), "."));
+            echo "<br>";
+            // // Check if file already exists
+            // while (file_exists($target_file)) {
+            //     $count = 1;
+            //     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"] . "($count)");
+                
+            //     $count++;
+            //     $fileRenamed = true;
+               
+            // }
+
+            // // If file already exists rename it
+            // if($fileRenamed){
+            //     echo "File already exists.";
+            //     echo "File renamed to {$_FILES["fileToUpload"]["name"]}";
+            //     $uploadOk = 1;
+            // }
+
+
+
+            
+
+            if (!empty($_FILES["fileToUpload"]["tmp_name"])) {
+                // Check if image file is a actual image or fake image
+                if ($action == "add_product") {
+                    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+                    if ($check !== false) {
+                        $uploadOk = 1;
+                    } else {
+                        echo "File is not an image.";
+                        $uploadOk = 0;
+                    }
+                }
+
+                // // Check if file already exists
+                // if (file_exists($target_file)) {
+                //     echo "Sorry, file already exists.";
+                //     //try again
+                //     $uploadOk = 0;
+                //     //Use existing file
+                // }
+
+                // Check file size - max filesize allowed is 2Mb
+                if ($_FILES["fileToUpload"]["size"] > 2097153) { ?>
+                    <h4>Sorry, your file is too large - max filesize allowed for product images is 2Mb</h4> echo
+                <?php $uploadOk = 0;
+                }
+
+                // Allow certain file formats
+                if (
+                    $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                    && $imageFileType != "gif"
+                ) { ?>
+
+                    <h4>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</h4> echo
+                <?php
+
                     $uploadOk = 0;
                 }
-            }
 
-            // Check if file already exists
-            if (file_exists($target_file)) {
-                echo "Sorry, file already exists.";
-                //try again
-                $uploadOk = 0;
-                //Use existing file
-            }
-
-            // Check file size - max filesize allowed is 2Mb
-            if ($_FILES["fileToUpload"]["size"] > 2097153) { ?>
-                <h4>Sorry, your file is too large - max filesize allowed for product images is 2Mb</h4> echo
-            <?php $uploadOk = 0;
-            }
-
-            // Allow certain file formats
-            if (
-                $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                && $imageFileType != "gif"
-            ) { ?>
-
-                <h4>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</h4> echo
-            <?php
-
-                $uploadOk = 0;
-            }
-
-            // Check if $uploadOk is set to 0 by an error
-            if ($uploadOk == 0) {
-                echo "Sorry, your file was not uploaded.";
-                // if everything is ok, try to upload file
-            } else {
-                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                    echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
+                // Check if $uploadOk is set to 0 by an error
+                if ($uploadOk == 0) {
+                    echo "Sorry, your file was not uploaded.";
+                    // if everything is ok, try to upload file
                 } else {
-                    echo "Sorry, there was an error uploading your file.";
+                    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                        echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
+                    } else {
+                        echo "Sorry, there was an error uploading your file.";
+                    }
                 }
+                $web_filePath = webFilePath($target_file);
+            } else {
+                $web_filePath = "assets/img/products/default_img.jpg";
             }
 
             var_dump($uploadOk);
+            var_dump($_POST['category']);
 
             if ($uploadOk) {
                 $date = date('Y/m/d H:i');
-                $web_filePath = webFilePath($target_file);
+
+                var_dump($web_filePath);
+
                 $new_product = new Product(
                     $_POST['title'],
                     $_POST['price'],
@@ -189,17 +221,17 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
             Category::UpdateCategory($_POST['category_id'], $_POST['newDescription']);
             ?> <h3>Category Updated!</h3> <?php
 
-            break;
+                                            break;
 
 
 
-        case 'delete_category':
+                                        case 'delete_category':
 
-            Category::DeleteCategory($_POST['category_id']); ?>
+                                            Category::DeleteCategory($_POST['category_id']); ?>
             <h3>Category Deleted</h3>
 
     <?php break;
-    }
+                                    }
 
 
 

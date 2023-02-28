@@ -8,3 +8,7 @@ th{
 .getFileButton{
     max-width: 15ch;
 }
+
+.redtext{
+    color:rgb(221, 49, 49)
+}
