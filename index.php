@@ -32,16 +32,10 @@ $products = Product::ADMINviewProducts();
 				<input type="text" name= "search">
 				<input type="submit" name = "submit">
 				<div class="cart">Cart</div>
-                
 			</form>
 		</div>
-        <br>
-		</header>	
-<?php 
-$conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
-if ($conn instanceof mysqli){?>
-    <p class="MYSQL"><?php echo "Client info: " .$conn->client_info . "\n" . "Client Version: " . $conn->client_version; ?></p>
-    <?php } $conn->close();?>
+    <br>
+</header>	
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -52,13 +46,23 @@ if ($conn instanceof mysqli){?>
         <title>SINUS SKATEOARDS</title>
     </head>
     <body>
+    <?php 
+    $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+    if ($conn instanceof mysqli){?>
+    <p class="MYSQL"><?php echo "Client info: " .$conn->client_info . "\n" . "Client Version: " . $conn->client_version; ?></p>
+    <?php } $conn->close();?>
         <h1 class="SINUS">SINUS Skateboards</h1>
         <nav class="filter">
-            <ul id="menu">
-                <li><a href="#">Products</a></li>
-                <li><a href="#">About us</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
+            <p></p>
+            <a href="#">Price(High-Low)</a>
+            <p></p>
+            <a href="#">Price(Low-High)</a>
+            <p></p>
+            <a href="#">Skateboards</a>
+            <p></p>
+            <a href="#">Chothing</a>
+            <p></p>
+            <a href="#">Parts</a>
         </nav>
     <?php 
     for ($i = 0; $i < count($products); $i++) 
