@@ -6,7 +6,8 @@
 			background-color:darkgray;
 			color: #fff;
 			padding: 10px;
-
+            display: grid;
+            grid-template-columns: auto auto auto auto;
 		}
 
 		/* Dropdown styles */
