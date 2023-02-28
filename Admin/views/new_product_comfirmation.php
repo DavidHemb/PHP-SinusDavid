@@ -3,7 +3,7 @@
     <thead>
         <tr>
             <th scope="col">Image</th>
-            <!-- <th scope="col">Product ID</th> -->
+            <th scope="col">Product ID</th>
             <th scope="col">Date Created</th>
             <th scope="col">Date Updated</th>
             <th scope="col">Title</th>
