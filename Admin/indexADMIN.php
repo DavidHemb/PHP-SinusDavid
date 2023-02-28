@@ -13,28 +13,29 @@ session_start();
 
     <?php
 
-if (!isset($_SESSION["admin"])) {
-    header("Location: ../User/loginpage.php");
-    exit();
-  }
+    if (!isset($_SESSION["admin"])) {
+        header("Location: ../User/loginpage.php");
+        exit();
+    }
     //echo var_dump($_POST['Add_New_Product']);
     // Selects input form
 
     //MAIN MENU!!
 
     if (isset($_POST['Edit_products'])) {
-        include('./views/edit_products.php');
+        include('./views/view_products.php');
     }
     if (isset($_POST['Edit_categories'])) {
         include('./views/edit_categories.php');
     }
+    if (isset($_POST["Logout"])) {
+        session_destroy();
+        unset($_SESSION);
+    }
 
 
     //EDIT PRODUCT MENU!!
-    if (isset($_POST['View_All'])) {
-        include('./views/view_products.php');
-    }
-    if (isset($_POST['Add_New_Product'])) {
+    if ($action == 'New Product') {
         include('./views/add_product.php');
     }
 
@@ -53,6 +54,15 @@ if (!isset($_SESSION["admin"])) {
     }
     if ($action == 'select_category') {
         include('./views/update_category.php');
+    }
+    if ($action == 'Delete') { ?>
+        <h3>Product Delted!</h3>
+        <?php
+        Product::ADMINdeleteProduct($_POST['product_id']);
+    }
+    if ($action == 'Update') {
+        var_dump($_POST);
+        include('./views/update_product.php');
     }
 
 
@@ -97,7 +107,7 @@ if (!isset($_SESSION["admin"])) {
              * 
              */
 
-            
+
 
 
             $target_dir = "../assets/img/products/";
@@ -173,9 +183,6 @@ if (!isset($_SESSION["admin"])) {
                 $web_filePath = "assets/img/products/default_img.jpg";
             }
 
-            echo "<pre>";
-            print_r($_POST);
-            echo "</pre>";
 
             if ($uploadOk) {
                 $date = date('Y/m/d H:i');
@@ -199,7 +206,13 @@ if (!isset($_SESSION["admin"])) {
 
             break;
 
+        case 'update_product':
+            echo "vi kom till update";
+            echo "<pre>";
+            print_r($_POST);
+            echo "</pre>";
 
+            break;
         case 'add_category':
 
             $new_category =  new Category($_POST['category_title'], $_POST['category_description']);

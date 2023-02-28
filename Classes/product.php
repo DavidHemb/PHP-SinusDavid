@@ -13,9 +13,9 @@ class Product
     private $date_created;
     private $date_updated;
     private $is_published;
-    
-   
-    public function __construct($category_id ,$title, $price, $color, $product_description, $imagepath, $stock, $date_created, $date_updated, $is_published)
+
+
+    public function __construct($category_id, $title, $price, $color, $product_description, $imagepath, $stock, $date_created, $date_updated, $is_published)
     {
         $this->category_id = $category_id;
         $this->title = $title;
@@ -36,22 +36,26 @@ class Product
     {
         $this->product_id = $product_id;
     }
-    public function get_category_id(){
+    public function get_category_id()
+    {
         return $this->category_id;
-    } 
+    }
 
-    public function set_category_id($category_id){
+    public function set_category_id($category_id)
+    {
         $this->category_id = $category_id;
-    } 
-    
-    public function get_category_title(){
+    }
+
+    public function get_category_title()
+    {
         return $this->category_id;
-    } 
+    }
 
-    public function set_category_title($category_id){
+    public function set_category_title($category_id)
+    {
         $this->category_id = $category_id;
-    } 
-    
+    }
+
 
     public function get_title()
     {
@@ -125,7 +129,7 @@ class Product
     {
         $this->is_published = $is_published;
     }
-    
+
     //MAIN
     //MAIN Function
     static function selectproduct()
@@ -162,7 +166,7 @@ class Product
         $test = $this->title;
         $query = $conn->prepare("INSERT INTO products (category_id, title, price, color, product_description, imagepath, stock, date_created, date_updated, is_published)
         VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $query->bind_param('isdsssissi',$this->category_id, $this->title, $this->price, $this->color, $this->product_description, $this->imagepath, $this->stock, $this->date_created, $this->date_updated, $this->is_published);
+        $query->bind_param('isdsssissi', $this->category_id, $this->title, $this->price, $this->color, $this->product_description, $this->imagepath, $this->stock, $this->date_created, $this->date_updated, $this->is_published);
         $query->execute();
 
         $conn->close();
@@ -180,7 +184,7 @@ class Product
         ON c.category_id = p.category_id";
         $result = $conn->query($sql);
         $products = array();
-        
+
 
         while ($row = $result->fetch_assoc()) {
 
@@ -190,6 +194,7 @@ class Product
         }
         return $products;
     }
+
     static function ADMINselectproduct($title)
     {
         //Varible title in database sent in by calling function
@@ -226,6 +231,25 @@ class Product
         $result = $query->get_result();
         $r = $result->fetch_array(MYSQLI_ASSOC);
     }
+
+    static function ADMINdeleteProduct($product_id)
+    {
+
+
+        $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+
+        $sql = "DELETE FROM products WHERE product_id = $product_id";
+
+        if ($conn->query($sql) === TRUE) {
+            $result = "Record deleted successfully";
+        } else {
+            echo "Error deleting record: " . $conn->error;
+        }
+
+        $conn->close();
+        return $result;
+    }
+
     static function ADMINpublishORnotproduct($title)
     {
         //Varible title in database sent in by calling function
