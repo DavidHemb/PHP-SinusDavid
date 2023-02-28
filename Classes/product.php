@@ -242,4 +242,31 @@ class Product
         $result = $query->get_result();
         $r = $result->fetch_array(MYSQLI_ASSOC);
     }
+    static public function filterproducts($title)
+    {
+        //Varibles in database sent in by calling function
+        // Create connection
+        $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        //SQL
+
+        $sql = "SELECT p.*, c.title AS category_title 
+        FROM products p
+        LEFT OUTER JOIN category c
+        ON c.category_id = p.category_id 
+        WHERE c.title = '$title'";
+        $result = $conn->query($sql);
+        $products = array();
+
+        while ($row = $result->fetch_assoc()) {
+
+            $product = new Product($row['category_title'], $row['title'], $row['price'], $row['color'], $row['product_description'], $row['imagepath'], $row['stock'], $row['date_created'], $row['date_updated'], $row['is_published']);
+            $product->set_product_id($row['product_id']);
+            $products[] = $product;
+        }
+        return $products;
+    }
 }
