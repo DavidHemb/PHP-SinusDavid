@@ -5,6 +5,7 @@ require_once('./classes/category.php');
 $filteraction = filter_input(INPUT_POST, 'filteraction', FILTER_UNSAFE_RAW);
 $Usefilter = filter_input(INPUT_POST, 'usefilter', FILTER_UNSAFE_RAW);
 session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,32 +20,40 @@ session_start();
     <header> 
     <div class="logo";>
     </div>
-		<div class="dropdown">
+    <div class="dropdown">
 			<button>Menu</button>
 			<div class="dropdown-content">
 				<?php
+				include('header.css');
+					// Generate menu items dynamically from array
 					$menuItems = array('home', 'about', 'contact');
 					$userChoice = isset($_GET['choice']) ? $_GET['choice'] : '';
 					$choices = explode(',',$userChoice);
 					foreach ($choices as $item) {
 						echo '<a href="">' . $item .'<br>'. '</a>';
-					if($choices == 'home')
-					{
-						echo'<a href=" ">' ;
+						if($choices == 'home')
+						{
+							echo'<a href=" ">' ;
+						}
+						
+						else echo '-1';
 					}
-					else echo '-1';
-				} ?>
+
+				?>
 			</div>
 		</div>
+
 		<div class="loginbutton";>
             <a href="./User/loginpage.php" style="text-decoration: none;"><p class="logintext">Login</p></a>
         </div>
 		<div class="search-container">
-            <p class="searchtext">Search bar</p>
-			<form method="post">
-				<input type="text" name= "search">
-				<input type="submit" name = "submit" value="Search";>
-			</form>
+        <form action="welcome.php" method="post">
+        Name: <input type="text" name="name"><br>
+        <input type="submit">
+        </form>
+                require_once('./Component/header.php');
+                SearchBarMetod(); ?>
+   
 		</div>
         <div class="cart">
             <a href="shoppingcart.php" style="text-decoration: none;"><p class="carttext">Cart</p></a>

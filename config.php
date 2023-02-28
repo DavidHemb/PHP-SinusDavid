@@ -11,8 +11,7 @@ const DB_HOST = 'localhost';
 const DB_NAME = 'sinus';
 const DB_USERNAME = 'root';
 const DB_PASSWORD = '';
-
-function connect($dbHost, $dbName, $dbUsername, $dbPassword)
+function Connect($dbHost, $dbName, $dbUsername, $dbPassword)
 {
     $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
     if ($conn->connect_error) {
