@@ -1,5 +1,6 @@
 table {
     font-size: 0.7em;
+    display: table-header-group;
 }
 th{
     font-size: 0.9em;
@@ -11,4 +12,14 @@ th{
 
 .redtext{
     color:rgb(221, 49, 49)
+}
+
+input.admin-products-view{
+    font-size: 0.7em;
+    padding: 0.5em 0.2em;
+    margin: 0.3em;
+    min-width: 10ch;
+}
+input.red-btn {
+    background-color: rgb(190, 0, 0);
 }

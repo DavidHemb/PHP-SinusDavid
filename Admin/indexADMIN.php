@@ -28,6 +28,10 @@ if (!isset($_SESSION["admin"])) {
     if (isset($_POST['Edit_categories'])) {
         include('./views/edit_categories.php');
     }
+    if (isset($_POST["Logout"])) {
+        session_destroy();
+        unset($_SESSION);
+    }
 
 
     //EDIT PRODUCT MENU!!
@@ -53,6 +57,10 @@ if (!isset($_SESSION["admin"])) {
     }
     if ($action == 'select_category') {
         include('./views/update_category.php');
+    }
+    if($action == 'Delete'){
+        var_dump($_POST);
+        Product::ADMINdeleteProduct($_POST['product_id']);
     }
 
 
@@ -173,9 +181,6 @@ if (!isset($_SESSION["admin"])) {
                 $web_filePath = "assets/img/products/default_img.jpg";
             }
 
-            echo "<pre>";
-            print_r($_POST);
-            echo "</pre>";
 
             if ($uploadOk) {
                 $date = date('Y/m/d H:i');
