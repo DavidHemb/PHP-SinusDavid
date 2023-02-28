@@ -2,6 +2,8 @@
 class Product
 {
     private $product_id;
+    
+    private $category_title;
     private $title;
     private $price;
     private $color;
@@ -11,10 +13,11 @@ class Product
     private $date_created;
     private $date_updated;
     private $is_published;
-    //Array that contains category objects that the product is part of.
-    private $categories;
-    public function __construct($title, $price, $color, $product_description, $imagepath, $stock, $date_created, $date_updated, $is_published)
+    
+   
+    public function __construct($category_title ,$title, $price, $color, $product_description, $imagepath, $stock, $date_created, $date_updated, $is_published)
     {
+        $this->category_title = $category_title;
         $this->title = $title;
         $this->price = $price;
         $this->color = $color;
@@ -33,6 +36,14 @@ class Product
     {
         $this->product_id = $product_id;
     }
+    public function get_category_title(){
+        return $this->category_title;
+    } 
+
+    public function set_category_title($category_title){
+        $this->category_title = $category_title;
+    } 
+
     public function get_title()
     {
         return $this->title;
@@ -105,14 +116,7 @@ class Product
     {
         $this->is_published = $is_published;
     }
-    public function get_categories()
-    {
-        return $this->categories;
-    }
-    public function set_categories($categories)
-    {
-        $this->categories[] = $categories;
-    }
+    
     //MAIN
     //MAIN Function
     static function selectproduct()
@@ -162,14 +166,16 @@ class Product
         // Create connection
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
 
-        $sql = "SELECT * FROM products";
+        $sql = "SELECT p.*, c.title AS category_title FROM products p
+        JOIN category c
+        ON c.category_id = p.category_id";
         $result = $conn->query($sql);
         $products = array();
-
+        
 
         while ($row = $result->fetch_assoc()) {
 
-            $product = new Product($row['title'], $row['price'], $row['color'], $row['product_description'], $row['imagepath'], $row['stock'], $row['date_created'], $row['date_updated'], $row['is_published']);
+            $product = new Product($row['category_title'], $row['title'], $row['price'], $row['color'], $row['product_description'], $row['imagepath'], $row['stock'], $row['date_created'], $row['date_updated'], $row['is_published']);
             $product->set_product_id($row['product_id']);
             $products[] = $product;
         }

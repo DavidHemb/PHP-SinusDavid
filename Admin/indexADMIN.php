@@ -171,6 +171,7 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
                 $date = date('Y/m/d H:i');
 
                 $new_product = new Product(
+                    $_Post['category_title'],
                     $_POST['title'],
                     $_POST['price'],
                     $_POST['color'],
