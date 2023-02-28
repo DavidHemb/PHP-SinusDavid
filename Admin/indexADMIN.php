@@ -91,7 +91,7 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
              * 
              */
 
-            var_dump($_POST['category']);
+            
 
 
             $target_dir = "../assets/img/products/";
@@ -167,11 +167,15 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
                 $web_filePath = "assets/img/products/default_img.jpg";
             }
 
+            echo "<pre>";
+            print_r($_POST);
+            echo "</pre>";
+
             if ($uploadOk) {
                 $date = date('Y/m/d H:i');
 
                 $new_product = new Product(
-                    $_Post['category_title'],
+                    $_POST['category_id'],
                     $_POST['title'],
                     $_POST['price'],
                     $_POST['color'],

@@ -2,7 +2,7 @@
 class Product
 {
     private $product_id;
-    
+    private $category_id;
     private $category_title;
     private $title;
     private $price;
@@ -15,9 +15,9 @@ class Product
     private $is_published;
     
    
-    public function __construct($category_title ,$title, $price, $color, $product_description, $imagepath, $stock, $date_created, $date_updated, $is_published)
+    public function __construct($category_id ,$title, $price, $color, $product_description, $imagepath, $stock, $date_created, $date_updated, $is_published)
     {
-        $this->category_title = $category_title;
+        $this->category_id = $category_id;
         $this->title = $title;
         $this->price = $price;
         $this->color = $color;
@@ -36,13 +36,22 @@ class Product
     {
         $this->product_id = $product_id;
     }
-    public function get_category_title(){
-        return $this->category_title;
+    public function get_category_id(){
+        return $this->category_id;
     } 
 
-    public function set_category_title($category_title){
-        $this->category_title = $category_title;
+    public function set_category_id($category_id){
+        $this->category_id = $category_id;
     } 
+    
+    public function get_category_title(){
+        return $this->category_id;
+    } 
+
+    public function set_category_title($category_id){
+        $this->category_id = $category_id;
+    } 
+    
 
     public function get_title()
     {
@@ -151,9 +160,9 @@ class Product
         }
         //SQL
         $test = $this->title;
-        $query = $conn->prepare("INSERT INTO products (title, price, color, product_description, imagepath, stock, date_created, date_updated, is_published)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $query->bind_param('sdsssissi', $this->title, $this->price, $this->color, $this->product_description, $this->imagepath, $this->stock, $this->date_created, $this->date_updated, $this->is_published);
+        $query = $conn->prepare("INSERT INTO products (category_id, title, price, color, product_description, imagepath, stock, date_created, date_updated, is_published)
+        VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $query->bind_param('isdsssissi',$this->category_id, $this->title, $this->price, $this->color, $this->product_description, $this->imagepath, $this->stock, $this->date_created, $this->date_updated, $this->is_published);
         $query->execute();
 
         $conn->close();
@@ -167,7 +176,7 @@ class Product
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
 
         $sql = "SELECT p.*, c.title AS category_title FROM products p
-        JOIN category c
+        LEFT OUTER JOIN category c
         ON c.category_id = p.category_id";
         $result = $conn->query($sql);
         $products = array();

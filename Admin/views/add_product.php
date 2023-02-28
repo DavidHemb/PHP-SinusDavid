@@ -13,10 +13,11 @@ $categories = Category::ViewCategory();
         <label for="title">*Title:</label>
         <input type="text" id="title" name="title" autofocus required>
 
-        <label for="category_title">Choose a Categories:</label>
-        <select name="category_title" id="category_title">
+        <label for="category_id">Choose a Categories:</label>
+        <label>(You must have a category before you can add products)</label>
+        <select name="category_id" id="category_id" required>
             <?php for ($i = 0; $i < count($categories); $i++) { ?>
-                <option value="<?= $categories[$i]->get_title() ?>"><?= $categories[$i]->get_title(); ?></option>
+                <option value="<?= $categories[$i]->get_category_id() ?>"><?= $categories[$i]->get_title(); ?></option>
             <?php } ?>
         </select>
 

@@ -2,7 +2,6 @@
 include('./views/edit_products.php');
 $products = Product::ADMINviewProducts();
 
-
 ?>
 <h3>Products</h3>
 <table>
