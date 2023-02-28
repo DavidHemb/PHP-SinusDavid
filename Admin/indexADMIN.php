@@ -5,12 +5,18 @@ require_once('../Classes/category.php');
 require_once('../config.php');
 
 $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
-
+session_start();
 
 ?>
 
 <main>
+
     <?php
+
+if (!isset($_SESSION["admin"])) {
+    header("Location: ../User/loginpage.php");
+    exit();
+  }
     //echo var_dump($_POST['Add_New_Product']);
     // Selects input form
 

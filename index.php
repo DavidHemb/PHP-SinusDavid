@@ -3,6 +3,7 @@ require_once('./config.php');
 require_once('./classes/product.php');
 require_once('./classes/category.php');
 $products = Product::ADMINviewProducts();
+session_start();
 ?>
 <header> 
     <div class="logo";>
