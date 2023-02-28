@@ -8,7 +8,6 @@ $products = Product::ADMINviewProducts();
 			<button>Menu</button>
 			<div class="dropdown-content">
 				<?php
-            // Header KIM
 					$menuItems = array('home', 'about', 'contact');
 					$userChoice = isset($_GET['choice']) ? $_GET['choice'] : '';
 					$choices = explode(',',$userChoice);
@@ -18,22 +17,24 @@ $products = Product::ADMINviewProducts();
 						{
 							echo'<a href=" ">' ;
 						}
-						
 						else echo '-1';
 					}
-
 				?>
 			</div>
 		</div>
-			
+		<div class="loginbutton";>
+            <a href="./User/loginpage.php"><p class="logintext">Login</p></a>
+        </div>
 		<div class="search-container">
+            <p class="searchtext">Search bar</p>
 			<form method="post">
-				<label> Search </label>
 				<input type="text" name= "search">
-				<input type="submit" name = "submit">
-				<div class="cart">Cart</div>
+				<input type="submit" name = "submit" value="Search";>
 			</form>
 		</div>
+        <div class="cart">
+            <a href="shoppingcart.php" style="text-decoration: none;"><p class="carttext">Cart</p></a>
+        </div>
     <br>
 </header>	
 <!DOCTYPE html>
