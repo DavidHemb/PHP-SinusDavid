@@ -2,6 +2,9 @@
 require_once('./config.php');
 require_once('./classes/product.php');
 $products = Product::ADMINviewProducts();
+?>
+
+<?php 
 $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
 if ($conn instanceof mysqli){?>
     <p class="MYSQL"><?php echo "Client info: " .$conn->client_info . "\n" . "Client Version: " . $conn->client_version; ?></p>
@@ -17,7 +20,13 @@ if ($conn instanceof mysqli){?>
     </head>
     <body>
         <h1 class="SINUS">SINUS Skateboards</h1>
-        <a class="filter" href="indexfilter.php">FILTER</a>
+        <nav class="filter">
+            <ul id="menu">
+                <li><a href="#">Products</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
     <?php 
     for ($i = 0; $i < count($products); $i++) 
     {  
