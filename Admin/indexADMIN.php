@@ -91,34 +91,35 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
              * 
              */
 
+            var_dump($_POST['category']);
+
+
             $target_dir = "../assets/img/products/";
             $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
             //echo $target_file;
-            var_dump(strpos(basename($_FILES["fileToUpload"]["name"]), "."));
-            echo "<br>";
-            // // Check if file already exists
-            // while (file_exists($target_file)) {
-            //     $count = 1;
-            //     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"] . "($count)");
-                
-            //     $count++;
-            //     $fileRenamed = true;
-               
-            // }
+            $filename =  basename($_FILES["fileToUpload"]["name"]);
+            $findLastDot = strpos($filename, ".");
+            $fileRenamed = false;
+            // Check if file already exists if so rename it with title as suffix
+            while (file_exists($target_file)) {
+                $suffix = 1;
+                $target_file = $target_dir . substr($filename, 0, $findLastDot) . "_" . "{$_POST['title']}" . substr($filename, $findLastDot);
+                $filename = substr($filename, 0, $findLastDot) . "_" . "{$_POST['title']}" . substr($filename, $findLastDot);
+                $_FILES["fileToUpload"]["name"] = $filename;
 
-            // // If file already exists rename it
-            // if($fileRenamed){
-            //     echo "File already exists.";
-            //     echo "File renamed to {$_FILES["fileToUpload"]["name"]}";
-            //     $uploadOk = 1;
-            // }
+                $fileRenamed = true;
+            }
 
+            // If file already exists confirm the rename
+            if ($fileRenamed && !empty($_FILES["fileToUpload"]["tmp_name"])) { ?>
+                <p>File already exists.</p>
+                <p>File renamed to <?php echo $_FILES["fileToUpload"]["name"] ?></p>
+                <?php $uploadOk = 1;
+            }
 
-
-            
 
             if (!empty($_FILES["fileToUpload"]["tmp_name"])) {
                 // Check if image file is a actual image or fake image
@@ -131,14 +132,6 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
                         $uploadOk = 0;
                     }
                 }
-
-                // // Check if file already exists
-                // if (file_exists($target_file)) {
-                //     echo "Sorry, file already exists.";
-                //     //try again
-                //     $uploadOk = 0;
-                //     //Use existing file
-                // }
 
                 // Check file size - max filesize allowed is 2Mb
                 if ($_FILES["fileToUpload"]["size"] > 2097153) { ?>
@@ -153,7 +146,7 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
                 ) { ?>
 
                     <h4>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</h4> echo
-                <?php
+                    <?php
 
                     $uploadOk = 0;
                 }
@@ -163,9 +156,9 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
                     echo "Sorry, your file was not uploaded.";
                     // if everything is ok, try to upload file
                 } else {
-                    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                        echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
-                    } else {
+                    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) { ?>
+                        <p><em>The file <?php echo htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) ?> has been uploaded!</em></p>
+                <?php } else {
                         echo "Sorry, there was an error uploading your file.";
                     }
                 }
@@ -174,13 +167,8 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
                 $web_filePath = "assets/img/products/default_img.jpg";
             }
 
-            var_dump($uploadOk);
-            var_dump($_POST['category']);
-
             if ($uploadOk) {
                 $date = date('Y/m/d H:i');
-
-                var_dump($web_filePath);
 
                 $new_product = new Product(
                     $_POST['title'],
@@ -219,19 +207,20 @@ $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
         case 'update_category':
 
             Category::UpdateCategory($_POST['category_id'], $_POST['newDescription']);
-            ?> <h3>Category Updated!</h3> <?php
+            ?> <h3>Category Updated!</h3>
+        <?php
 
-                                            break;
+            break;
 
 
 
-                                        case 'delete_category':
+        case 'delete_category':
 
-                                            Category::DeleteCategory($_POST['category_id']); ?>
+            Category::DeleteCategory($_POST['category_id']); ?>
             <h3>Category Deleted</h3>
 
     <?php break;
-                                    }
+    }
 
 
 
