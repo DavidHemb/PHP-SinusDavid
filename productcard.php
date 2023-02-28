@@ -26,6 +26,7 @@ $i = $_POST['INDEX'];
                 Color: <?php echo $products[$i]->get_color();?><br><br>
                 Description: <?php echo $products[$i]->get_product_description();?><br><br>
                 Stock: <?php echo $products[$i]->get_stock();?><br><br>
+                Category: <?php echo $products[$i]->get_category_title();?><br><br>
                 Price: <?php echo $currencyFormatter->formatCurrency($products[$i]->get_price(), "SEK") ;?>
             </p>
                 <tr>

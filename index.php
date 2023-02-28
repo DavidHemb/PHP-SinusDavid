@@ -1,6 +1,7 @@
 <?php
 require_once('./config.php');
 require_once('./classes/product.php');
+require_once('./classes/category.php');
 $products = Product::ADMINviewProducts();
 ?>
 <header> 
@@ -53,14 +54,19 @@ $products = Product::ADMINviewProducts();
     $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
     if ($conn instanceof mysqli){?>
     <p class="MYSQL"><?php echo "Client info: " .$conn->client_info . "\n" . "Client Version: " . $conn->client_version; ?></p>
-    <?php } $conn->close();?>
-        <nav class="filter">
-            <a href="#" class="filtertext">Price(High-Low)</a>
-            <a href="#" class="filtertext">Price(Low-High)</a>
-            <a href="#" class="filtertext">Skateboards</a>
-            <a href="#" class="filtertext">Chothing</a>
-            <a href="#" class="filtertext">Parts</a>
-        </nav>
+    <?php } 
+    $conn->close(); 
+    $categories = Category::ViewCategory();?>
+    <h1></h1>
+    <form action="indexfilter.php" method="POST" class="filter">
+        <label for="" style="font-size: 40;">Filter:</label>
+            <select class="selectoptionsbar" name="category_title" id="category_title">
+            <?php for ($i = 0; $i < count($categories); $i++) { ?>
+                <option class="filtertext" value="<?= $categories[$i]->get_title() ?>"><?= $categories[$i]->get_title(); ?></option>
+            <?php } ?>
+        </select>
+        <input class="submitfilter" type="submit" value="Submit">
+    </form>
     <?php 
     for ($i = 0; $i < count($products); $i++) 
     {  
