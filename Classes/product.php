@@ -11,7 +11,7 @@ class Product
     private $date_created;
     private $date_updated;
     private $is_published;
-    //Array that contains categories that the product is part of.
+    //Array that contains category objects that the product is part of.
     private $categories;
     public function __construct($title, $price, $color, $product_description, $imagepath, $stock, $date_created, $date_updated, $is_published)
     {
@@ -44,7 +44,6 @@ class Product
     public function get_price()
     {
         return $this->price;
-       
     }
     public function set_price($price)
     {
@@ -166,7 +165,7 @@ class Product
         $sql = "SELECT * FROM products";
         $result = $conn->query($sql);
         $products = array();
-    
+
 
         while ($row = $result->fetch_assoc()) {
 
