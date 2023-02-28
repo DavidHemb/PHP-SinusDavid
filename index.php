@@ -4,6 +4,8 @@ require_once('./classes/product.php');
 $products = Product::ADMINviewProducts();
 ?>
 <header> 
+    <div class="logo";>
+    </div>
 		<div class="dropdown">
 			<button>Menu</button>
 			<div class="dropdown-content">
@@ -13,17 +15,16 @@ $products = Product::ADMINviewProducts();
 					$choices = explode(',',$userChoice);
 					foreach ($choices as $item) {
 						echo '<a href="">' . $item .'<br>'. '</a>';
-						if($choices == 'home')
-						{
-							echo'<a href=" ">' ;
-						}
-						else echo '-1';
+					if($choices == 'home')
+					{
+						echo'<a href=" ">' ;
 					}
-				?>
+					else echo '-1';
+				} ?>
 			</div>
 		</div>
 		<div class="loginbutton";>
-            <a href="./User/loginpage.php"><p class="logintext">Login</p></a>
+            <a href="./User/loginpage.php" style="text-decoration: none;"><p class="logintext">Login</p></a>
         </div>
 		<div class="search-container">
             <p class="searchtext">Search bar</p>
@@ -53,18 +54,12 @@ $products = Product::ADMINviewProducts();
     if ($conn instanceof mysqli){?>
     <p class="MYSQL"><?php echo "Client info: " .$conn->client_info . "\n" . "Client Version: " . $conn->client_version; ?></p>
     <?php } $conn->close();?>
-        <h1 class="SINUS">SINUS Skateboards</h1>
         <nav class="filter">
-            <p></p>
-            <a href="#">Price(High-Low)</a>
-            <p></p>
-            <a href="#">Price(Low-High)</a>
-            <p></p>
-            <a href="#">Skateboards</a>
-            <p></p>
-            <a href="#">Chothing</a>
-            <p></p>
-            <a href="#">Parts</a>
+            <a href="#" class="filtertext">Price(High-Low)</a>
+            <a href="#" class="filtertext">Price(Low-High)</a>
+            <a href="#" class="filtertext">Skateboards</a>
+            <a href="#" class="filtertext">Chothing</a>
+            <a href="#" class="filtertext">Parts</a>
         </nav>
     <?php 
     for ($i = 0; $i < count($products); $i++) 

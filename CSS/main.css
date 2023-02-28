@@ -48,4 +48,18 @@ body{
     text-decoration: none;
     font-size: 35px;
     margin-top: 100px;
+    grid-column-start: 2;
+	grid-column-end: 4;
+}
+.filtertext{
+    color: white;
+    text-decoration: none;
+    border: 2px solid black;
+    border-radius: 12px;
+    padding: 5px;
+    background-color: gray;
+}
+a:hover{
+    color: gold;
+    text-decoration: underline;
 }
