@@ -214,9 +214,30 @@ class Product
         $r = new Product($r['product_id'], ['title'], ['price'], ['color'], ['product_description'], ['imagepath'], ['stock'], ['date_created'], ['date_updated'], ['is_published']);
         return $r;
     }
+
+    static function ADMINselectProductById($id)
+    {
+       // Create connection
+       $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+
+       $sql = "SELECT * FROM products WHERE product_id=$id";
+       $result = $conn->query($sql);
+       $products = array();
+
+
+       while ($row = $result->fetch_assoc()) {
+
+           $product = new Product($row['category_id'], $row['title'], $row['price'], $row['color'], $row['product_description'], $row['imagepath'], $row['stock'], $row['date_created'], $row['date_updated'], $row['is_published']);
+           $product->set_product_id($row['product_id']);
+          
+       }
+       return $product;
+    }
     //ADMIN Function
     static function ADMINupdateproduct($product)
     {
+        //EJ KLAR!!
+
         //Varible title in database sent in by calling function
         // Create connection
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);

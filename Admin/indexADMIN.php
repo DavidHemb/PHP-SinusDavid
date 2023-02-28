@@ -5,6 +5,7 @@ require_once('../Classes/category.php');
 require_once('../config.php');
 
 $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
+
 session_start();
 
 ?>
@@ -108,81 +109,11 @@ session_start();
              */
 
 
+            $resultsArray = UploadImage();
 
-
-            $target_dir = "../assets/img/products/";
-            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-            $uploadOk = 1;
-            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-            //echo $target_file;
-            $filename =  basename($_FILES["fileToUpload"]["name"]);
-            $findLastDot = strpos($filename, ".");
-            $fileRenamed = false;
-            // Check if file already exists if so rename it with title as suffix
-            while (file_exists($target_file)) {
-                $suffix = 1;
-                $target_file = $target_dir . substr($filename, 0, $findLastDot) . "_" . "{$_POST['title']}" . substr($filename, $findLastDot);
-                $filename = substr($filename, 0, $findLastDot) . "_" . "{$_POST['title']}" . substr($filename, $findLastDot);
-                $_FILES["fileToUpload"]["name"] = $filename;
-
-                $fileRenamed = true;
-            }
-
-            // If file already exists confirm the rename
-            if ($fileRenamed && !empty($_FILES["fileToUpload"]["tmp_name"])) { ?>
-                <p>File already exists.</p>
-                <p>File renamed to <?php echo $_FILES["fileToUpload"]["name"] ?></p>
-                <?php $uploadOk = 1;
-            }
-
-
-            if (!empty($_FILES["fileToUpload"]["tmp_name"])) {
-                // Check if image file is a actual image or fake image
-                if ($action == "add_product") {
-                    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-                    if ($check !== false) {
-                        $uploadOk = 1;
-                    } else {
-                        echo "File is not an image.";
-                        $uploadOk = 0;
-                    }
-                }
-
-                // Check file size - max filesize allowed is 2Mb
-                if ($_FILES["fileToUpload"]["size"] > 2097153) { ?>
-                    <h4>Sorry, your file is too large - max filesize allowed for product images is 2Mb</h4> echo
-                <?php $uploadOk = 0;
-                }
-
-                // Allow certain file formats
-                if (
-                    $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                    && $imageFileType != "gif"
-                ) { ?>
-
-                    <h4>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</h4> echo
-                    <?php
-
-                    $uploadOk = 0;
-                }
-
-                // Check if $uploadOk is set to 0 by an error
-                if ($uploadOk == 0) {
-                    echo "Sorry, your file was not uploaded.";
-                    // if everything is ok, try to upload file
-                } else {
-                    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) { ?>
-                        <p><em>The file <?php echo htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) ?> has been uploaded!</em></p>
-                <?php } else {
-                        echo "Sorry, there was an error uploading your file.";
-                    }
-                }
-                $web_filePath = webFilePath($target_file);
-            } else {
-                $web_filePath = "assets/img/products/default_img.jpg";
-            }
-
+            print_r($resultsArray);
+            $uploadOk = $resultsArray["uploadOk"];
+            $web_filePath = $resultsArray["web_filePath"];
 
             if ($uploadOk) {
                 $date = date('Y/m/d H:i');
@@ -208,9 +139,15 @@ session_start();
 
         case 'update_product':
             echo "vi kom till update";
+            echo "<br>";
+            $resultsArray = UploadImage();
+            print_r($resultsArray);
             echo "<pre>";
             print_r($_POST);
             echo "</pre>";
+            echo basename($resultsArray['web_filePath']);
+
+            //Glöm inte att Uppdatera $date_updated;
 
             break;
         case 'add_category':
@@ -261,4 +198,85 @@ function webFilePath($filePath)
     $cleanPath = substr($filePath, $possition);
     return $cleanPath;
 }
+
+function UploadImage()
+{
+
+    $target_dir = "../assets/img/products/";
+    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+    //echo $target_file;
+    $filename =  basename($_FILES["fileToUpload"]["name"]);
+    $findLastDot = strpos($filename, ".");
+    $fileRenamed = false;
+    // Check if file already exists if so rename it with title as suffix
+    while (file_exists($target_file)) {
+        $target_file = $target_dir . substr($filename, 0, $findLastDot) . "_" . "{$_POST['title']}" . substr($filename, $findLastDot);
+        $filename = substr($filename, 0, $findLastDot) . "_" . "{$_POST['title']}" . substr($filename, $findLastDot);
+        $_FILES["fileToUpload"]["name"] = $filename;
+
+        $fileRenamed = true;
+    }
+
+    // If file already exists confirm the rename
+    if ($fileRenamed && !empty($_FILES["fileToUpload"]["tmp_name"])) { ?>
+        <p>File already exists.</p>
+        <p>File renamed to <?php echo $_FILES["fileToUpload"]["name"] ?></p>
+        <?php
+        $uploadOk = 1;
+    }
+
+
+    if (!empty($_FILES["fileToUpload"]["tmp_name"])) {
+        // Check if image file is a actual image or fake image
+        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+        if ($check !== false) {
+            $uploadOk = 1;
+        } else {
+            echo "File is not an image.";
+            $uploadOk = 0;
+        }
+
+
+        // Check file size - max filesize allowed is 2Mb
+        if ($_FILES["fileToUpload"]["size"] > 2097153) { ?>
+            <h4>Sorry, your file is too large - max filesize allowed for product images is 2Mb</h4> echo
+        <?php $uploadOk = 0;
+        }
+
+        // Allow certain file formats
+        if (
+            $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+            && $imageFileType != "gif"
+        ) { ?>
+
+            <h4>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</h4> echo
+            <?php
+
+            $uploadOk = 0;
+        }
+
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            echo "Sorry, your file was not uploaded.";
+            // if everything is ok, try to upload file
+        } else {
+            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) { ?>
+                <p><em>The file <?php echo htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) ?> has been uploaded!</em></p>
+<?php } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+        }
+        $web_filePath = webFilePath($target_file);
+    } else {
+        $web_filePath = "assets/img/products/default_img.jpg";
+    }
+
+    $returnArray = array("web_filePath" => $web_filePath, "uploadOk" => $uploadOk);
+    return $returnArray;
+}
+
+
 ?>
