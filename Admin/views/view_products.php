@@ -18,7 +18,11 @@ $products = Product::ADMINviewProducts();
             <th scope="col">Stock</th>
             <th scope="col">Price</th>
             <th scope="col">Published</th>
-            <th scope="col"></th>
+            <th scope="col">
+                <form method="POST">
+                    <input class="admin-small-btn" type="submit" id="update_product" name="action" value="New Product"></input>
+                </form>
+            </th>
 
         </tr>
     </thead>
@@ -44,11 +48,11 @@ $products = Product::ADMINviewProducts();
                 <?php } ?>
                 <td>
                     <form method="POST">
-                    <input type="hidden" name="product_id" value="<?= $products[$i]->get_product_id(); ?>">
-                    <input class="admin-products-view red-btn" type="submit" id="delete_product" name="action" value="Delete"></input>
-                    <input class="admin-products-view" type="submit" id="update_product" name="action" value="Update"></input>
+                        <input type="hidden" name="product_id" value="<?= $products[$i]->get_product_id(); ?>">
+                        <input class="admin-small-btn admin-red-btn" type="submit" id="delete_product" name="action" value="Delete"></input>
+                        <input class="admin-small-btn" type="submit" id="update_product" name="action" value="Update"></input>
                     </form>
-                    
+
                 </td>
             </tr>
 
