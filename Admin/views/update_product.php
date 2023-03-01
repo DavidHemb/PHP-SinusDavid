@@ -13,6 +13,7 @@ print_r($productToUpdate);
     <p class="redtext">*Required fields</p>
     <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="action" value="update_product">
+        <input type="hidden" name="product_id "value="<?= $productToUpdate->get_product_id(); ?>">
         <input type="hidden" name="old_webpath" value="<?= $productToUpdate->get_imagepath(); ?>">
         <label for="title">*Title:</label>
         <input type="text" id="title" name="title" value="<?= $productToUpdate->get_title(); ?>"autofocus required>
