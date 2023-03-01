@@ -28,7 +28,7 @@ session_start();
   </div>
 </div>
 		<div class="loginbutton";>
-            <?php if (isset($_SESSION["user"])){ echo '<a href="./user/profilepage.php" style="text-decoration: none;">';} else { echo '<a href="./User/loginpage.php" style="text-decoration: none;">';} ?> <p class="logintext"><?php if (!isset($_SESSION["user"])){ echo "Login";} else if (isset($_SESSION["user"])){ echo $_SESSION['user'];}?></p></a>
+            <?php if (isset($_SESSION["user"])){ echo '<a href="./user/profilepage/profilepage.php" style="text-decoration: none;">';} else { echo '<a href="./User/loginpage.php" style="text-decoration: none;">';} ?> <p class="logintext"><?php if (!isset($_SESSION["user"])){ echo "Login";} else if (isset($_SESSION["user"])){ echo $_SESSION['user'];}?></p></a>
             <?php if (isset($_SESSION["user"])){ ?> <br> <a href="./User/logoutpage.php" style="text-decoration: none; color: white;"><p>Logout</p></a> <?php }?>
         </div>
 		<div class="search-container">

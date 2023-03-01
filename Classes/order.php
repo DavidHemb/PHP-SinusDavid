@@ -80,11 +80,15 @@ Class Order{
 
     // }
 
-    public function DeleteOrder(){
-        
-        //Delete order_rows in DB
-        //Delete order in DB
-        
+    public function DeleteOrder($order_id){
+        $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+        $sql = "DELETE FROM order_rows WHERE order_id = $order_id";
+        $conn->close();
+        //2
+        $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+        $sql = "DELETE FROM `order` WHERE order_id = $order_id";
+        $conn->close();
+        return;
     }
     public function ViewOrders(){
         //Return all orders from the db into an array of order objects

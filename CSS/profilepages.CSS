@@ -1,0 +1,125 @@
+body{
+    background-color: grey;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin: 0;
+    background-image: url('https://play-lh.googleusercontent.com/1gGyQF2NN7XTnBLbmJcT7HLk3SakHhT9KsoLs2P1DkCzyxRfnQd0T-dvx5MXMS4z3w7N');
+    background-size: cover;
+}
+.header{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    display: flex;
+    background-image: url('https://th.bing.com/th/id/OIP.LkqvXxSrvcqlxBdzWw5sbwHaEK?pid=ImgDet&rs=1');
+    background-size: cover;
+    height: 600px;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid gold;
+}
+.headertitle{
+    font-size: 40px;
+    color: gold;
+    border: 2px solid goldenrod;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 10%;
+}
+.buttontext{
+    padding: 5px;
+    font-size: 30px;
+    color: white;
+    text-decoration: none;
+    border: 2px solid gold;
+    border-radius: 15px;
+}
+.menu{
+    background-image: url('https://static.vecteezy.com/ti/vetor-gratis/t2/7069573-ouro-vip-icone-e-coroa-com-gemas-vetor.jpg');
+    background-size: cover;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: 30%;
+    grid-column-start: 1;
+    grid-row-start: 3;
+    color: white;
+    border: 2px solid gold;
+    border-radius: 12px;
+    text-align: center;
+}
+.logout{
+    background-image: url('https://static.vecteezy.com/ti/vetor-gratis/t2/7069573-ouro-vip-icone-e-coroa-com-gemas-vetor.jpg');
+    background-size: cover;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 30%;
+    grid-column-start: 3;
+    grid-row-start: 3;
+    color: white;
+    border: 2px solid gold;
+    border-radius: 12px;
+    text-align: center;
+}
+.user{
+    background-image: url('https://static.vecteezy.com/ti/vetor-gratis/t2/7069573-ouro-vip-icone-e-coroa-com-gemas-vetor.jpg');
+    background-size: cover;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 30%;
+    grid-column-start: 1;
+    grid-row-start: 4;
+    color: white;
+    border: 2px solid gold;
+    border-radius: 12px;
+    text-align: center;
+}
+.orderhistory{
+    background-image: url('https://static.vecteezy.com/ti/vetor-gratis/t2/7069573-ouro-vip-icone-e-coroa-com-gemas-vetor.jpg');
+    background-size: cover;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 30%;
+    grid-column-start: 3;
+    grid-row-start: 4;
+    color: white;
+    border: 2px solid gold;
+    border-radius: 12px;
+    text-align: center;
+}
+.footer{
+    margin-top: 300px;
+    background-color: grey;
+    border: 2px solid gold;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 5;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.footerleft{
+    grid-column-start: 1;
+    text-align: center;
+    color: gold;
+    font-size: 40px;
+}
+.footertitle{
+    grid-column-start: 2;
+    text-align: center;
+    color: gold;
+    font-size: 40px;
+}
+.footerright{
+    grid-column-start: 3;
+    text-align: center;
+    color: gold;
+    font-size: 40px;
+}
