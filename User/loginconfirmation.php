@@ -1,5 +1,6 @@
 <?php
 require_once('../Classes/user.php');
+require_once('../config.php');
 session_start();
 $inputusername = strtolower($_POST['username']);
 $inputpassword = strtolower($_POST['password']);

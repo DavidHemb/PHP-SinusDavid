@@ -1,9 +1,9 @@
 <?php
-require_once('../config.php');
 class User
 {
     static public function registeruser($username, $password, $date)
     {
+        
         //Varibles in database sent in by calling function
         // Create connection
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
