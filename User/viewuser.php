@@ -11,36 +11,45 @@ var_dump($user);
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./CSS/productcard.css">
+        <link rel="stylesheet" href="../CSS/profilepages.css">
         <title>SINUS Skateboards</title>
     </head>
     <body>
-    <div class="menu">
-            <h1>SINUS PROFILE</h1>
+    <div class="menuviewuser" style="margin-top: 0px;" >
+        <div class="viewtitle">
+            <h2>PROFILE OF <?=$_SESSION['user'];?>!</h2>
+        </div>
             <img class="img" src="../Assets/img/pictures/gigachad.jpg" height=600 width=1080></img>
-            <form action="">
-                
-            </form>
-            <p>Username: <?php $user["username"] ?></p>
-            <p>Password: <?php $user["password"] ?></p>
-            <p>Name: <?php $user["password"] ?></p>
-            <p>Password: <?php $user["password"] ?></p>
-            <p>Password: <?php $user["password"] ?></p>
-            <p>Password: <?php $user["password"] ?></p>
-            <p>Password: <?php $user["password"] ?></p>
-                <?php
-                    for($i = 0; $i < count($user); $i++){?>
-                    <p><?php $user[$i] ?></p>
-                <?php } ?>
-            <form style="margin-bottom: -60px;" action="index.php">
-            <input type="hidden" name="product_id" value="<?= $product->get_product_id(); ?>">
-                <p></p>
-                <input class="button" style="display: inline-block; background-color: black; color: white;" type="submit" value="Back">
-            </form>
-            <form action="shoppingcart.php" method="POST">
-            <input type="hidden" name="product_id" value="<?= $product->get_product_id(); ?>">
-                <p></p>
-                <input class="button" style="float: right; background-color: green; margin-top: -30px;" type="submit" value="Buy now">
+            <form action="" class="viewuserfrom">
+                <!-- Username -->
+                <label for="Username">Username:</label>
+                <input type="text" id="username" name="username" min="0.00" step="0.01" placeholder="<?php echo $user["username"]; ?> ";>
+                <!-- Password -->
+                <label for="password">Password:</label>
+                <input type="text" id="password" name="password" min="0.00" step="0.01" placeholder="<?php echo $user["userpassword"]; ?> ";>
+                <!-- Name -->
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" min="0.00" step="0.01" placeholder="<?php echo $user["name"]; ?> ";>
+                <br>
+                <!-- Adress -->
+                <label for="price">Adress:</label>
+                <input type="text" id="adress" name="adress" min="0.00" step="0.01" placeholder="<?php echo $user["address"]; ?> ";>
+                <!-- Zipcode -->
+                <label for="price">Zipcode:</label>
+                <input type="text" id="zipcode" name="zipcode" min="0.00" step="0.01" placeholder="<?php echo $user["zipcode"] ?> ";>
+                <!-- City -->
+                <label for="price">City:</label>
+                <input type="text" id="city" name="city" min="0.00" step="0.01" placeholder="<?php echo $user["city"] ?> ";>
+                <!-- Phone -->
+                <br>
+                <label for="price">Phone Number:</label>
+                <input type="text" id="phonenumber" name="price" min="0.00" step="0.01" placeholder="<?php echo $user["phone"] ?> ";>
+                <!-- EMail -->
+                <label for="price">EMail:</label>
+                <input type="text" id="email" name="price" min="0.00" step="0.01" placeholder="<?php echo $user["email"] ?> ";>
+                 <!-- Button back -->
+                 <button class="button">Submit</button>
+                <a href="./profilepage.php" class="button">Back</a>
             </form>
         </div>
     </body>
