@@ -47,9 +47,14 @@ Class Order{
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $query = $conn->prepare("INSERT INTO `order` (order_id, date_created, date_updated) VALUES (?, NOW(), NOW())");
-        $query->bind_param('i', $this->order_id);
-        $query->execute();
+        $sql = "INSERT INTO `order` (date_created, date_updated) VALUES (NOW(), NOW())";
+        
+        if ($conn->query($sql) === TRUE) {
+            echo "Order created successfully";
+        } else {
+            echo "Error deleting record: " . $conn->error;
+        }
+        $this->set_order_id($conn->insert_id);
 
         //Loop the order_row array
         for ($i=0; $i < count($this->order_rows); $i++) {
