@@ -99,7 +99,7 @@ class Order
             die("Connection failed: " . $conn->connect_error);
         }
                 
-        $sql = "DELETE FROM order_rows WHERE order_id = $order_id";
+        $sql = "DELETE FROM order_row WHERE order_id = $order_id";
         if ($conn->query($sql) === TRUE) {
             $result1 = "Rows deleted successfully";
         } else {
