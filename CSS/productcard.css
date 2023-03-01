@@ -42,4 +42,5 @@ body{
     border-radius: 12px;
     color: white;
     text-decoration: none;
+    cursor: pointer;
 }
