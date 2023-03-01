@@ -16,11 +16,9 @@ if(!empty($duplicateusername))
     $email = $_POST["email"];
     $userarray = array("username"=>$username, "userpassword"=>$password, "name"=>$name, "address"=>$address, "zipcode"=>$zipcode, "city"=>$city, "phone"=>$phone, "email"=>$email);
     user::updateuserorder($userarray);
-    
 }
 else
 {
-    echo 'yay';
-    //header("Location: ./viewuser.php");
-    //exit();
+    header("Location: ./viewuser.php");
+    exit();
 }

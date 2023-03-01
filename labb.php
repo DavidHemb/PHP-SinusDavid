@@ -7,7 +7,7 @@ $row2 = new Row(11,1,12);
 
 
 $rows = array($row1,$row2);
-    
+var_dump($rows);
 
  $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
 ?>
@@ -18,7 +18,7 @@ $rows = array($row1,$row2);
 
 <?php
 if($action == "Place Order"){
-    $order = new Order(1, $rows);
+    $order = new Order($rows);
     $order->CreateOrder();
 }
  

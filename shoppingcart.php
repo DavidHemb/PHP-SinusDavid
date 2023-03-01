@@ -10,11 +10,12 @@ $product_id = $_POST['product_id'];
 //Get price
 $product = product::ADMINselectProductById($product_id);
 $price = $currencyFormatter->formatCurrency($product->get_price(), "SEK") ;
-$quantity = 1;
+//$quantity = $Row->get_quantity();
+
 
 //MAKE ARRAY WHIT VALUES
 $arr = array("product_id"=>$product_id, "quantity"=>$quantity, "price"=>$price);
-
+var_dump($arr);
 //MAKE OBJECT WHIT ARRAY
 new Row($arr["product_id"], $arr["quantity"], $arr["price"]);
 

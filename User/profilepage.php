@@ -15,14 +15,17 @@ if (!isset($_SESSION["user"])) {
         <title>SINUS PROFILE</title>
     </head>
     <body>
+    <audio autoplay>
+        <source src="../Assets/songs/GIGACHAD.mp3" type="audio/mpeg">
+    </audio>
     <div class="header">
         <h1 class="headertitle">Welcome GIGACHAD: <?=$_SESSION['user'];?>!</h1>
     </div>
     <div class="menu">
-        <a href="" class="buttontext">Menu</a>
+        <a href="./logoutpage.php" class="buttontext">Logout</a>
     </div>
     <div class="logout">
-        <a href="../logoutpage.php" class="buttontext">Logout</a>
+        <a href="../index.php" class="buttontext">To website</a>
     </div>
     <div class="orderhistory">
         <a href="" class="buttontext">Orderhistory</a>

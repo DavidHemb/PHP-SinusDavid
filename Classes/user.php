@@ -89,5 +89,24 @@ class User
         //Return selected product in array 
         return $r;
     }
+    static function selectorderhistory($username)
+    {
+        //JOIN BORH KEYS
+        //ORDERHISTORY
+        // Create connection
+        $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        //SQL
+        $query = $conn->prepare("SELECT * FROM users WHERE username=?");
+        $query->bind_param('s', $username);
+        $query->execute();
+        $result = $query->get_result();
+        $r = $result->fetch_array(MYSQLI_ASSOC);
+        //Return selected product in array 
+        return $r;
+    }
 }
 ?>
