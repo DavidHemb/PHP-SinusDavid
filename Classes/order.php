@@ -8,9 +8,8 @@ Class Order{
     //Array of Row Objects
     private $order_rows;
 
-    public function __construct($order_id, $date_created, $order_rows){
+    public function __construct($order_id, $order_rows){
         $this->order_id = $order_id;
-        $this->date_created = $date_created;
         $this->order_rows = $order_rows;
     }
 
@@ -47,10 +46,24 @@ Class Order{
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-        //Create Order in DB
 
-        //Send in order_rows in DB
+        $query = $conn->prepare("INSERT INTO `order` (order_id, date_created, date_updated) VALUES (?, NOW(), NOW())");
+        $query->bind_param('i', $this->order_id);
+        $query->execute();
 
+        //Loop the order_row array
+        for ($i=0; $i < count($this->order_rows); $i++) { 
+            $query = $conn->prepare("INSERT INTO order_row (product_id, order_id, quantity, price) 
+            VALUES (?, ?, ?, ?)");
+            $query->bind_param('iiid', 
+            $this->order_rows[$i]->get_product_id(),
+            $this->order_id,
+            $this->order_rows[$i]->get_quantity(),
+            $this->order_rows[$i]->get_price());
+            $query->execute(); 
+        }
+       
+        $conn->close();
     }
 
     // public function UpdateOrder(){
@@ -58,11 +71,18 @@ Class Order{
     // }
 
     public function DeleteOrder(){
-        //Delete order in DB
+        
         //Delete order_rows in DB
+        //Delete order in DB
+        
     }
-    public function ViewOrder(){
-        //Send order info to adminview
+    public function ViewOrders(){
+        //Return all orders from the db into an array of order objects
+    }
+
+    private static function GetOrderFromDB($order_id){
+        //Get all info and all rows from an order in the db return an order object
+        return ;
     }
 
 }
