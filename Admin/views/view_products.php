@@ -20,7 +20,7 @@ $products = Product::ADMINviewProducts();
             <th scope="col">Published</th>
             <th scope="col">
                 <form method="POST">
-                    <input class="admin-small-btn" type="submit" id="update_product" name="action" value="New Product"></input>
+                    <input class="admin-small-btn-new" type="submit" id="update_product" name="action" value="New Product"></input>
                 </form>
             </th>
 
