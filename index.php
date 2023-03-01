@@ -120,7 +120,12 @@ session_start();
                 <form action="shoppingcart.php" method="POST">
                 <input type="hidden" name="product_id" value="<?= $products[$i]->get_product_id(); ?>">
                     <p></p>
-                    <input class="button" style="float: right; background-color: green; margin-top: -125;" type="submit" value="Buy now">
+                    <input class="button" style="float: right; background-color: green;" type="submit" value="Buy now">
+                </form>
+                <form action="picturetab.php" method="POST" target="_blank">
+                <input type="hidden" name="product_id" value="<?= $products[$i]->get_product_id(); ?>">
+                    <p></p>
+                    <input class="button" style=" background-color: black;" type="submit" value="View picture in new tab">
                 </form>
             </tr>
         </div>  
