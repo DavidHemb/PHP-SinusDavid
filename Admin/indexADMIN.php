@@ -2,6 +2,7 @@
 include('../Component/admin_header.php');
 require_once('../Classes/product.php');
 require_once('../Classes/category.php');
+require_once('../Classes/order.php');
 require_once('../config.php');
 
 $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
@@ -22,12 +23,15 @@ session_start();
     // Selects input form
 
     //MAIN MENU!!
-
+    
     if (isset($_POST['Edit_products'])) {
         include('./views/view_products.php');
     }
     if (isset($_POST['Edit_categories'])) {
         include('./views/edit_categories.php');
+    }
+    if (isset($_POST['Orders'])) {
+        include('./views/view_orders.php');
     }
     if (isset($_POST["Logout"])) {
         session_destroy();
