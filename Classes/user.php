@@ -1,5 +1,4 @@
 <?php
-require_once('../config.php');
 class User
 {
     static public function registeruser($username, $password, $date)
