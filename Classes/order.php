@@ -114,7 +114,7 @@ class Order
         }
         $conn->close();
         $resultArray = array($result1, $result2);
-        return; $resultArray;
+        return $resultArray;
     }
     public static function ViewOrders()
     {

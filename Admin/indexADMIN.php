@@ -23,7 +23,7 @@ session_start();
     // Selects input form
 
     //MAIN MENU!!
-    
+
     if (isset($_POST['Edit_products'])) {
         include('./views/view_products.php');
     }
@@ -54,15 +54,12 @@ session_start();
 
     //ORDER MENU!!
     if ($action == 'Delete Order') {
-       echo "du tog bort en order";
-       //print_r($_POST);
-       echo "<br>";
-       echo $_POST['order_id'];
-       Order::DeleteOrder($_POST['order_id']);
-    }
+        $result = Order::DeleteOrder($_POST['order_id']);?>
+        <h3> <?= "$result[0]" ?> <br> <?= "$result[1]" ?> </h3>
+    <?php } 
     if ($action == 'Order Details') {
         echo "du tittar på en order";
-     }
+    }
 
 
 
@@ -83,7 +80,7 @@ session_start();
     if ($action == 'select_category') {
         include('./views/update_category.php');
     }
-    
+
 
 
 
@@ -157,9 +154,9 @@ session_start();
             break;
 
         case 'update_product':
-          
+
             $resultsArray = UploadImage();
-          
+
             $imgpath = "";
             //Get correct imgpath to send in
             if (basename($resultsArray['web_filePath']) == "default_img.jpg") {
