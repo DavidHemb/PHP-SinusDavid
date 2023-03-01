@@ -49,8 +49,8 @@ $products = Product::ADMINviewProducts();
                 <td>
                     <form method="POST">
                         <input type="hidden" name="product_id" value="<?= $products[$i]->get_product_id(); ?>">
-                        <input class="admin-small-btn admin-red-btn" type="submit" id="delete_product" name="action" value="Delete"></input>
-                        <input class="admin-small-btn" type="submit" id="update_product" name="action" value="Update"></input>
+                        <input class="admin-small-btn admin-red-btn" type="submit" id="delete_product" name="action" value="Delete Product"></input>
+                        <input class="admin-small-btn" type="submit" id="update_product" name="action" value="Update Product"></input>
                     </form>
 
                 </td>

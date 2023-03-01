@@ -23,8 +23,9 @@ $orders = Order::ViewOrders();
                 <td><?= $orders[$i]["Total_sum"]; ?></td>
                 <td>
                     <form method="POST">
-                        <input type="hidden" name="product_id" value="<?= $orders[$i]["order_id"]; ?>">
-                        <input class="admin-small-btn admin-red-btn" type="submit" id="delete_product" name="action" value="Delete"></input>
+                        <input type="hidden" name="order_id" value="<?= $orders[$i]["order_id"]; ?>">
+                        <input class="admin-small-btn admin-red-btn" type="submit" id="delete_product" name="action" value="Delete Order"></input>
+                        <input class="admin-small-btn " type="submit" id="delete_product" name="action" value="Order Details"></input>
                     </form>
 
                 </td>

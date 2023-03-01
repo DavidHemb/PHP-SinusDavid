@@ -43,14 +43,29 @@ session_start();
     if ($action == 'New Product') {
         include('./views/add_product.php');
     }
-    if ($action == 'Delete') { ?>
+    if ($action == 'Delete Product') { ?>
         <h3>Product Delted!</h3>
         <?php
         Product::ADMINdeleteProduct($_POST['product_id']);
     }
-    if ($action == 'Update') {
+    if ($action == 'Update Product') {
         include('./views/update_product.php');
     }
+
+    //ORDER MENU!!
+    if ($action == 'Delete Order') {
+       echo "du tog bort en order";
+       //print_r($_POST);
+       echo "<br>";
+       echo $_POST['order_id'];
+       Order::DeleteOrder($_POST['order_id']);
+    }
+    if ($action == 'Order Details') {
+        echo "du tittar på en order";
+     }
+
+
+
 
     //EDIT CATEGORY MENU!!
     if (isset($_POST['view_categories'])) {
