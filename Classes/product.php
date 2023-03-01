@@ -32,7 +32,7 @@ class Product
     {
         return $this->product_id;
     }
-    private function set_product_id($product_id)
+    public function set_product_id($product_id)
     {
         $this->product_id = $product_id;
     }
@@ -217,26 +217,27 @@ class Product
 
     static function ADMINselectProductById($id)
     {
-       // Create connection
-       $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+        // Create connection
+        $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
 
-       $sql = "SELECT * FROM products WHERE product_id=$id";
-       $result = $conn->query($sql);
-       $products = array();
+        $sql = "SELECT * FROM products WHERE product_id=$id";
+        $result = $conn->query($sql);
+        $products = array();
 
 
-       while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) {
 
-           $product = new Product($row['category_id'], $row['title'], $row['price'], $row['color'], $row['product_description'], $row['imagepath'], $row['stock'], $row['date_created'], $row['date_updated'], $row['is_published']);
-           $product->set_product_id($row['product_id']);
-          
-       }
-       return $product;
+            $product = new Product($row['category_id'], $row['title'], $row['price'], $row['color'], $row['product_description'], $row['imagepath'], $row['stock'], $row['date_created'], $row['date_updated'], $row['is_published']);
+            $product->set_product_id($row['product_id']);
+        }
+        return $product;
     }
     //ADMIN Function
     static function ADMINupdateproduct($product)
     {
-        //EJ KLAR!!
+
+
+        var_dump($product);
 
         //Varible title in database sent in by calling function
         // Create connection
@@ -246,11 +247,25 @@ class Product
             die("Connection failed: " . $conn->connect_error);
         }
         //SQL
-        $query = $conn->prepare("UPDATE products SET title, price, color, product_description, imagepath, stock, date_created, date_updated, is_published WHERE product_id=?");
-        $query->bind_param('sdsssissii', $product['title'], $product['price'], $product['color'], $product['product_description'], $product['imagepath'], $product['stock'], $product['stock'], $product['date_created'], $product['date_updated'], $product['is_published'], $product['product_id']);
-        $query->execute();
-        $result = $query->get_result();
-        $r = $result->fetch_array(MYSQLI_ASSOC);
+        $sql = "UPDATE products SET
+        title = '{$product->get_title()}',
+        price = {$product->get_price()},
+        color = '{$product->get_color()}',
+        product_description = '{$product->get_product_description()}',
+        imagepath = '{$product->get_imagepath()}',
+        stock = {$product->get_stock()},
+        date_updated = NOW(),
+        is_published = {$product->get_is_published()},
+        category_id = {$product->get_category_id()}
+        WHERE product_id= {$product->get_product_id()}";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "Record updated successfully";
+        } else {
+            echo "Error updating record: " . $conn->error;
+        }
+
+        $conn->close();
     }
 
     static function ADMINdeleteProduct($product_id)
@@ -316,35 +331,26 @@ class Product
     }
     static function SearchBarMetod()
     {
-    // Create connection
-    $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
 
-    $input = $_POST["search"];
-    if(isset($_POST["submit"]))
-    {
-        $sqlQuery = $conn->prepare("SELECT p.*, c.title AS category_title FROM products p LEFT OUTER JOIN category c ON c.category_id = p.category_id WHERE p.title LIKE ? OR product_description LIKE ?");
-        $input = '%' . $input . '%';
-        $sqlQuery->bind_param("ss", $input, $input);
-        $sqlQuery->execute();
-        $result = $sqlQuery->get_result();
-        $products = array();
+        // Create connection
+        $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
 
-        while ($row = $result->fetch_assoc()) {
+        $input = $_POST["search"];
+        if (isset($_POST["submit"])) {
+            $sqlQuery = $conn->prepare("SELECT p.*, c.title AS category_title FROM products p LEFT OUTER JOIN category c ON c.category_id = p.category_id WHERE p.title LIKE ? OR product_description LIKE ?");
+            $input = '%' . $input . '%';
+            $sqlQuery->bind_param("ss", $input, $input);
+            $sqlQuery->execute();
+            $result = $sqlQuery->get_result();
+            $products = array();
 
-            $product = new Product($row['category_title'], $row['title'], $row['price'], $row['color'], $row['product_description'], $row['imagepath'], $row['stock'], $row['date_created'], $row['date_updated'], $row['is_published']);
-            $product->set_product_id($row['product_id']);
-            $products[] = $product;
+            while ($row = $result->fetch_assoc()) {
+
+                $product = new Product($row['category_title'], $row['title'], $row['price'], $row['color'], $row['product_description'], $row['imagepath'], $row['stock'], $row['date_created'], $row['date_updated'], $row['is_published']);
+                $product->set_product_id($row['product_id']);
+                $products[] = $product;
+            }
+            return $products;
         }
-        return $products;
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
-    }
-    }
-    static function MenuMetod()
-    {
-            // Create connection
-            $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
     }
 }

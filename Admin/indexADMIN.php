@@ -111,7 +111,7 @@ session_start();
 
             $resultsArray = UploadImage();
 
-            print_r($resultsArray);
+            //print_r($resultsArray);
             $uploadOk = $resultsArray["uploadOk"];
             $web_filePath = $resultsArray["web_filePath"];
 
@@ -138,16 +138,39 @@ session_start();
             break;
 
         case 'update_product':
-            echo "vi kom till update";
-            echo "<br>";
+          
             $resultsArray = UploadImage();
-            print_r($resultsArray);
-            echo "<pre>";
-            print_r($_POST);
-            echo "</pre>";
-            echo basename($resultsArray['web_filePath']);
+          
+            $imgpath = "";
+            //Get correct imgpath to send in
+            if (basename($resultsArray['web_filePath']) == "default_img.jpg") {
+                $imgpath = $_POST['old_webpath'];
+                echo "Om bild är default använd {$_POST['old_webpath']} = {$imgpath}";
+            } else {
+                $imgpath = $resultsArray['web_filePath'];
+                echo "använd ny bild {$resultsArray['web_filePath']} = {$imgpath}";
+            }
 
-            //Glöm inte att Uppdatera $date_updated;
+            if (basename($_POST['old_webpath']) == basename($resultsArray['web_filePath'])) {
+                $imgpath = $_POST['old_webpath'];
+                echo "Om ny och gammal bild är default använd {$_POST['old_webpath']} = {$imgpath}";
+            }
+
+            $product = new Product(
+                $_POST['category_id'],
+                $_POST['title'],
+                $_POST['price'],
+                $_POST['color'],
+                $_POST['product_description'],
+                $imgpath,
+                $_POST['stock'],
+                "",
+                "NOW()",
+                $_POST['published']
+            );
+            $product->set_product_id($_POST['product_id_']);
+
+            Product::ADMINupdateproduct($product);
 
             break;
         case 'add_category':
