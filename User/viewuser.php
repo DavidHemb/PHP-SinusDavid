@@ -3,7 +3,6 @@ require_once('../config.php');
 require_once('../classes/user.php');
 session_start();
 $user = user::selectuser($_SESSION["user"]);
-var_dump($user);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +19,7 @@ var_dump($user);
             <h2>PROFILE OF <?=$_SESSION['user'];?>!</h2>
         </div>
             <img class="img" src="../Assets/img/pictures/gigachad.jpg" height=600 width=1080></img>
-            <form action="" class="viewuserfrom">
+            <form action="updateuser.php" method="POST" class="viewuserfrom">
                 <!-- Username -->
                 <label for="Username">Username:</label>
                 <input type="text" id="username" name="username" min="0.00" step="0.01" placeholder="<?php echo $user["username"]; ?> ";>
@@ -32,8 +31,8 @@ var_dump($user);
                 <input type="text" id="name" name="name" min="0.00" step="0.01" placeholder="<?php echo $user["name"]; ?> ";>
                 <br>
                 <!-- Adress -->
-                <label for="price">Adress:</label>
-                <input type="text" id="adress" name="adress" min="0.00" step="0.01" placeholder="<?php echo $user["address"]; ?> ";>
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" min="0.00" step="0.01" placeholder="<?php echo $user["address"]; ?> ";>
                 <!-- Zipcode -->
                 <label for="price">Zipcode:</label>
                 <input type="text" id="zipcode" name="zipcode" min="0.00" step="0.01" placeholder="<?php echo $user["zipcode"] ?> ";>
@@ -42,11 +41,11 @@ var_dump($user);
                 <input type="text" id="city" name="city" min="0.00" step="0.01" placeholder="<?php echo $user["city"] ?> ";>
                 <!-- Phone -->
                 <br>
-                <label for="price">Phone Number:</label>
-                <input type="text" id="phonenumber" name="price" min="0.00" step="0.01" placeholder="<?php echo $user["phone"] ?> ";>
+                <label for="phone">Phone Number:</label>
+                <input type="text" id="phone" name="phone" min="0.00" step="0.01" placeholder="<?php echo $user["phone"] ?> ";>
                 <!-- EMail -->
-                <label for="price">EMail:</label>
-                <input type="text" id="email" name="price" min="0.00" step="0.01" placeholder="<?php echo $user["email"] ?> ";>
+                <label for="email">EMail:</label>
+                <input type="text" id="email" name="email" min="0.00" step="0.01" placeholder="<?php echo $user["email"] ?> ";>
                  <!-- Button back -->
                  <button class="button">Submit</button>
                 <a href="./profilepage.php" class="button">Back</a>
