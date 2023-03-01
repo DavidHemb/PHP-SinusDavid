@@ -20,23 +20,13 @@ session_start();
     <header> 
     <div class="logo";>
     </div>
-		<div class="dropdown">
-			<button>Menu</button>
-			<div class="dropdown-content">
-				<?php
-					$menuItems = array('home', 'about', 'contact');
-					$userChoice = isset($_GET['choice']) ? $_GET['choice'] : '';
-					$choices = explode(',',$userChoice);
-					foreach ($choices as $item) {
-						echo '<a href="">' . $item .'<br>'. '</a>';
-					if($choices == 'home')
-					{
-						echo'<a href=" ">' ;
-					}
-					else echo '-1';
-				} ?>
-			</div>
-		</div>
+    <div class="dropdown">
+  <button class="dropbtn">Menu</button>
+  <div class="dropdown-content">
+    <a href="http://localhost/test/SinusDavid/Component/about_us.php" >Products</a>
+    <a href="http://localhost/test/SinusDavid/Component/about_us.php" >About Us</a>
+  </div>
+</div>
 		<div class="loginbutton";>
             <?php if (isset($_SESSION["user"])){ echo '<a href="./user/profilepage.php" style="text-decoration: none;">';} else { echo '<a href="./User/loginpage.php" style="text-decoration: none;">';} ?> <p class="logintext"><?php if (!isset($_SESSION["user"])){ echo "Login";} else if (isset($_SESSION["user"])){ echo $_SESSION['user'];}?></p></a>
             <?php if (isset($_SESSION["user"])){ ?> <br> <a href="./User/logoutpage.php" style="text-decoration: none; color: white;"><p>Logout</p></a> <?php }?>

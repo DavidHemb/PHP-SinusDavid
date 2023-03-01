@@ -318,10 +318,7 @@ class Product
     {
     // Create connection
     $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+
     $input = $_POST["search"];
     if(isset($_POST["submit"]))
     {
@@ -339,6 +336,15 @@ class Product
             $products[] = $product;
         }
         return $products;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     }
+    }
+    static function MenuMetod()
+    {
+            // Create connection
+            $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
     }
 }
