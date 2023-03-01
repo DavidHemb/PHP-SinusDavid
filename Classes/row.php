@@ -14,23 +14,23 @@ class Row
     {
         return $this->product_id;
     }
-    private function set_product_id($product_id)
+    public function set_product_id($product_id)
     {
         $this->product_id = $product_id;
     }
-    public function set_quantity()
+    public function get_quantity()
     {
         return $this->quantity;
     }
-    private function get_quantity($quantity)
+    public function set_quantity($quantity)
     {
         $this->quantity = $quantity;
     }
-    public function set_price()
+    public function get_price()
     {
-        return $this->quantity;
+        return $this->price;
     }
-    private function get_price($price)
+    public function set_price($price)
     {
         $this->price = $price;
     }

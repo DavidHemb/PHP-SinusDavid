@@ -52,14 +52,19 @@ Class Order{
         $query->execute();
 
         //Loop the order_row array
-        for ($i=0; $i < count($this->order_rows); $i++) { 
+        for ($i=0; $i < count($this->order_rows); $i++) {
+            
+            $product_id = $this->order_rows[$i]->get_product_id();
+            $quantity = $this->order_rows[$i]->get_quantity();
+            $price = $this->order_rows[$i]->get_price();
+
             $query = $conn->prepare("INSERT INTO order_row (product_id, order_id, quantity, price) 
             VALUES (?, ?, ?, ?)");
             $query->bind_param('iiid', 
-            $this->order_rows[$i]->get_product_id(),
+            $product_id,
             $this->order_id,
-            $this->order_rows[$i]->get_quantity(),
-            $this->order_rows[$i]->get_price());
+            $quantity,
+            $price);
             $query->execute(); 
         }
        
