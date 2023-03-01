@@ -3,10 +3,12 @@ class Row
 {
     private $product_id;
     private $quantity;
-    public function __construct($product_id, $quantity)
+    private $price;
+    public function __construct($product_id, $quantity, $price)
     {
         $this->product_id = $product_id;
         $this->quantity = $quantity;
+        $this->price = $price;
     }
     public function get_product_id()
     {
@@ -23,6 +25,14 @@ class Row
     private function get_quantity($quantity)
     {
         $this->quantity = $quantity;
+    }
+    public function set_price()
+    {
+        return $this->quantity;
+    }
+    private function get_price($price)
+    {
+        $this->price = $price;
     }
 }
 ?>
