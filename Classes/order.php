@@ -90,8 +90,27 @@ Class Order{
         $conn->close();
         return;
     }
-    public function ViewOrders(){
+    public static function ViewOrders(){
         //Return all orders from the db into an array of order objects
+           // Create connection
+           $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+
+           $sql = "SELECT o.order_id, o.date_created , sum(r.quantity) AS Items, SUM(r.price) AS Total_sum FROM `order` o
+           JOIN order_row r
+           ON r.order_id = o.order_id
+           GROUP BY o.order_id";
+           $result = $conn->query($sql);
+           $orders = array();
+   
+   
+           while ($row = $result->fetch_assoc()) {
+                echo "<pre>";
+                echo print_r($row);
+                echo "</pre>";
+
+               $orders[] = $row;
+           }
+           return  $orders;
     }
 
     private static function GetOrderFromDB($order_id){

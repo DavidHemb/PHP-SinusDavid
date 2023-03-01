@@ -123,3 +123,40 @@ body{
     color: gold;
     font-size: 40px;
 }
+.viewuserfrom{
+    justify-content: center;
+    text-align: center;
+    color: gold;
+    font-size: 40px;
+}
+.menuviewuser{
+    background-image: url('https://www.kamda.se/upload/Bakgrund-Vinyl/29429-vinylbakgrund-1-5x3m-pikerad-vagg-svart.png');
+    background-size: cover;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin: 0;
+    grid-column-start: 1;
+    grid-row-start: 3;
+    color: white;
+    border: 2px solid gold;
+    border-radius: 12px;
+    text-align: center;
+}
+.viewtitle{
+    font-size: 40px;
+    color: gold;
+    border-radius: 20px;
+    padding: 10px;
+}
+.button{
+    background-color: transparent;
+    text-align: center;
+    color: gold;
+    border: 2px solid gold;
+    border-radius: 12px;
+    padding: 2px;
+    text-decoration: none;
+    font-size: 35px;
+}
