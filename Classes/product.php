@@ -339,16 +339,6 @@ class Product
             $products[] = $product;
         }
         return $products;
-        /*
-        $sqlQuery = $conn->prepare("SELECT * FROM products WHERE title OR product_description LIKE '%?%';");
-        var_dump($sqlQuery);
-        $sqlQuery->bind_param('s', $input);
-        $sqlQuery->execute();
-        $result = $sqlQuery->get_result();
-        
-        var_dump($r);
-           
-        */
     }
     }
 }

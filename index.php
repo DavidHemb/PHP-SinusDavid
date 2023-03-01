@@ -112,12 +112,12 @@ session_start();
                 <td><?= $currencyFormatter->formatCurrency($products[$i]->get_price(), "SEK") ; ?></td>
                 <p style="margin-bottom: -50px;"></p>
                 <form action="productcard.php" method="POST">
-                    <input style="visibility:hidden" type="text" name ="INDEX" value="<?php echo $i ?>">
+                <input type="hidden" name="product_id" value="<?= $products[$i]->get_product_id(); ?>">
                     <p></p>
                     <input class="button" style="background-color: brown; margin-top: 40px;" type="submit" value="More info">
                 </form>
                 <form action="shoppingcart.php" method="POST">
-                <input style="visibility:hidden" type="text" name ="INDEX" value="<?php echo $i ?>">
+                <input type="hidden" name="product_id" value="<?= $products[$i]->get_product_id(); ?>">
                     <p></p>
                     <input class="button" style="float: right; background-color: green; margin-top: -125;" type="submit" value="Buy now">
                 </form>
