@@ -19,8 +19,19 @@ input.admin-small-btn{
     font-size: 0.7em;
     padding: 0.5em 0.2em;
     margin: 0.3em;
-    min-width: 12ch;
+    width: 100%;
 }
+
+input.admin-small-btn-new{
+    font-family: inherit;
+    font-size: 1.2em;
+    font-weight: 700;
+    padding: 0.5em 0.2em;
+    margin: 0.3em;
+    width: 100%;
+    background-color: rgb(83, 138, 0);
+}
+
 input.admin-red-btn {
     background-color: rgb(190, 0, 0);
 }
