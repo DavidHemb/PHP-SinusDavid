@@ -80,7 +80,7 @@ Class Order{
 
     // }
 
-    public function DeleteOrder($order_id){
+    public static function DeleteOrder($order_id){
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
         $sql = "DELETE FROM order_rows WHERE order_id = $order_id";
         $conn->close();
@@ -104,9 +104,6 @@ Class Order{
    
    
            while ($row = $result->fetch_assoc()) {
-                echo "<pre>";
-                echo print_r($row);
-                echo "</pre>";
 
                $orders[] = $row;
            }

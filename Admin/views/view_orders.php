@@ -1,12 +1,9 @@
 <?php
 
 $orders = Order::ViewOrders();
-echo "<pre>";
-print_r($orders);
-echo "</pre>";
-echo count($orders);
+
 ?>
-<h3>Products</h3>
+<h3>Orders</h3>
 <table class="admin-products-view">
     <thead>
         <tr>
