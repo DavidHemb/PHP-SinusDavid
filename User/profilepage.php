@@ -16,7 +16,7 @@ if (!isset($_SESSION["user"])) {
     </head>
     <body>
     <audio autoplay>
-        <source src="../Assets/songs/GIGACHAD.mp3" type="audio/mpeg">
+        <source src="../Assets/songs/GIGACHADshort.mp3" type="audio/mpeg">
     </audio>
     <div class="header">
         <h1 class="headertitle">Welcome GIGACHAD: <?=$_SESSION['user'];?>!</h1>
