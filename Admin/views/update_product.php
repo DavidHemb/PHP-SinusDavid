@@ -4,12 +4,10 @@ include('./views/edit_products.php');
 $categories = Category::ViewCategory();
 $productToUpdate = Product::ADMINselectProductById($_POST['product_id']);
 
-print_r($productToUpdate);
-
 ?>
-<h3>Add New Product</h3>
+<h3>Update product!</h3>
 <fieldset>
-    <legend>Add new product!</legend>
+    <legend>Update product!</legend>
     <p class="redtext">*Required fields</p>
     <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="action" value="update_product">

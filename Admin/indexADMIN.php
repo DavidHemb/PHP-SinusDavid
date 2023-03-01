@@ -39,6 +39,14 @@ session_start();
     if ($action == 'New Product') {
         include('./views/add_product.php');
     }
+    if ($action == 'Delete') { ?>
+        <h3>Product Delted!</h3>
+        <?php
+        Product::ADMINdeleteProduct($_POST['product_id']);
+    }
+    if ($action == 'Update') {
+        include('./views/update_product.php');
+    }
 
     //EDIT CATEGORY MENU!!
     if (isset($_POST['view_categories'])) {
@@ -56,15 +64,7 @@ session_start();
     if ($action == 'select_category') {
         include('./views/update_category.php');
     }
-    if ($action == 'Delete') { ?>
-        <h3>Product Delted!</h3>
-        <?php
-        Product::ADMINdeleteProduct($_POST['product_id']);
-    }
-    if ($action == 'Update') {
-        var_dump($_POST);
-        include('./views/update_product.php');
-    }
+    
 
 
 
@@ -145,15 +145,15 @@ session_start();
             //Get correct imgpath to send in
             if (basename($resultsArray['web_filePath']) == "default_img.jpg") {
                 $imgpath = $_POST['old_webpath'];
-                echo "Om bild är default använd {$_POST['old_webpath']} = {$imgpath}";
+                //echo "Om bild är default använd {$_POST['old_webpath']} = {$imgpath}";
             } else {
                 $imgpath = $resultsArray['web_filePath'];
-                echo "använd ny bild {$resultsArray['web_filePath']} = {$imgpath}";
+                //echo "använd ny bild {$resultsArray['web_filePath']} = {$imgpath}";
             }
 
             if (basename($_POST['old_webpath']) == basename($resultsArray['web_filePath'])) {
                 $imgpath = $_POST['old_webpath'];
-                echo "Om ny och gammal bild är default använd {$_POST['old_webpath']} = {$imgpath}";
+                //echo "Om ny och gammal bild är default använd {$_POST['old_webpath']} = {$imgpath}";
             }
 
             $product = new Product(
