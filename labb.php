@@ -22,6 +22,35 @@ if($action == "Place Order"){
     $order->CreateOrder();
 }
  
+$foo = array(
+
+    'whatever', // [0]
+    'foo', // [1]
+    'bar',
+    'banan',
+    'ketchup'
+
+
+);
+
+echo "<pre>";
+var_dump($foo);
+echo "</pre>"; 
+
+unset($foo[0]); // remove item at index 0
+
+
+echo "<pre>";
+var_dump($foo);
+echo "</pre>"; 
+
+
+$foo = array_values($foo); // 'reindex' array
+
+echo "<pre>";
+var_dump($foo);
+echo "</pre>"; 
+
  ?>
 
  
