@@ -1,0 +1,67 @@
+body{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: lightgray;
+    margin: 0;
+}
+.header{
+    background-color: gray;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    border: 2px solid white;
+    border-radius: 8px;
+}
+.headertitle{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    text-align: center;
+    font-size: 50px;
+    color: white;
+    border: 2px solid white;
+    border-radius: 12px;
+}
+.backbutton{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 12px;
+    margin: auto;
+    padding: 10px;
+}
+.checkoutbutton{
+    grid-column-start: 3;
+    grid-column-end: 4;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 12px;
+    margin: auto;
+    padding: 10px;
+}
+.text{
+    color: white;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+}
+.cart{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 12px;
+    margin: auto;
+    padding: 10px;
+}
+.nothingincart{
+    color: white;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    font-size: 50px;
+}

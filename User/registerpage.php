@@ -22,7 +22,7 @@
                     <input style="background-color: black; color: white;" type="submit" value="Register">
                 </form>
                 <form action="loginpage.php">
-                        <input style="background-color: black; color: white;" type="submit" value="Back">
+                    <input style="background-color: black; color: white;" type="submit" value="Back">
                 </form>
             </div>
     </body>
