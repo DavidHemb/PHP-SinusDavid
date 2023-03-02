@@ -6,12 +6,9 @@ $inputpassword = strtolower($_POST['password']);
 $FoundUser = User::selectuser($inputusername);
 var_dump($FoundUser);
 
-
-foreach($FoundUser as $key => $value) {
-    // OM Session innehåller användare
-    if($FoundUser[$key]['username'] == $_SESSION['username'] && $FoundUser[$key]['userpassword'] == $_SESSION['password']) {
+if($FoundUser['username'] != $_SESSION['username'] && $FoundUser['userpassword'] != $_SESSION['password']) {
         // OM INLOGGAD
-        if ($FoundUser[$key]['username'] != $inputusername || $FoundUser[$key]['userpassword'] != $inputpassword) {
+        if ($FoundUser['username'] != $inputusername || $FoundUser[$key]['userpassword'] != $inputpassword) {
             // om ej funnen användare hittad skicka till
             header("Location: loginpage.php?error=Wrong username or password");
             exit();
@@ -22,5 +19,5 @@ foreach($FoundUser as $key => $value) {
             exit();
         }
     }
-}
+
 

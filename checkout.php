@@ -22,13 +22,20 @@
         require_once('./config.php');
         require_once('./Classes/order.php');
         require_once('./Classes/user.php');
-		require_once('./User/checkoutconfir.php');
+		require_once('./Component/purchase.php');
+		//require_once('./User/checkoutconfir.php');
 		session_start();
 
 	// define variables and set to empty values
 	$nameErr = $addressErr = $zipcodeErr = $cityErr = $phoneErr = $emailErr = "";
 	$name = $address = $zipcode = $city = $phone = $email = "";
-	test_input($data);
+	function test_input($data) {
+		$data = trim($data);
+		$data = stripslashes($data);
+		$data = htmlspecialchars($data);
+		return $data;
+	  }
+	
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") { 
 	  if (empty($_POST["name"])) {
@@ -100,9 +107,27 @@
 <?php } ?>
 	
 
+
 	</fieldset>
 </form>
+<br>
+<form>
+	<fieldset>
+		<legend> Wish to login or register? </legend>					
 
+	
+<button onclick="location.href='./User/loginpage.php'">
+  <a href="./User/loginpage.php">Loginpage</a>
+</button>
+
+<button onclick="location.href='./User/registerpage.php'">
+  <a href="./User/registerpage.php">Registerpage</a>
+</button>
+
+
+	</fieldset>
+</form>
+<br>
 
 	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 		<fieldset>
@@ -141,6 +166,24 @@
             <input type="submit" name = "submit" value="Search";>
 
 			<br><br>
-   
+			<?php	registeruserorder();	?>
+			<form>
+	<fieldset>
+						
+	 
+
+	
+<button onclick="location.href='./User/loginpage.php'">
+  <a href="./User/index.php">Return to Homepage</a>
+</button>
+
+<button onclick="location.href='./User/registerpage.php'">
+  <a href="./User/registerpage.php">Finish purchase</a>
+</button>
+
+
+	</fieldset>
+</form>
+
 </body>
 </html>

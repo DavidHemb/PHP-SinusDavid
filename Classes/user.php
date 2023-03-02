@@ -20,6 +20,14 @@ class User
     }
     static public function registeruserorder($userarray)
     {
+    $name = $_POST['name'];
+    $address = $_POST['address'];
+    $zipcode = $_POST['zipcode'];
+    $city = $_POST['city'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $currentDateTime = date('Y-m-d H:i:s');
+
         //KLAR MEN ADDERA DATECREATED!!!!
         //Varibles in database sent in by calling function
         // Create connection
@@ -29,9 +37,9 @@ class User
             die("Connection failed: " . $conn->connect_error);
         }
         //SQL
-        $query = $conn->prepare("INSERT INTO users (username, userpassword, `name`, `address`, zipcode, city, phone, email)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $query->bind_param('sssssssss', $userarray['username'], $userarray['userpassword'], $userarray['name'], $userarray['address'], $userarray['zipcode'], $userarray['city'], $userarray['phone'], $userarray['email']);
+        $query = $conn->prepare("INSERT INTO users ( `name`, `address`, zipcode, city, phone, email,date_created)
+        VALUES ( ?, ?, ?, ?, ?, ?, ? )");
+        $query->bind_param('sssssss', $name['name'], $address['address'], $zipcode['zipcode'], $city['city'], $phone['phone'], $email['email'],$currentDateTime['date_created']);
         $query->execute();
         $conn->close();
     }
