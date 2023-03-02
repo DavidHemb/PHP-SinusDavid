@@ -13,7 +13,7 @@ session_start();
 ?>
 
 <main>
-    
+
 
     <?php
     if (!isset($_SESSION["admin"])) {
@@ -26,7 +26,7 @@ session_start();
     // Selects input form
 
     //MAIN MENU!! - Takes the choice from the form in Component\admin_header.php
-    
+
     if (isset($_POST['Edit_admins'])) {
         include('./views/view_admins.php');
     }
@@ -47,6 +47,19 @@ session_start();
         unset($_SESSION);
     }
 
+    //EDIT ADMINS MENU!!
+    //Deletes an Admin from DB
+    if ($action == 'Delete Admin') {
+        User::DeleteAdmin($_POST["admin_username"]); ?>
+
+        <h3>Admin <?= $_POST["admin_username"] ?> removed from database! </h3>
+
+    <?php }
+    //Presents the form to add a new Admin
+    if ($action == 'New Admin') {
+        include('./views/add_admin.php');
+    }
+
 
     //EDIT PRODUCT MENU!!
     if ($action == 'New Product') {
@@ -54,7 +67,7 @@ session_start();
     }
     if ($action == 'Delete Product') { ?>
         <h3>Product Delted!</h3>
-        <?php
+    <?php
         Product::ADMINdeleteProduct($_POST['product_id']);
     }
     if ($action == 'Update Product') {
@@ -63,9 +76,9 @@ session_start();
 
     //ORDER MENU!!
     if ($action == 'Delete Order') {
-        $result = Order::DeleteOrder($_POST['order_id']);?>
+        $result = Order::DeleteOrder($_POST['order_id']); ?>
         <h3> <?= "$result[0]" ?> <br> <?= "$result[1]" ?> </h3>
-    <?php } 
+        <?php }
     if ($action == 'Order Details') {
         include('./views/view_orderdetails.php');
     }
@@ -204,7 +217,27 @@ session_start();
             Category::DeleteCategory($_POST['category_id']); ?>
             <h3>Category Deleted</h3>
 
-    <?php break;
+            <?php break;
+
+        case 'add_admin':
+            $inputusername = strtolower($_POST['username']);
+            $inputpassword = strtolower($_POST['password']);
+
+            if (!empty($inputusername)) {
+                $FoundAdmin = User::selectadmins($inputusername);
+
+                if (empty($FoundAdmin)) {
+                        User::ReqisterNewAdmin($inputusername, $inputpassword);
+                        include('./views/view_admins.php');
+                        } else { ?>
+                        
+                        <h3>Username already taken!</h3>
+                        <p>Please try again.</p>
+
+                    <?php }
+                }
+
+            break;
     }
 
 
