@@ -11,6 +11,9 @@
 		}
 	</style>
 </head>
+
+</head>
+
 <body>
 
 	<h1 style="text-align: center;">Checkout Form</h1>
@@ -25,7 +28,7 @@
 	// define variables and set to empty values
 	$nameErr = $addressErr = $zipcodeErr = $cityErr = $phoneErr = $emailErr = "";
 	$name = $address = $zipcode = $city = $phone = $email = "";
-
+	test_input($data);
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") { 
 	  if (empty($_POST["name"])) {
@@ -82,13 +85,24 @@
 	  }
 	}
 
-	function test_input($data) {
-	  $data = trim($data);
-	  $data = stripslashes($data);
-	  $data = htmlspecialchars($data);
-	  return $data;
-	}
+
 	?>
+
+</form></fieldset>
+
+<form>
+	<fieldset>
+		<legend> Welcome to checkout! </legend>					
+<?php foreach($_SESSION as $key => $value)
+{?>
+<label for="<=php echo $key; ?>"><?php echo $value ;?></label>
+<br>
+<?php } ?>
+	
+
+	</fieldset>
+</form>
+
 
 	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 		<fieldset>
@@ -125,20 +139,8 @@
             <br><br>
      
             <input type="submit" name = "submit" value="Search";>
+
 			<br><br>
-       
-
-            </form></fieldset>
-
-	<form>
-		<fieldset>
-			<legend> Order Data </legend>					
-	<?php foreach($_SESSION as $key => $value)
-	{?>
-	<label for="<=php echo $key; ?>"><?php echo $key . ':' . $value;?></label>
-	<br>
-	<?php } ?>
-		
-
-		</fieldset>
-	</form>
+   
+</body>
+</html>
