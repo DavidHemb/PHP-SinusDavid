@@ -26,6 +26,6 @@
                 <form action="../index.php">
                         <input style="background-color: black; color: white;" type="submit" value="Back">
                 </form>
-            </div>
+        </div>
     </body>
 </html>

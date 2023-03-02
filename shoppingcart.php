@@ -4,7 +4,10 @@ require_once('./classes/product.php');
 require_once('./classes/category.php');
 require_once('./classes/row.php');
 session_start();
-$rows = $_SESSION["rows"];
+
+if (isset($_SESSION["rows"])) {
+    $rows = $_SESSION["rows"];
+}
 
 //POST
 $product_id = $_POST['product_id'];

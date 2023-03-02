@@ -37,7 +37,15 @@ class User
     }
     static public function updateuserorder($userarray)
     {
-        
+        $username = $userarray['username'];
+        $userpassword = $userarray['userpassword'];
+        $uname = $userarray['name'];
+        $uaddress = $userarray['address'];
+        $uzip = $userarray['zipcode'];
+        $ucity = $userarray['city'];
+        $tele = $userarray['phone'];
+        $mail = $userarray['email'];
+        $id = $userarray['user_id'];
         //Varibles in database sent in by calling function
         // Create connection
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
@@ -46,10 +54,9 @@ class User
             die("Connection failed: " . $conn->connect_error);
         }
         //SQL
-        var_dump($userarray);
-        $sql = ("UPDATE users SET userpassword={$userarray['userpassword']}, `name`={$userarray['name']}, `address`={$userarray['address']}, zipcode={$userarray['zipcode']}, city={$userarray['city']}, phone={$userarray['phone']}, email={$userarray['email']} WHERE username={$userarray['username']})");
+        $sql = ("UPDATE `users` SET `username`='$username', userpassword='$userpassword', `name`='$uname', `address`='$uaddress', zipcode='$uzip', city='$ucity', phone='$tele', email='$mail' WHERE user_id='$id'");
         if ($conn->query($sql) === TRUE) {
-            echo "Record updated successfully";
+            return;
         } else {
             echo "Error updating record: " . $conn->error;
         }

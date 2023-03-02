@@ -39,7 +39,7 @@ $Usefilter = filter_input(INPUT_POST, 'usefilter', FILTER_UNSAFE_RAW);
         <input type="checkbox" id="usefilter" name="usefilter" value="usefilter">
         <input class="buttontext" type="submit" value="User">
     </form>
-    <?php if(!empty($useraction && $Usefilter == 'usefilter')){ $user = user::selectuser($_SESSION["user"]);?>
+    <?php if(!empty($useraction && $Usefilter == 'usefilter')){ $user = user::selectuser($_SESSION["user"]); ?>
         <div class="menuviewuser" style="margin-top: 0px;" >
             <div class="viewtitle">
                 <h2>PROFILE OF <?=$_SESSION['user'];?>!</h2>
@@ -48,30 +48,34 @@ $Usefilter = filter_input(INPUT_POST, 'usefilter', FILTER_UNSAFE_RAW);
                 <form action="updateuser.php" method="POST" class="viewuserfrom">
                     <!-- Username -->
                     <label for="Username">Username:</label>
-                    <input type="text" id="username" name="username" min="0.00" step="0.01" placeholder="<?php echo $user["username"]; ?> ";>
+                    <input type="text" id="username" name="username" min="0.00" step="0.01" placeholder="<?php echo $user["username"]; ?> "; required>
                     <!-- Password -->
                     <label for="password">Password:</label>
-                    <input type="text" id="password" name="password" min="0.00" step="0.01" placeholder="<?php echo $user["userpassword"]; ?> ";>
+                    <input type="password" id="password" name="password" min="0.00" step="0.01" placeholder="<?php echo $user["userpassword"]; ?> "; required>
                     <!-- Name -->
                     <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" min="0.00" step="0.01" placeholder="<?php echo $user["name"]; ?> ";>
+                    <input type="text" id="name" name="name" min="0.00" step="0.01" placeholder="<?php echo $user["name"]; ?> "; required>
                     <br>
                     <!-- Adress -->
                     <label for="address">Address:</label>
-                    <input type="text" id="address" name="address" min="0.00" step="0.01" placeholder="<?php echo $user["address"]; ?> ";>
+                    <input type="text" id="address" name="address" min="0.00" step="0.01" placeholder="<?php echo $user["address"]; ?> "; required>
                     <!-- Zipcode -->
                     <label for="price">Zipcode:</label>
-                    <input type="text" id="zipcode" name="zipcode" min="0.00" step="0.01" placeholder="<?php echo $user["zipcode"] ?> ";>
+                    <input type="text" id="zipcode" name="zipcode" min="0.00" step="0.01" placeholder="<?php echo $user["zipcode"] ?> "; required>
                     <!-- City -->
                     <label for="price">City:</label>
-                    <input type="text" id="city" name="city" min="0.00" step="0.01" placeholder="<?php echo $user["city"] ?> ";>
+                    <input type="text" id="city" name="city" min="0.00" step="0.01" placeholder="<?php echo $user["city"] ?> "; required>
                     <!-- Phone -->
                     <br>
                     <label for="phone">Phone Number:</label>
-                    <input type="text" id="phone" name="phone" min="0.00" step="0.01" placeholder="<?php echo $user["phone"] ?> ";>
+                    <input type="text" id="phone" name="phone" min="0.00" step="0.01" placeholder="<?php echo $user["phone"] ?> "; required>
                     <!-- EMail -->
                     <label for="email">EMail:</label>
-                    <input type="text" id="email" name="email" min="0.00" step="0.01" placeholder="<?php echo $user["email"] ?> ";>
+                    <input type="text" id="email" name="email" min="0.00" step="0.01" placeholder="<?php echo $user["email"] ?> "; required>
+                    <!-- UserID -->
+                    <tr> <td> <?php echo $user["user_id"]; ?> </td> </tr>
+                    <label for="user_id">UserID:</label>
+                    <input type="int" id="user_id" name="user_id" min="0.00" step="0.01" placeholder="<?php echo $user["user_id"] ?> "; required>
                     <!-- Button back -->
                     <button class="button">Submit</button>
                     <a href="./profilepage.php" class="button">Back</a>
