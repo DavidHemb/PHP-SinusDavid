@@ -9,6 +9,12 @@ echo "<pre>";
 var_dump($_SESSION["rows"]);
 echo "</pre>";
 
+$order = $_SESSION["rows"];
+$_SESSION["order"] = $order;
+
+echo "<pre>";
+var_dump($_SESSION["order"]);
+echo "</pre>";
 //HTML FOR PAGE
 ?>
 <!DOCTYPE html>
