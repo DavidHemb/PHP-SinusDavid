@@ -19,36 +19,19 @@
         require_once('./config.php');
         require_once('./Classes/order.php');
         require_once('./Classes/user.php');
-      
-        session_start(); 
+		require_once('./User/checkoutconfir.php');
+ 
 	// define variables and set to empty values
 	$nameErr = $addressErr = $zipcodeErr = $cityErr = $phoneErr = $emailErr = "";
 	$name = $address = $zipcode = $city = $phone = $email = "";
-    $FoundUser = User::selectuser($inputusername); // Get userdata
+   
  
-
-    if (!isset($_SESSION["user"])) {
-        header("Location: ./User/loginpage.php");
-        exit();
-    }
-    //Check for user
-    if ($FoundUser['username'] != $inputusername || $FoundUser['userpassword'] != $inputpassword)
-    {
-        header("Location: loginpage.php?error= Wrong unsername or password");
-        exit();
-    }
-    else
-    {
-        $_SESSION["user"] = $FoundUser['username'];
-        echo 'Welcome' . $FoundUser['username'];
-        header("Location: ./index.php");
-        exit();
-    }
+ 
     
 
 
 
-	if ($_SERVER["REQUEST_METHOD"] == "POST") { //approved
+	if ($_SERVER["REQUEST_METHOD"] == "POST") { 
 	  if (empty($_POST["name"])) {
 	    $nameErr = "Name is required";
 	  } else {
@@ -61,7 +44,7 @@
 
 	  if (empty($_POST["address"])) {
 	    $addressErr = "Address is required";
-	  } else {
+	  } else { 
 	    $address = test_input($_POST["address"]);
 	  }
 
@@ -70,7 +53,8 @@
 	  } else {
 	    $zipcode = test_input($_POST["zipcode"]);
 	    // check if zipcode is valid
-	    if (!preg_match("/^[0-9]{5}$/",$zipcode)) {
+	    if (!preg_match("/^[0-9]{5}$/",$zipcode)) { 
+            // preg_match Method searching for patterns.
 	      $zipcodeErr = "Invalid zipcode try agian 64354";
 	    }
 	  }
@@ -145,4 +129,4 @@
             <br><br>
             <br><br>
             <input type="submit" name = "submit" value="Search";>
-</form></fieldset>
+            </form></fieldset>

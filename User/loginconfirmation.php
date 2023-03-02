@@ -19,7 +19,7 @@ else if ($FoundUser['username'] != $inputusername || $FoundUser['userpassword'] 
     header("Location: loginpage.php?error= Wrong unsername or password");
     exit();
 }
-else
+else  
 {
     $_SESSION["user"] = $FoundUser['username'];
     header("Location: ../index.php");
