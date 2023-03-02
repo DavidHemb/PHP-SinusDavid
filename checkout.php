@@ -19,16 +19,12 @@
         require_once('./config.php');
         require_once('./Classes/order.php');
         require_once('./Classes/user.php');
-		require_once('./User/checkoutconfir.php');
- 
+		//require_once('./User/checkoutconfir.php');
+		session_start();
+
 	// define variables and set to empty values
 	$nameErr = $addressErr = $zipcodeErr = $cityErr = $phoneErr = $emailErr = "";
 	$name = $address = $zipcode = $city = $phone = $email = "";
-   
- 
- 
-    
-
 
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") { 
@@ -129,4 +125,12 @@
             <br><br>
             <br><br>
             <input type="submit" name = "submit" value="Search";>
+			
+	<?php foreach($_SESSION as $key => $value)
+	{
+
+		echo $_SESSION['order'];
+		echo $_POST['index'];
+	}
+	?>
             </form></fieldset>
