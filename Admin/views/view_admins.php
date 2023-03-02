@@ -1,7 +1,7 @@
 <?php
-require('../Classes/user.php');
-$products = Product::ADMINviewProducts();
-//$admins = User::GetAllAdminsFromDB();
+require_once('../Classes/user.php');
+$admins = User::GetAllAdminsFromDB();
+
 ?>
 <h3>Admins</h3>
 <table class="admin-products-view">
@@ -19,13 +19,13 @@ $products = Product::ADMINviewProducts();
     <tbody>
 
 
-        <?php for ($i = 0; $i < count($products); $i++) {  ?>
+        <?php for ($i = 1; $i < count($admins); $i++) {  ?>
             <tr>
-                <td>ett namn</td>
+                <td><?= $admins[$i]["username"] ?> </td>
              
                 <td>
                     <form method="POST">
-                        <input type="hidden" name="admin_username" value="ETT ADMIN ID!!">
+                        <input type="hidden" name="admin_username" value="<?= $admins[$i]["username"]?>">
                         <input class="admin-small-btn admin-red-btn" type="submit" id="delete_product" name="action" value="Delete Admin"></input>
                     </form>
 

@@ -3,6 +3,7 @@ include('../Component/admin_header.php');
 require_once('../Classes/product.php');
 require_once('../Classes/category.php');
 require_once('../Classes/order.php');
+require_once('../Classes/user.php');
 require_once('../config.php');
 
 $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
@@ -83,31 +84,10 @@ session_start();
     if ($action == 'select_category') {
         include('./views/update_category.php');
     }
+  
 
 
-
-
-
-
-
-    // if (isset($_POST['Delete Product'])) {
-    //     include('view/delete_product.php');
-    // }
-    // if (isset($_POST['Update Product'])) {
-    //     include('view/update_product.php');
-    // }
-    // if (isset($_POST['Find'])) {
-    //     include('view/find_product.php');
-    // }  
-    // if (isset($_POST["Logout"])) {
-    //     session_destroy();
-    //     unset($_SESSION);
-    // }
-
-
-
-
-    // Handles input from hidden formaction above
+    // Handles input from included formaction pages above
     switch ($action) {
             //date('Y/m/d H:i')
         case 'add_product':

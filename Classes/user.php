@@ -115,5 +115,54 @@ class User
         //Return selected product in array 
         return $r;
     }
+
+
+
+    //FUNCTIONS FOR ADMIN SECTION OF THE SITE
+
+    static public function GetAllAdminsFromDB(){
+        
+        // Create connection
+        $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT username FROM admins";
+
+        $result = $conn->query($sql);
+        $admins = array();
+
+
+        while ($row = $result->fetch_array()) {
+
+            $admins[] = $row;
+        }
+        return  $admins;
+    }
+
+    static public function GetAllCustomersFromDB(){
+         // Create connection
+        $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        
+        $sql = "";
+
+        $result = $conn->query($sql);
+        $customers = array();
+
+
+        while ($row = $result->fetch_array()) {
+
+            $customers[] = $row;
+        }
+        return  $customers;
+
+
+    }
+
 }
-?>
