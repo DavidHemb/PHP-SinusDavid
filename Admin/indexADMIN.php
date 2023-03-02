@@ -12,18 +12,23 @@ session_start();
 ?>
 
 <main>
+    
 
     <?php
-
     if (!isset($_SESSION["admin"])) {
         header("Location: ../User/loginpage.php");
         exit();
     }
+
+
     //echo var_dump($_POST['Add_New_Product']);
     // Selects input form
 
-    //MAIN MENU!!
+    //MAIN MENU!! - Takes the choice from the form in Component\admin_header.php
 
+    if (isset($_POST['Edit_admins'])) {
+        include('./views/view_admins.php');
+    }
     if (isset($_POST['Edit_products'])) {
         include('./views/view_products.php');
     }
@@ -58,10 +63,8 @@ session_start();
         <h3> <?= "$result[0]" ?> <br> <?= "$result[1]" ?> </h3>
     <?php } 
     if ($action == 'Order Details') {
-        echo "du tittar på en order";
+        include('./views/view_orderdetails.php');
     }
-
-
 
 
     //EDIT CATEGORY MENU!!
