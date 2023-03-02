@@ -98,19 +98,22 @@ $order = $_SESSION["rows"];
                         </td>
                         <td>
                             <form method="POST">
-                            <input type="int" id="quantity" name="quantity" value="<?php echo $order[$i]->get_quantity(); ?>" >
-                            <input type="hidden" id="index" name="index" value="<?php echo ($i) ?>">
-                            <input type="submit" name="action" value="Update">
+                                <input type="int" id="quantity" name="quantity"
+                                    value="<?php echo $order[$i]->get_quantity(); ?>">
+                                <input type="hidden" id="index" name="index" value="<?php echo ($i) ?>">
+                                <input type="submit" name="action" value="Update">
                             </form>
                         </td>
                         <td>
-                        <form method="POST">
-                            <input type="hidden" id="index" name="index" value="<?php echo ($i) ?>">
-                            <input type="submit" name="action" value="Remove">
+                            <form method="POST">
+                                <input type="hidden" id="index" name="index" value="<?php echo ($i) ?>">
+                                <input type="submit" name="action" value="Remove">
                             </form>
                         </td>
                     <?php } ?>
-                <input type="submit" name="action" value="Checkout">
+                    <?php if (!empty($_SESSION["rows"])) { ?>
+                        <input type="submit" name="action" value="Checkout">
+                    <?php } ?>
             </table>
         </form>
     </div>
