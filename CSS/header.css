@@ -26,10 +26,10 @@ header {
 	background-color: black;
 }
 .carttext {
-	font-size: 25px;
+	font-size: 40px;
 	color: white;
-	padding-left: 15px;
-	padding-right: 15px;
+	padding-left: 35px;
+	padding-right: 35px;
 }
 .search-container {
 	grid-column-start: 3;
@@ -59,10 +59,12 @@ header {
 
 .dropbtn {
   background-color: #ffffff;
-  color: rgb(0, 0, 0);
-  padding: 16px;
-  font-size: 16px;
-  border: none;
+  color: white;
+  background-color: black;
+  padding: 30px;
+  font-size: 40px;
+  border: 2px solid white;
+  border-radius: 12px;
 }
 
 .dropdown {

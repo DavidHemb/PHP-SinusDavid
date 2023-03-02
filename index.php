@@ -40,7 +40,7 @@ session_start();
 			</form>
 		</div>
         <div class="cart">
-            <a href="shoppingcart.php" style="text-decoration: none;"><p class="carttext">Cart</p></a>
+            <a href="shoppingcart.php" style="text-decoration: none; font-size: 60px;"><p class="carttext">Cart</p></a>
         </div>
     <br>
     </header>	

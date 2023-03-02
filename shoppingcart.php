@@ -4,20 +4,23 @@ require_once('./classes/product.php');
 require_once('./classes/category.php');
 require_once('./classes/row.php');
 session_start();
+$rows = $_SESSION["rows"];
+
 //POST
 $product_id = $_POST['product_id'];
 
 //Get price
 $product = product::ADMINselectProductById($product_id);
 $price = $currencyFormatter->formatCurrency($product->get_price(), "SEK") ;
-//$quantity = $Row->get_quantity();
-
+$quantity = 1;
 
 //MAKE ARRAY WHIT VALUES
 $arr = array("product_id"=>$product_id, "quantity"=>$quantity, "price"=>$price);
-var_dump($arr);
+
 //MAKE OBJECT WHIT ARRAY
-new Row($arr["product_id"], $arr["quantity"], $arr["price"]);
+
+$rows[] = new Row($arr["product_id"], $arr["quantity"], $arr["price"]);
+$_SESSION["rows"] = $rows;
 
 //INFO FOR PAGE
 $product = product::ADMINselectProductById($product_id);
@@ -33,7 +36,7 @@ $product = product::ADMINselectProductById($product_id);
         <title>SINUS Skateboards</title>
     </head>
     <body>
-    <div class="menu">
+        <div class="menu">
             <h1>
                 SINUS Skateboards
             </h1>
@@ -42,16 +45,15 @@ $product = product::ADMINselectProductById($product_id);
                 Title: <?php echo $product->get_title();?><br><br>
             </p>
             <h1>Added to cart!</h1>
-                <form style="margin-bottom: -60px;" action="index.php">
-                    <p></p>
-                    <input class="button" style="display: inline-block; background-color: black; color: white;" type="submit" value="Continue Shopping">
-                </form>
-                <form action="shoppingcart.php" method="POST">
+            <form style="margin-bottom: -60px;" action="index.php">
+                <p></p>
+                <input class="button" style="display: inline-block; background-color: black; color: white;" type="submit" value="Continue Shopping">
+            </form>
+            <form action="cart.php" method="POST">
                 <input type="hidden" name="product_id" value="<?= $product->get_product_id(); ?>">
-                    <p></p>
-                    <input class="button" style="float: right; background-color: green; margin-top: -10px;" type="submit" value="To Shoppingcart">
-                </form>
+                <p></p>
+                <input class="button" style="float: right; background-color: green; margin-top: -10px;" type="submit" value="To cart">
+            </form>
         </div>
     </body>
 </html>
-?>

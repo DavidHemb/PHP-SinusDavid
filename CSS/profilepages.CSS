@@ -34,6 +34,7 @@ body{
     text-decoration: none;
     border: 2px solid gold;
     border-radius: 15px;
+    background-color: transparent;
 }
 .menu{
     background-image: url('https://static.vecteezy.com/ti/vetor-gratis/t2/7069573-ouro-vip-icone-e-coroa-com-gemas-vetor.jpg');
@@ -79,6 +80,7 @@ body{
     border: 2px solid gold;
     border-radius: 12px;
     text-align: center;
+    background-color: transparent;
 }
 .orderhistory{
     background-image: url('https://static.vecteezy.com/ti/vetor-gratis/t2/7069573-ouro-vip-icone-e-coroa-com-gemas-vetor.jpg');
@@ -101,7 +103,7 @@ body{
     border: 2px solid gold;
     grid-column-start: 1;
     grid-column-end: 4;
-    grid-row-start: 5;
+    grid-row-start: 6;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
@@ -132,13 +134,12 @@ body{
 .menuviewuser{
     background-image: url('https://www.kamda.se/upload/Bakgrund-Vinyl/29429-vinylbakgrund-1-5x3m-pikerad-vagg-svart.png');
     background-size: cover;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 400px;
-    padding-right: 400px;
+
     margin: 0;
     grid-column-start: 1;
-    grid-row-start: 3;
+    grid-column-start: 2;
+    grid-row-start: 4;
+    grid-row-start: 5;
     color: white;
     border: 2px solid gold;
     border-radius: 12px;
