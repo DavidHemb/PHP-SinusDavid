@@ -19,7 +19,7 @@
         require_once('./config.php');
         require_once('./Classes/order.php');
         require_once('./Classes/user.php');
-		//require_once('./User/checkoutconfir.php');
+		require_once('./User/checkoutconfir.php');
 		session_start();
 
 	// define variables and set to empty values
@@ -123,14 +123,22 @@
 			<input type="text" id="email" name="email" value="<?php echo $email;?>">
 			<span class="error">* <?php echo $emailErr;?></span>
             <br><br>
-            <br><br>
+     
             <input type="submit" name = "submit" value="Search";>
-			
-	<?php foreach($_SESSION as $key => $value)
-	{
+			<br><br>
+       
 
-		echo $_SESSION['order'];
-		echo $_POST['index'];
-	}
-	?>
             </form></fieldset>
+
+	<form>
+		<fieldset>
+			<legend> Order Data </legend>					
+	<?php foreach($_SESSION as $key => $value)
+	{?>
+	<label for="<=php echo $key; ?>"><?php echo $key . ':' . $value;?></label>
+	<br>
+	<?php } ?>
+		
+
+		</fieldset>
+	</form>
