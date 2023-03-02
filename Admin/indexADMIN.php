@@ -26,7 +26,7 @@ session_start();
     // Selects input form
 
     //MAIN MENU!! - Takes the choice from the form in Component\admin_header.php
-
+    
     if (isset($_POST['Edit_admins'])) {
         include('./views/view_admins.php');
     }
@@ -35,6 +35,9 @@ session_start();
     }
     if (isset($_POST['Edit_categories'])) {
         include('./views/edit_categories.php');
+    }
+    if (isset($_POST['Customers'])) {
+        include('./views/view_customers.php');
     }
     if (isset($_POST['Orders'])) {
         include('./views/view_orders.php');

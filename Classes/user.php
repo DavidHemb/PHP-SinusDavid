@@ -149,14 +149,14 @@ class User
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-        
-        $sql = "";
+
+        $sql = "SELECT u.user_id, u.username, u.name, u.address, u.zipcode, u.city, u.phone, u.email FROM users u";
 
         $result = $conn->query($sql);
         $customers = array();
 
 
-        while ($row = $result->fetch_array()) {
+        while ($row = $result->fetch_assoc()) {
 
             $customers[] = $row;
         }
