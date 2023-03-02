@@ -8,6 +8,8 @@ $orders = Order::ViewOrders();
     <thead>
         <tr>
             <th scope="col">Order ID</th>
+            <th scope="col">Customer Id</th>
+            <th scope="col">Customer Name</th>
             <th scope="col">Order Date</th>
             <th scope="col">Items</th>
             <th scope="col">Order Value</th>
@@ -18,9 +20,11 @@ $orders = Order::ViewOrders();
         <?php for ($i = 0; $i < count($orders); $i++) {  ?>
             <tr>
                 <td><?= $orders[$i]["order_id"]; ?></td>
+                <td><?= $orders[$i]["user_id"]; ?></td>
+                <td><?= $orders[$i]["name"]; ?></td>
                 <td><?= $orders[$i]["date_created"]; ?></td>
                 <td><?= $orders[$i]["Items"]; ?></td>
-                <td><?= $orders[$i]["Total_sum"]; ?></td>
+                <td><?= $currencyFormatter->formatCurrency($orders[$i]["Total_sum"], "SEK"); ?></td>
                 <td>
                     <form method="POST">
                         <input type="hidden" name="order_id" value="<?= $orders[$i]["order_id"]; ?>">

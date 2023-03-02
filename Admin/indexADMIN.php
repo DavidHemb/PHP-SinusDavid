@@ -63,7 +63,7 @@ session_start();
         <h3> <?= "$result[0]" ?> <br> <?= "$result[1]" ?> </h3>
     <?php } 
     if ($action == 'Order Details') {
-        echo "du tittar på en order";
+        include('./views/view_orderdetails.php');
     }
 
 

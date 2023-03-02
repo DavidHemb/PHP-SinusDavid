@@ -98,7 +98,7 @@ class Order
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-                
+
         $sql = "DELETE FROM order_row WHERE order_id = $order_id";
         if ($conn->query($sql) === TRUE) {
             $result1 = "Rows deleted successfully";
@@ -122,10 +122,14 @@ class Order
         // Create connection
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
 
-        $sql = "SELECT o.order_id, o.date_created , sum(r.quantity) AS Items, SUM(r.price) AS Total_sum FROM `order` o
-           JOIN order_row r
-           ON r.order_id = o.order_id
-           GROUP BY o.order_id";
+        $sql = "SELECT o.order_id,u.user_id, u.name , o.date_created , sum(r.quantity) AS Items, SUM(r.price) AS Total_sum FROM `order` o
+        JOIN order_row r
+        ON r.order_id = o.order_id
+        JOIN orderhistory h
+           ON o.order_id = h.order_id
+           JOIN users u
+           ON h.user_id = u.user_id
+        GROUP BY o.order_id";
         $result = $conn->query($sql);
         $orders = array();
 
@@ -135,6 +139,33 @@ class Order
             $orders[] = $row;
         }
         return  $orders;
+    }
+
+    public static function ViewOrderDetails($order_id)
+    {
+        //Return all orders from the db into an array of order objects
+        // Create connection
+        $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+
+        $sql = "SELECT h.order_id, r.product_id, r.quantity, r.price, p.title, p.color, u.user_id ,u.name, u.address, u.city, u.zipcode, u.phone, u.email FROM orderhistory h 
+        JOIN order_row r
+        ON h.order_id = r.order_id
+        JOIN	products p
+        ON r.product_id = p.product_id
+        JOIN users u
+        ON u.user_id = h.user_id
+        WHERE h.order_id = $order_id
+        ";
+
+        $result = $conn->query($sql);
+        $order_rows = array();
+
+
+        while ($row = $result->fetch_assoc()) {
+
+            $order_rows[] = $row;
+        }
+        return  $order_rows;
     }
 
     private static function GetOrderFromDB($order_id)
