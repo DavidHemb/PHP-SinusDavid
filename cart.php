@@ -5,8 +5,6 @@ require_once('./classes/category.php');
 require_once('./classes/row.php');
 session_start();
 $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
-
-var_dump($_POST);
 if (!empty($action)) {
     switch ($action) {
         case 'Remove':
@@ -20,11 +18,18 @@ if (!empty($action)) {
             $_SESSION["rows"] = $order;
             break;
         case 'Update':
-            $order[$i]->get_price();
+            $quantity = $_POST['quantity'];
+
+            $order = $_SESSION["rows"];
+            $order[$_POST['index']]->set_quantity($quantity);
+
+            $_SESSION["rows"] = $order;
             break;
-        case 'To checkout':
+        case 'Checkout':
+            $order = $_SESSION["rows"];
             $_SESSION["order"] = $order;
-            break;
+            header("Location: ./checkout.php");
+            exit();
     }
 }
 
@@ -35,7 +40,6 @@ if (empty($_SESSION["rows"])) { ?>
 <?php }
 
 $order = $_SESSION["rows"];
-
 //HTML FOR PAGE
 ?>
 <!DOCTYPE html>
@@ -93,16 +97,20 @@ $order = $_SESSION["rows"];
                             <?= $order[$i]->get_price(); ?>
                         </td>
                         <td>
-                            <input type="int" id="quantity" name="quantity" value="<?php $order[$i]->get_quantity(); ?>" ; required>
+                            <form method="POST">
+                            <input type="int" id="quantity" name="quantity" value="<?php echo $order[$i]->get_quantity(); ?>" >
+                            <input type="hidden" id="index" name="index" value="<?php echo ($i) ?>">
+                            <input type="submit" name="action" value="Update">
+                            </form>
                         </td>
                         <td>
-                            <form method="POST">
-                                <input type="submit" name="action" value="Remove">
-                                <input type="submit" name="action" value="Update">
+                        <form method="POST">
+                            <input type="hidden" id="index" name="index" value="<?php echo ($i) ?>">
+                            <input type="submit" name="action" value="Remove">
                             </form>
                         </td>
                     <?php } ?>
-                <input type="submit" name="To_checkout" value="To checkout">
+                <input type="submit" name="action" value="Checkout">
             </table>
         </form>
     </div>

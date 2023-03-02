@@ -7,7 +7,6 @@ if (!isset($_SESSION["user"])) {
 require_once('../config.php');
 require_once('../classes/user.php');
 $useraction = filter_input(INPUT_POST, 'useraction', FILTER_UNSAFE_RAW);
-$Usefilter = filter_input(INPUT_POST, 'usefilter', FILTER_UNSAFE_RAW);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,11 +34,10 @@ $Usefilter = filter_input(INPUT_POST, 'usefilter', FILTER_UNSAFE_RAW);
         <a href="" class="buttontext">Orderhistory</a>
     </div>
     <form method="POST" class="user">
-        <input type="hidden" name="useraction" value="filter">
-        <input type="checkbox" id="usefilter" name="usefilter" value="usefilter">
+        <input type="hidden" name="useraction" value="OpenUser">
         <input class="buttontext" type="submit" value="User">
     </form>
-    <?php if(!empty($useraction && $Usefilter == 'usefilter')){ $user = user::selectuser($_SESSION["user"]); ?>
+    <?php if($useraction == 'OpenUser'){ $user = user::selectuser($_SESSION["user"]); var_dump($user["user_id"]) ?>
         <div class="menuviewuser" style="margin-top: 0px;" >
             <div class="viewtitle">
                 <h2>PROFILE OF <?=$_SESSION['user'];?>!</h2>
@@ -48,37 +46,38 @@ $Usefilter = filter_input(INPUT_POST, 'usefilter', FILTER_UNSAFE_RAW);
                 <form action="updateuser.php" method="POST" class="viewuserfrom">
                     <!-- Username -->
                     <label for="Username">Username:</label>
-                    <input type="text" id="username" name="username" min="0.00" step="0.01" placeholder="<?php echo $user["username"]; ?> "; required>
+                    <input type="text" id="username" name="username" value="<?php echo $user["username"]; ?> "; required>
                     <!-- Password -->
                     <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" min="0.00" step="0.01" placeholder="<?php echo $user["userpassword"]; ?> "; required>
+                    <input type="password" id="password" name="password" value="<?php echo $user["userpassword"]; ?> "; required>
                     <!-- Name -->
                     <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" min="0.00" step="0.01" placeholder="<?php echo $user["name"]; ?> "; required>
+                    <input type="text" id="name" name="name" value="<?php echo $user["name"]; ?> "; required>
                     <br>
                     <!-- Adress -->
                     <label for="address">Address:</label>
-                    <input type="text" id="address" name="address" min="0.00" step="0.01" placeholder="<?php echo $user["address"]; ?> "; required>
+                    <input type="text" id="address" name="address" value="<?php echo $user["address"]; ?> "; required>
                     <!-- Zipcode -->
                     <label for="price">Zipcode:</label>
-                    <input type="text" id="zipcode" name="zipcode" min="0.00" step="0.01" placeholder="<?php echo $user["zipcode"] ?> "; required>
+                    <input type="text" id="zipcode" name="zipcode" value="<?php echo $user["zipcode"] ?> "; required>
                     <!-- City -->
                     <label for="price">City:</label>
-                    <input type="text" id="city" name="city" min="0.00" step="0.01" placeholder="<?php echo $user["city"] ?> "; required>
+                    <input type="text" id="city" name="city" value="<?php echo $user["city"] ?> "; required>
                     <!-- Phone -->
                     <br>
                     <label for="phone">Phone Number:</label>
-                    <input type="text" id="phone" name="phone" min="0.00" step="0.01" placeholder="<?php echo $user["phone"] ?> "; required>
+                    <input type="text" id="phone" name="phone" value="<?php echo $user["phone"] ?> "; required>
                     <!-- EMail -->
                     <label for="email">EMail:</label>
-                    <input type="text" id="email" name="email" min="0.00" step="0.01" placeholder="<?php echo $user["email"] ?> "; required>
+                    <input type="text" id="email" name="email" value="<?php echo $user["email"] ?> "; required>
                     <!-- UserID -->
-                    <tr> <td> <?php echo $user["user_id"]; ?> </td> </tr>
                     <label for="user_id">UserID:</label>
-                    <input type="int" id="user_id" name="user_id" min="0.00" step="0.01" placeholder="<?php echo $user["user_id"] ?> "; required>
+                    <tr> <td> <?php echo $user["user_id"]; ?> </td> </tr>
+                    <input type="hidden" id="user_id" name="user_id" value="<?php echo $user["user_id"];?>">
                     <!-- Button back -->
-                    <button class="button">Submit</button>
-                    <a href="./profilepage.php" class="button">Back</a>
+                    <button class="button" name="Submit">Submit</button>
+                    <input class="button" name="useraction" type="submit" value="CloseUser">
+
                 </form>
             </div>
         <?php } ?>
