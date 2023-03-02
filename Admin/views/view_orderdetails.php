@@ -1,6 +1,10 @@
 <?php
-
+if (!isset($_SESSION["admin"])) {
+    header("Location: ../../User/loginpage.php");
+    exit();
+}
 $order_rows = Order::ViewOrderDetails($_POST["order_id"]);
+
 
 ?>
 <h3>Order Details</h3>

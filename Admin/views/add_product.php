@@ -1,5 +1,9 @@
 <?php
 include('./views/edit_products.php');
+if (!isset($_SESSION["admin"])) {
+    header("Location: ../../User/loginpage.php");
+    exit();
+}
 //Array of Category Objects
 $categories = Category::ViewCategory();
 

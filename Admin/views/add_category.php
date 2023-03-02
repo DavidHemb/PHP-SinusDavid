@@ -1,5 +1,10 @@
 <?php
 include('./views/edit_categories.php');
+
+if (!isset($_SESSION["admin"])) {
+    header("Location: ../../User/loginpage.php");
+    exit();
+}
 //Anrop till att lägga till produkt
 //ProductClass::addproduct($pruduct_id, +$title, $price, +$color, +$product_description, $imagepath, +$stock, $date_created, $date_updated, $is_published);
 ?>

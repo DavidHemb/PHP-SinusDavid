@@ -1,4 +1,8 @@
 <?php
+if (!isset($_SESSION["admin"])) {
+    header("Location: ../../User/loginpage.php");
+    exit();
+}
 include('./views/edit_products.php');
 $products = Product::ADMINviewProducts();
 

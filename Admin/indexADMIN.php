@@ -84,7 +84,6 @@ session_start();
     if ($action == 'select_category') {
         include('./views/update_category.php');
     }
-  
 
 
     // Handles input from included formaction pages above

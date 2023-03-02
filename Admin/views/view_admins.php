@@ -1,5 +1,9 @@
 <?php
 require_once('../Classes/user.php');
+if (!isset($_SESSION["admin"])) {
+    header("Location: ../../User/loginpage.php");
+    exit();
+}
 $admins = User::GetAllAdminsFromDB();
 
 ?>
@@ -26,7 +30,7 @@ $admins = User::GetAllAdminsFromDB();
                 <td>
                     <form method="POST">
                         <input type="hidden" name="admin_username" value="<?= $admins[$i]["username"]?>">
-                        <input class="admin-small-btn admin-red-btn" type="submit" id="delete_product" name="action" value="Delete Admin"></input>
+                        <input class="admin-small-btn admin-red-btn" type="submit" id="delete_admin" name="action" value="Delete Admin"></input>
                     </form>
 
                 </td>

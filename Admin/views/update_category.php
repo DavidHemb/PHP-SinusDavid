@@ -1,4 +1,8 @@
 <?php include('./views/edit_categories.php');
+if (!isset($_SESSION["admin"])) {
+    header("Location: ../../User/loginpage.php");
+    exit();
+}
 $categories = Category::ViewCategory();
 
 ?>

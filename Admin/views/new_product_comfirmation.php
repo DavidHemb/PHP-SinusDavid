@@ -1,3 +1,8 @@
+<?php
+if (!isset($_SESSION["admin"])) {
+    header("Location: ../../User/loginpage.php");
+    exit();
+} ?>
 <h3>Success: New Product <?php echo $new_product->get_title()?> Created</h3>
 <table>
     <thead>

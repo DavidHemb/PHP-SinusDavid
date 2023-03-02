@@ -1,4 +1,9 @@
-
+<?php 
+if (!isset($_SESSION["admin"])) {
+    header("Location: ../../User/loginpage.php");
+    exit();
+}
+?>
     <form method="POST">
         <input type="submit" name="view_categories" value="View Categories"></input>
         <input type="submit" name="create_category" value="Create Category"></input>
