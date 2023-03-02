@@ -41,12 +41,12 @@ session_start();
                 <form style="margin-bottom: -60px;" action="index.php">
                 <input type="hidden" name="product_id" value="<?= $product->get_product_id(); ?>">
                     <p></p>
-                    <input class="button" style="display: inline-block; background-color: black; color: white;" type="submit" value="Back">
+                    <input class="button" style="display: inline-block; color: white;" type="submit" value="Back">
                 </form>
                 <form action="shoppingcart.php" method="POST">
                 <input type="hidden" name="product_id" value="<?= $product->get_product_id(); ?>">
                     <p></p>
-                    <input class="button" style="float: right; background-color: green; margin-top: -30px;" type="submit" value="Buy now">
+                    <input class="button" style="float: right;" type="submit" value="Buy now">
                 </form>
         </div>
     </body>

@@ -51,7 +51,7 @@ session_start();
         </form>
     </div>
     <div class="cart">
-        <a href="shoppingcart.php" style="text-decoration: none; font-size: 60px;">
+        <a href="cart.php" style="text-decoration: none; font-size: 60px;">
             <p class="carttext">Cart</p>
         </a>
     </div>
@@ -98,7 +98,7 @@ session_start();
         if ($products[$i]->get_is_published() == 1) { ?>
             <div class="productcard">
                 <div>
-                    <td><img src="./<?= $products[$i]->get_imagepath(); ?>" alt=" <?= $products[$i]->get_title(); ?> " border=0 height=600 width=600></img></td>
+                    <td><img style="display: block; margin-right: auto; margin-left: auto;" src="./<?= $products[$i]->get_imagepath(); ?>" alt=" <?= $products[$i]->get_title(); ?> " border=0 height=600 width=600></img></td>
                     <p class="title"><?= $products[$i]->get_title(); ?></p>
                     <p></p>
                     <td>Stock:</td>
@@ -110,21 +110,21 @@ session_start();
                     <form action="productcard.php" method="POST">
                         <input type="hidden" name="product_id" value="<?= $products[$i]->get_product_id(); ?>">
                         <p></p>
-                        <input class="button" style="background-color: brown; margin-top: 40px;" type="submit" value="More info">
+                        <input class="button" style="margin-top: 40px;" type="submit" value="More info">
                     </form>
                     <?php if ($products[$i]->get_stock() > 0) { ?>
                         <form action="shoppingcart.php" method="POST">
                             <input type="hidden" name="product_id" value="<?= $products[$i]->get_product_id(); ?>">
                             <p></p>
-                            <input class="button" style="float: right; background-color: green;" type="submit" value="Buy now">
+                            <input class="button" style="float: right;" type="submit" value="Buy now">
                         </form>
                     <?php } else { ?>
-                        <p class="button" style="float: right; background-color: green; cursor: default;">Out of stock!</p>
+                        <p class="button" style="float: right; cursor: default;">Out of stock!</p>
                     <?php } ?>
                     <form action="picturetab.php" method="POST" target="_blank">
                         <input type="hidden" name="product_id" value="<?= $products[$i]->get_product_id(); ?>">
                         <p></p>
-                        <input class="button" style=" background-color: black;" type="submit" value="View picture in new tab">
+                        <input class="button" type="submit" value="View picture in new tab">
                     </form>
                 </div>
             </div>

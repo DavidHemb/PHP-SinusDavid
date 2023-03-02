@@ -16,7 +16,7 @@ if ($FoundAdmin['username'] == $inputusername && $FoundAdmin['userpassword'] == 
 //Check for user loggin
 else if ($FoundUser['username'] != $inputusername || $FoundUser['userpassword'] != $inputpassword)
 {
-    header("Location: loginpage.php?error= Wrong unsername or password");
+    header("Location: loginpage.php?error= Wrong username or password");
     exit();
 }
 else  

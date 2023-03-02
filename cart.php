@@ -56,7 +56,9 @@ $order = $_SESSION["rows"];
 <body>
     <div class="header">
         <h2 class="backbutton"><a href="./index.php" class="text">Back</a></h2>
+        <div style="margin: auto;">
         <h1 class="headertitle">CART</h1>
+        </div>
         <h2><a href="./checkout.php"></a></h2>
     </div>
     <div class="cart">
