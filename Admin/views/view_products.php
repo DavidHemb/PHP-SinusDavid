@@ -4,10 +4,15 @@ if (!isset($_SESSION["admin"])) {
     exit();
 }
 include('./views/edit_products.php');
-$products = Product::ADMINviewProducts();
+$products = Product::ADMINviewActiveProducts();
 
 ?>
+
 <h3>Products</h3>
+<form method="POST">
+        <input class="admin-small-btn" type="submit" id="view_inactive" name="action" value="View Inactive"></input>
+</form>
+
 <table class="admin-products-view">
     <thead>
         <tr>
@@ -65,3 +70,6 @@ $products = Product::ADMINviewProducts();
     </tbody>
 
 </table>
+
+    
+ 

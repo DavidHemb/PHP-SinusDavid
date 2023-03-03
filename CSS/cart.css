@@ -59,6 +59,7 @@ body{
     border-radius: 12px;
     margin: auto;
     padding: 10px;
+    margin-top: 50px;
 }
 .nothingincart{
     color: white;
@@ -66,4 +67,19 @@ body{
     background-color: transparent;
     border: none;
     font-size: 50px;
+}
+.quantityerrorclass{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+.quantityerror{
+    color: red;
+    text-decoration: none;
+    background-color: transparent;
+    border: 2px solid red;
+    padding: 10px;
+    font-size: 30px;
+    text-align: center;
 }

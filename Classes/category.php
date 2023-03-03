@@ -39,7 +39,7 @@ class Category
         // Create connection
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
 
-        $sql = "SELECT * FROM category order BY title";
+        $sql = "SELECT * FROM category order BY category_id";
         $result = $conn->query($sql);
         $categories = array();
 
@@ -119,13 +119,36 @@ class Category
 
     public static function DeleteCategory($category_id)
     {
+
+        //Read and find the products that are part of the category that is about to be deleted
         // Create connection
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
         // Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-        //SQL
+
+        $sql = "SELECT p.product_id FROM products p WHERE p.category_id = $category_id";
+        $result = $conn->query($sql);
+        $products = array();
+
+        while($row = $result->fetch_assoc()) {
+           
+            $products[] = $row['product_id'];
+        }
+       
+
+
+        //Update all found products to the "No Category" category that has id 1
+        $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+        for ($i = 0; $i < count($products); $i++) {
+            $sql = "UPDATE products p SET p.category_id = 1
+            WHERE p.product_id = $products[$i]";
+            $conn->query($sql);
+           
+        }
+
+        //Delete the category
         $query = $conn->prepare("DELETE FROM category WHERE `category_id`=?");
         $query->bind_param('i', $category_id);
         $query->execute();

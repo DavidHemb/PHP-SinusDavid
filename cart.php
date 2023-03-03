@@ -23,11 +23,31 @@ if (!empty($action)) {
             $quantity = $_POST['quantity'];
 
             $order = $_SESSION["rows"];
-            $order[$_POST['index']]->set_quantity($quantity);
 
-            $_SESSION["rows"] = $order;
-            break;
+            //CHECK QUANTITY
+            $quantityerror = 0;
+            for ($i = 0; $i < count($order); $i++) {
+                $products = product::ADMINselectProductById($order[$i]->get_product_id());
+
+                //COMPARE
+                if ($products->get_stock() < $quantity) {
+                    $quantityerror = 1;
+                }
+            }
+            //IF NO ERRORS
+            if ($quantityerror == 0) {
+                $order[$_POST['index']]->set_quantity($quantity);
+                $_SESSION["rows"] = $order;
+                break;
+                //IF ERRORS
+            } else { ?>
+                <div class="quantityerrorclass">
+                    <p class="quantityerror">Quantity cannot exceede stock!</p>
+                </div>
+                <?php break;
+            }
         case 'Checkout':
+            //MAKE SESSON ORDER
             $order = $_SESSION["rows"];
             $_SESSION["order"] = $order;
             header("Location: ./checkout.php");
@@ -141,8 +161,7 @@ if (empty($_SESSION["rows"])) { ?>
                             </td>
                             <td>
                                 <form method="POST">
-                                    <input type="int" id="quantity" name="quantity"
-                                        value="<?php echo $order[$i]->get_quantity(); ?>">
+                                    <input type="int" id="quantity" name="quantity" value="" placeholder="<?php echo $order[$i]->get_quantity(); ?>">
                                     <input type="hidden" id="index" name="index" value="<?php echo ($i) ?>">
                                     <input type="submit" name="action" value="Update">
                                 </form>

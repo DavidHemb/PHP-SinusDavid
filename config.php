@@ -19,6 +19,7 @@ function Connect($dbHost, $dbName, $dbUsername, $dbPassword)
     }
     return $conn;
 }
+
 class Cleaner
 {
     static function test_input($data)

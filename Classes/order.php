@@ -46,7 +46,7 @@ class Order
         $this->order_rows = $order_rows;
     }
 
-    public function CreateOrder()
+    public function CreateOrder($user_id)
     {
 
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
@@ -55,6 +55,7 @@ class Order
             die("Connection failed: " . $conn->connect_error);
         }
 
+        //Creates a new order in the database
         $sql = "INSERT INTO `order` (date_created, date_updated) VALUES (NOW(), NOW())";
 
         if ($conn->query($sql) === TRUE) {
@@ -62,6 +63,7 @@ class Order
         } else {
             echo "Error deleting record: " . $conn->error;
         }
+        //Sets the currents objects order ID with the last inserted order id from the order table
         $this->set_order_id($conn->insert_id);
 
         //Loop the order_row array
@@ -71,6 +73,7 @@ class Order
             $quantity = $this->order_rows[$i]->get_quantity();
             $price = $this->order_rows[$i]->get_price();
 
+            //
             $query = $conn->prepare("INSERT INTO order_row (product_id, order_id, quantity, price) 
             VALUES (?, ?, ?, ?)");
             $query->bind_param(
@@ -81,7 +84,33 @@ class Order
                 $price
             );
             $query->execute();
+
+            //Update stock in database deduct the $quantity from the stock field on the product.
+            $query = $conn->prepare("UPDATE products p SET p.stock= (p.stock-?)
+            WHERE product_id=?");
+            $query->bind_param(
+                'ii',
+                $quantity,
+                $product_id
+            );
+
+            $query->execute();
+
         }
+        echo "innan sista insert: ";
+        echo $this->order_id;
+        echo "<br>";
+        echo $user_id;
+        //Insers data into the correct customers orderhistory
+        $query = $conn->prepare("INSERT INTO orderhistory
+        (order_id, user_id)
+        VALUES (?, ?)");
+        $query->bind_param(
+            'ii',
+            $this->order_id,
+            $user_id
+        );
+        $query->execute();
 
         $conn->close();
     }

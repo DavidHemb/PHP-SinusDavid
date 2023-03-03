@@ -173,7 +173,9 @@ class Product
     }
     //ADMIN Function
     //Loops all products in the productstable and returns and array of product objects.
-    static function ADMINviewProducts()
+
+    //FUNCTIONS ADMINviewActiveProducts(), ADMINviewNOTActiveProducts() could be refactored into one, missed but due to lack of time.
+    static function ADMINviewActiveProducts()
     {
 
         // Create connection
@@ -181,7 +183,31 @@ class Product
 
         $sql = "SELECT p.*, c.title AS category_title FROM products p
         LEFT OUTER JOIN category c
-        ON c.category_id = p.category_id";
+        ON c.category_id = p.category_id
+        WHERE p.is_active = 1";
+        $result = $conn->query($sql);
+        $products = array();
+
+
+        while ($row = $result->fetch_assoc()) {
+
+            $product = new Product($row['category_title'], $row['title'], $row['price'], $row['color'], $row['product_description'], $row['imagepath'], $row['stock'], $row['date_created'], $row['date_updated'], $row['is_published']);
+            $product->set_product_id($row['product_id']);
+            $products[] = $product;
+        }
+        return $products;
+    }
+
+    static function ADMINviewNOTActiveProducts()
+    {
+
+        // Create connection
+        $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+
+        $sql = "SELECT p.*, c.title AS category_title FROM products p
+        LEFT OUTER JOIN category c
+        ON c.category_id = p.category_id
+        WHERE p.is_active = 0";
         $result = $conn->query($sql);
         $products = array();
 
@@ -237,7 +263,7 @@ class Product
     {
 
 
-        var_dump($product);
+        //var_dump($product);
 
         //Varible title in database sent in by calling function
         // Create connection
@@ -274,10 +300,28 @@ class Product
 
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
 
-        $sql = "DELETE FROM products WHERE product_id = $product_id";
+        $sql = "UPDATE products p SET p.is_active = 0, p.is_published = 0
+        WHERE product_id = $product_id";
 
         if ($conn->query($sql) === TRUE) {
-            $result = "Record deleted successfully";
+            $result = "Product status is now Inactive";
+        } else {
+            echo "Error deleting record: " . $conn->error;
+        }
+
+        $conn->close();
+        return $result;
+    }
+
+    static function ADMINActivateProduct($product_id)
+    {
+        $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+
+        $sql = "UPDATE products p SET p.is_active = 1
+        WHERE product_id = $product_id";
+
+        if ($conn->query($sql) === TRUE) {
+            $result = "Product status is now Inactive";
         } else {
             echo "Error deleting record: " . $conn->error;
         }

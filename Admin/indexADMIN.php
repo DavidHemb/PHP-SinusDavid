@@ -7,7 +7,6 @@ require_once('../Classes/user.php');
 require_once('../config.php');
 
 $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
-
 session_start();
 
 ?>
@@ -21,7 +20,7 @@ session_start();
         exit();
     }
 
-
+    
     //echo var_dump($_POST['Add_New_Product']);
     // Selects input form
 
@@ -31,8 +30,10 @@ session_start();
         include('./views/view_admins.php');
     }
     if (isset($_POST['Edit_products'])) {
+
         include('./views/view_products.php');
     }
+    
     if (isset($_POST['Edit_categories'])) {
         include('./views/edit_categories.php');
     }
@@ -62,14 +63,28 @@ session_start();
 
 
     //EDIT PRODUCT MENU!!
+    if ($action == 'View Inactive') {
+        include('./views/view_inactive_products.php');
+    }
+    if ($action == 'view_active') {
+        include('./views/view_products.php');
+    } 
+
     if ($action == 'New Product') {
         include('./views/add_product.php');
     }
     if ($action == 'Delete Product') { ?>
-        <h3>Product Delted!</h3>
+        <h3>Product set to Inactive!</h3>
     <?php
         Product::ADMINdeleteProduct($_POST['product_id']);
     }
+    if ($action == 'Activate Product') { ?>
+        <h3>Product set to Active!</h3>
+    <?php
+        echo $_POST['product_id'];
+        Product::ADMINActivateProduct($_POST['product_id']);
+    }
+
     if ($action == 'Update Product') {
         include('./views/update_product.php');
     }
@@ -229,15 +244,15 @@ session_start();
                 $FoundAdmin = User::selectadmins($inputusername);
 
                 if (empty($FoundAdmin)) {
-                        User::ReqisterNewAdmin($inputusername, $inputpassword);
-                        include('./views/view_admins.php');
-                        } else { ?>
-                        
-                        <h3>Username already taken!</h3>
-                        <p>Please try again.</p>
+                    User::ReqisterNewAdmin($inputusername, $inputpassword);
+                    include('./views/view_admins.php');
+                } else { ?>
 
-                    <?php }
-                }
+                    <h3>Username already taken!</h3>
+                    <p>Please try again.</p>
+
+    <?php }
+            }
 
             break;
     }
@@ -271,7 +286,7 @@ function UploadImage()
     $findLastDot = strpos($filename, ".");
     $fileRenamed = false;
     // Check if file already exists if so rename it with title as suffix
-    
+
     $stringToClean = $_POST['title'];
     $filteredsuffix = strtolower(preg_replace('/[\W\s\/]+/', '-', $stringToClean));
 
@@ -284,7 +299,7 @@ function UploadImage()
 
     // If file already exists confirm the rename
     if ($fileRenamed && !empty($_FILES["fileToUpload"]["tmp_name"])) { ?>
-        
+
         <p>File already exists.</p>
         <p>File renamed to <?php echo $_FILES["fileToUpload"]["name"] ?></p>
         <?php
@@ -328,7 +343,7 @@ function UploadImage()
         } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) { ?>
                 <p><em>The file <?php echo htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) ?> has been uploaded!</em></p>
-                
+
 <?php } else {
                 echo "Sorry, there was an error uploading your file.";
             }
