@@ -3,7 +3,7 @@ class User
 {
     static public function registeruser($username, $password, $date)
     {
-        
+
         //Varibles in database sent in by calling function
         // Create connection
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
@@ -128,8 +128,9 @@ class User
 
     //FUNCTIONS FOR ADMIN SECTION OF THE SITE
 
-    static public function GetAllAdminsFromDB(){
-        
+    static public function GetAllAdminsFromDB()
+    {
+
         // Create connection
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
         // Check connection
@@ -150,8 +151,40 @@ class User
         return  $admins;
     }
 
-    static public function GetAllCustomersFromDB(){
-         // Create connection
+    static public function DeleteAdmin($username)
+    {
+        // Create connection
+        $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        //SQL
+        $query = $conn->prepare("DELETE FROM admins WHERE `username`=?");
+        $query->bind_param('s', $username);
+        $query->execute();
+        $conn->close();
+    }
+
+    static public function ReqisterNewAdmin($username, $password){
+           //Varibles in database sent in by calling function
+        // Create connection
+        $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        //SQL
+        $query = $conn->prepare("INSERT INTO admins (username, userpassword)
+        VALUES (?, ?)");
+        $query->bind_param('ss', $username, $password);
+        $query->execute();
+        $conn->close();
+    }
+
+    static public function GetAllCustomersFromDB()
+    {
+        // Create connection
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
         // Check connection
         if ($conn->connect_error) {
@@ -169,8 +202,5 @@ class User
             $customers[] = $row;
         }
         return  $customers;
-
-
     }
-
 }
