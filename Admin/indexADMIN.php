@@ -66,7 +66,7 @@ session_start();
         include('./views/add_product.php');
     }
     if ($action == 'Delete Product') { ?>
-        <h3>Product Delted!</h3>
+        <h3>Product set to Inactive!</h3>
     <?php
         Product::ADMINdeleteProduct($_POST['product_id']);
     }

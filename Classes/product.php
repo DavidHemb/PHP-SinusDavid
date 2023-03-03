@@ -173,7 +173,7 @@ class Product
     }
     //ADMIN Function
     //Loops all products in the productstable and returns and array of product objects.
-    static function ADMINviewProducts()
+    static function ADMINviewActiveProducts()
     {
 
         // Create connection
@@ -181,7 +181,8 @@ class Product
 
         $sql = "SELECT p.*, c.title AS category_title FROM products p
         LEFT OUTER JOIN category c
-        ON c.category_id = p.category_id";
+        ON c.category_id = p.category_id
+        WHERE p.is_active = 1";
         $result = $conn->query($sql);
         $products = array();
 
@@ -274,10 +275,11 @@ class Product
 
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
 
-        $sql = "DELETE FROM products WHERE product_id = $product_id";
+        $sql = "UPDATE products p SET p.is_active = 0, p.is_published = 0
+        WHERE product_id = $product_id";
 
         if ($conn->query($sql) === TRUE) {
-            $result = "Record deleted successfully";
+            $result = "Product status is now Inactive";
         } else {
             echo "Error deleting record: " . $conn->error;
         }
