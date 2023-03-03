@@ -2,10 +2,10 @@
 require_once('./Classes/order.php');
 require_once('./Classes/row.php');
 require_once('./config.php');
-$row1 = new Row(9,3,123);
-$row2 = new Row(11,1,12);
+$row1 = new Row(3,3,12);
+$row2 = new Row(5,1,123);
 
-
+$userid = 14;
 $rows = array($row1,$row2);
 var_dump($rows);
 
@@ -19,7 +19,7 @@ var_dump($rows);
 <?php
 if($action == "Place Order"){
     $order = new Order($rows);
-    $order->CreateOrder();
+    $order->CreateOrder($userid);
 }
  
 $foo = array(
