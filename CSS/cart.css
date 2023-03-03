@@ -68,3 +68,18 @@ body{
     border: none;
     font-size: 50px;
 }
+.quantityerrorclass{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+.quantityerror{
+    color: red;
+    text-decoration: none;
+    background-color: transparent;
+    border: 2px solid red;
+    padding: 10px;
+    font-size: 30px;
+    text-align: center;
+}
