@@ -44,10 +44,15 @@ session_start();
                     <input class="button" style="display: inline-block; color: white;" type="submit" value="Back">
                 </form>
                 <form action="shoppingcart.php" method="POST">
-                <input type="hidden" name="product_id" value="<?= $product->get_product_id(); ?>">
-                    <p></p>
-                    <input class="button" style="float: right;" type="submit" value="Buy now">
-                </form>
+                <?php if ($product->get_stock() > 0) { ?>
+                        <form action="shoppingcart.php" method="POST">
+                            <input type="hidden" name="product_id" value="<?= $product->get_product_id(); ?>">
+                            <p></p>
+                            <input class="button" style="float: right;" type="submit" value="Buy now">
+                        </form>
+                    <?php } else { ?>
+                        <p class="button" style="float: right; cursor: default;">Out of stock!</p>
+                    <?php } ?>
         </div>
     </body>
 </html>
