@@ -7,7 +7,6 @@ require_once('../Classes/user.php');
 require_once('../config.php');
 
 $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
-
 session_start();
 
 ?>
@@ -64,7 +63,7 @@ session_start();
 
 
     //EDIT PRODUCT MENU!!
-    if (isset($_POST['view_inactive'])) {
+    if ($action == 'View Inactive') {
         include('./views/view_inactive_products.php');
     }
     if ($action == 'view_active') {
@@ -80,7 +79,7 @@ session_start();
         Product::ADMINdeleteProduct($_POST['product_id']);
     }
     if ($action == 'Activate Product') { ?>
-        <h3>Product Ative!</h3>
+        <h3>Product set to Active!</h3>
     <?php
         echo $_POST['product_id'];
         Product::ADMINActivateProduct($_POST['product_id']);
