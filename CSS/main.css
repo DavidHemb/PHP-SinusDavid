@@ -70,3 +70,8 @@ body{
     border-radius: 12px;
     cursor: pointer;
 }
+.searchbar{
+    font-size: 30px;
+    padding: 5px;
+    margin-bottom: 20px;
+}
