@@ -263,7 +263,7 @@ class Product
     {
 
 
-        var_dump($product);
+        //var_dump($product);
 
         //Varible title in database sent in by calling function
         // Create connection
