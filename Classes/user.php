@@ -20,14 +20,15 @@ class User
     }
     static public function registeruserorder($userarray)
     {
-    $name = cleaner::test_input($_POST['name']);
-    $address = cleaner::test_input($_POST['address']);
-    $zipcode = cleaner::test_input($_POST['zipcode']);
-    $city = cleaner::test_input($_POST['city']);
-    $phone = cleaner::test_input($_POST['phone']);
-    $email = cleaner::test_input($_POST['email']);
-    $currentDateTime = date('Y-m-d H:i:s');
 
+        $name = $userarray['name'];
+        $address = $userarray['address'];
+        $zipcode = $userarray['zipcode'];
+        $city = $userarray['city'];
+        $phone = $userarray['phone'];
+        $email = $userarray['email'];
+        $currentDateTime = $userarray['currentDateTime'];
+        var_dump($userarray);
         //KLAR MEN ADDERA DATECREATED!!!!
         //Varibles in database sent in by calling function
         // Create connection
@@ -37,23 +38,21 @@ class User
             die("Connection failed: " . $conn->connect_error);
         }
         //SQL
-        $query = $conn->prepare("INSERT INTO users ( `name`, `address`, zipcode, city, phone, email,date_created)
+        $query = $conn->prepare("INSERT INTO users ( `name`, `address`, zipcode, city, phone, email, date_created)
         VALUES ( ?, ?, ?, ?, ?, ?, ? )");
-        $query->bind_param('sssssss', $name['name'], $address['address'], $zipcode['zipcode'], $city['city'], $phone['phone'], $email['email'],$currentDateTime['date_created']);
+        $query->bind_param('sssssss', $name, $address, $zipcode, $city, $phone, $email, $currentDateTime);
         $query->execute();
         $conn->close();
     }
-    static public function updateuserorder($userarray)
+    // Checkout start ------
+    static public function updateuserorder($userarray) //TODO
     {
-        $username = $userarray['username'];
-        $userpassword = $userarray['userpassword'];
-        $uname = $userarray['name'];
-        $uaddress = $userarray['address'];
-        $uzip = $userarray['zipcode'];
-        $ucity = $userarray['city'];
-        $tele = $userarray['phone'];
-        $mail = $userarray['email'];
-        $id = $userarray['user_id'];
+        $name = $userarray['name'];
+        $address = $userarray['address'];
+        $zipcode = $userarray['zipcode'];
+        $city = $userarray['city'];
+        $phone = $userarray['phone'];
+        $email = $userarray['email']; 
         //Varibles in database sent in by calling function
         // Create connection
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
@@ -62,7 +61,7 @@ class User
             die("Connection failed: " . $conn->connect_error);
         }
         //SQL
-        $sql = ("UPDATE `users` SET `username`='$username', userpassword='$userpassword', `name`='$uname', `address`='$uaddress', zipcode='$uzip', city='$ucity', phone='$tele', email='$mail' WHERE user_id='$id'");
+        $sql = ("UPDATE `users` SET  `name`='$name', `address`='$address', zipcode='$zipcode', city='$city', phone='$phone', email='$email' WHERE user_id='$id'");
         if ($conn->query($sql) === TRUE) {
             return;
         } else {
@@ -70,6 +69,9 @@ class User
         }
         $conn->close();
     }
+    
+
+
     static function selectuser($username)
     {
         // Create connection
@@ -87,6 +89,9 @@ class User
         //Return selected product in array 
         return $r;
     }
+
+    // Checkout end -------
+
     static function selectadmins($username)
     {
         // Create connection
@@ -104,6 +109,7 @@ class User
         //Return selected product in array 
         return $r;
     }
+    
     static function selectorderhistory($username)
     {
         //JOIN BORH KEYS

@@ -128,48 +128,54 @@
 	</fieldset>
 </form>
 <br>
+<?php   
+if (!isset($_SESSION["user"])) { // finns det en user
 
-	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+}   ?>
+	<form method="post" action="./checkoutconf.php">
 		<fieldset>
 			<p><span class="error">* required field</span></p>
 
 			<label for="name">Name:</label>
-			<input type="text" id="name" name="name" value="<?php echo $name;?>">
+			<input type="text" id="name" name="name" value="<?php echo $name;?>"; required>
 			<span class="error">* <?php echo $nameErr;?></span>
 			<br><br>
 
 			<label for="address">Address:</label>
-			<input type="text" id="address" name="address" value="<?php echo $address;?>">
+			<input type="text" id="address" name="address" value="<?php echo $address;?>"; required>
 			<span class="error">* <?php echo $addressErr;?></span>
 			<br><br>
 
 			<label for="zipcode">Zipcode:</label>
-			<input type="text" id="zipcode" name="zipcode" value="<?php echo $zipcode;?>">
+			<input type="text" id="zipcode" name="zipcode" value="<?php echo $zipcode;?>"; required>
 			<span class="error">* <?php echo $zipcodeErr;?></span>
             <br><br>
 
             <label for="city">City:</label>
-			<input type="text" id="city" name="city" value="<?php echo $city;?>">
+			<input type="text" id="city" name="city" value="<?php echo $city;?>"; required>
 			<span class="error">* <?php echo $cityErr;?></span>
             <br><br>
 
             <label for="phone">Phone:</label>
-			<input type="text" id="phone" name="phone" value="<?php echo $phone;?>">
+			<input type="text" id="phone" name="phone" value="<?php echo $phone;?>"; required>
 			<span class="error">* <?php echo $phoneErr;?></span>
             <br><br>
 
             <label for="email">Email :</label>
-			<input type="text" id="email" name="email" value="<?php echo $email;?>">
+			<input type="text" id="email" name="email" value="<?php echo $email;?>"; required>
 			<span class="error">* <?php echo $emailErr;?></span>
             <br><br>
      
-            <input type="submit" name = "submit" value="Search";>
+            <input type="submit" name = "submit" value="Submit";>
 
 			<br><br>
-			<?php	registeruserorder();	?>
 			<form>
 	<fieldset>
-						
+<?php 
+
+
+
+?>						
 	 
 
 	
@@ -180,7 +186,6 @@
 <button onclick="location.href='./User/registerpage.php'">
   <a href="./User/registerpage.php">Finish purchase</a>
 </button>
-
 
 	</fieldset>
 </form>
