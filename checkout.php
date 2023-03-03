@@ -15,13 +15,15 @@ for ($i = 0; $i < count($order); $i++) {
 	$products = product::ADMINselectProductById($order[$i]->get_product_id());
 	?>
 	<table>
-		<th>Title</th>
-		<th></th>
-		<th>Color</th>
-		<th>Price</th>
-		<th>Quantity</th>
-		<tr>
-			<td>
+		<thead>
+			<th scope="col">Title</th>
+            <th scope="col">Image</th>
+            <th scope="col">Color</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+		</thead>
+		<tbody>
+		<td>
 				<?= $products->get_title(); ?>
 			</td>
 			<td><img src="../<?= $products->get_imagepath(); ?>" alt=" <?= $products->get_title(); ?> " border=0 height=50
@@ -35,6 +37,8 @@ for ($i = 0; $i < count($order); $i++) {
 			<td>
 				<?php echo $order[$i]->get_quantity(); ?>
 			</td>
+		</tbody>
+			
 	</table>
 <?php }
 // define variables and set to empty values
@@ -346,6 +350,9 @@ if (!empty($makearray)) {
 			}
 			if ($duplicateusernameid == 0) {
 				User::updateuserorder($userarray);
+				$newOrder = new Order($order);
+				$newOrder->CreateOrder($_POST['user_id']);
+				$_SESSION['newOrderID'] = $newOrder->get_order_id();
 				header("Location: purchaseconfirmation.php");
 			} else {
 				header("Location: checkout.php?error= Username already exists!");
