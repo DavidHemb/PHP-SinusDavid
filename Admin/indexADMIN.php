@@ -132,14 +132,16 @@ session_start();
             if ($uploadOk) {
                 $date = date('Y/m/d H:i');
 
+                //test_input(
+
                 $new_product = new Product(
                     $_POST['category_id'],
-                    $_POST['title'],
-                    $_POST['price'],
-                    $_POST['color'],
-                    $_POST['product_description'],
+                    Cleaner::test_input($_POST['title']),
+                    Cleaner::test_input($_POST['price']),
+                    Cleaner::test_input($_POST['color']),
+                    Cleaner::test_input($_POST['product_description']),
                     $web_filePath,
-                    $_POST['stock'],
+                    Cleaner::test_input($_POST['stock']),
                     $date,
                     $date,
                     $_POST['published']
@@ -269,16 +271,20 @@ function UploadImage()
     $findLastDot = strpos($filename, ".");
     $fileRenamed = false;
     // Check if file already exists if so rename it with title as suffix
-    while (file_exists($target_file)) {
-        $target_file = $target_dir . substr($filename, 0, $findLastDot) . "_" . "{$_POST['title']}" . substr($filename, $findLastDot);
-        $filename = substr($filename, 0, $findLastDot) . "_" . "{$_POST['title']}" . substr($filename, $findLastDot);
-        $_FILES["fileToUpload"]["name"] = $filename;
+    
+    $stringToClean = $_POST['title'];
+    $filteredsuffix = strtolower(preg_replace('/[\W\s\/]+/', '-', $stringToClean));
 
+    while (file_exists($target_file)) {
+        $target_file = $target_dir . substr($filename, 0, $findLastDot) . "_" . "$filteredsuffix" . substr($filename, $findLastDot);
+        $filename = substr($filename, 0, $findLastDot) . "_" . "{$filteredsuffix}" . substr($filename, $findLastDot);
+        $_FILES["fileToUpload"]["name"] = $filename;
         $fileRenamed = true;
     }
 
     // If file already exists confirm the rename
     if ($fileRenamed && !empty($_FILES["fileToUpload"]["tmp_name"])) { ?>
+        
         <p>File already exists.</p>
         <p>File renamed to <?php echo $_FILES["fileToUpload"]["name"] ?></p>
         <?php
@@ -322,6 +328,7 @@ function UploadImage()
         } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) { ?>
                 <p><em>The file <?php echo htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) ?> has been uploaded!</em></p>
+                
 <?php } else {
                 echo "Sorry, there was an error uploading your file.";
             }
