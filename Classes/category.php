@@ -39,7 +39,7 @@ class Category
         // Create connection
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
 
-        $sql = "SELECT * FROM category order BY title";
+        $sql = "SELECT * FROM category order BY category_id";
         $result = $conn->query($sql);
         $categories = array();
 
