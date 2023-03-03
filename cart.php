@@ -38,7 +38,6 @@ if (!empty($action)) {
             if ($quantityerror == 0) {
                 $order[$_POST['index']]->set_quantity($quantity);
                 $_SESSION["rows"] = $order;
-                var_dump($_SESSION["rows"]);
                 break;
                 //IF ERRORS
             } else { ?>
