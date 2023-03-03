@@ -10,7 +10,7 @@ $products = Product::ADMINviewActiveProducts();
 
 <h3>Products</h3>
 <form method="POST">
-        <input class="admin-small-btn" type="submit" id="view_inactive" name="view_inactive" value="View Inactive"></input>
+        <input class="admin-small-btn" type="submit" id="view_inactive" name="action" value="View Inactive"></input>
 </form>
 
 <table class="admin-products-view">
