@@ -50,12 +50,12 @@ $product = product::ADMINselectProductById($product_id);
             <h1>Added to cart!</h1>
             <form style="margin-bottom: -60px;" action="index.php">
                 <p></p>
-                <input class="button" style="display: inline-block; background-color: black; color: white;" type="submit" value="Continue Shopping">
+                <input class="button" type="submit" value="Continue Shopping">
             </form>
             <form action="cart.php" method="POST">
                 <input type="hidden" name="product_id" value="<?= $product->get_product_id(); ?>">
                 <p></p>
-                <input class="button" style="float: right; background-color: green; margin-top: -10px;" type="submit" value="To cart">
+                <input class="button" style="float: right; margin-top: -10px;" type="submit" value="To cart">
             </form>
         </div>
     </body>

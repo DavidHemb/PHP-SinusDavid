@@ -45,15 +45,15 @@ class User
     }
     static public function updateuserorder($userarray)
     {
-        $username = cleaner::test_input($userarray['username']);
-        $userpassword = cleaner::test_input($userarray['userpassword']);
-        $uname = cleaner::test_input($userarray['name']);
-        $uaddress = cleaner::test_input($userarray['address']);
-        $uzip = cleaner::test_input($userarray['zipcode']);
-        $ucity = cleaner::test_input($userarray['city']);
-        $tele = cleaner::test_input($userarray['phone']);
-        $mail = cleaner::test_input($userarray['email']);
-        $id = cleaner::test_input($userarray['user_id']);
+        $username = $userarray['username'];
+        $userpassword = $userarray['userpassword'];
+        $uname = $userarray['name'];
+        $uaddress = $userarray['address'];
+        $uzip = $userarray['zipcode'];
+        $ucity = $userarray['city'];
+        $tele = $userarray['phone'];
+        $mail = $userarray['email'];
+        $id = $userarray['user_id'];
         //Varibles in database sent in by calling function
         // Create connection
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);

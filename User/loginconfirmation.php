@@ -2,16 +2,18 @@
 require_once('../Classes/user.php');
 require_once('../config.php');
 session_start();
-$inputusername = strtolower($_POST['username']);
-$inputpassword = strtolower($_POST['password']);
+$inputusername1 = strtolower($_POST['username']);
+$inputpassword1= strtolower($_POST['password']);
+$inputusername = Cleaner::test_input($inputusername1);
+$inputpassword = Cleaner::test_input($inputpassword1);
 $FoundAdmin = User::selectadmins($inputusername);
 $FoundUser = User::selectuser($inputusername);
 //Check for admin loggin
 if ($FoundAdmin['username'] == $inputusername && $FoundAdmin['userpassword'] == $inputpassword)
 {       
-        $_SESSION["admin"] = $FoundAdmin['username'];
-        header("Location: ../Admin/indexADMIN.php");
-        exit();
+    $_SESSION["admin"] = $FoundAdmin['username'];
+    header("Location: ../Admin/indexADMIN.php");
+    exit();
 }
 //Check for user loggin
 else if ($FoundUser['username'] != $inputusername || $FoundUser['userpassword'] != $inputpassword)

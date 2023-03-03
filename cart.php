@@ -5,6 +5,12 @@ require_once('./classes/category.php');
 require_once('./classes/row.php');
 session_start();
 $action = filter_input(INPUT_POST, 'action', FILTER_UNSAFE_RAW);
+
+if (empty($_SESSION["rows"])) {
+header('./index.php');
+exit();
+}
+
 if (!empty($action)) {
     switch ($action) {
         case 'Remove':
@@ -114,7 +120,7 @@ $order = $_SESSION["rows"];
                         </td>
                     <?php } ?>
                     <?php if (!empty($_SESSION["rows"])) { ?>
-                        <input type="submit" name="action" value="Checkout">
+                        <input type="submit" style="font-size: 40px;" name="action" value="Checkout">
                     <?php } ?>
             </table>
         </form>

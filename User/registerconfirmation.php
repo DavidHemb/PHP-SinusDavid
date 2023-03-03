@@ -1,8 +1,10 @@
 <?php
 require_once('../Classes/user.php');
 require_once('../config.php');
-$inputusername = strtolower($_POST['username']);
-$inputpassword = strtolower($_POST['password']);
+$inputusername1 = strtolower($_POST['username']);
+$inputpassword1 = strtolower($_POST['password']);
+$inputusername = Cleaner::test_input($inputusername1);
+$inputpassword = Cleaner::test_input($inputpassword1);
 $date = date('Y/m/d H:i');
 if (!empty($inputusername))
 {
