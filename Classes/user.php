@@ -20,12 +20,12 @@ class User
     }
     static public function registeruserorder($userarray)
     {
-    $name = $_POST['name'];
-    $address = $_POST['address'];
-    $zipcode = $_POST['zipcode'];
-    $city = $_POST['city'];
-    $phone = $_POST['phone'];
-    $email = $_POST['email'];
+    $name = cleaner::test_input($_POST['name']);
+    $address = cleaner::test_input($_POST['address']);
+    $zipcode = cleaner::test_input($_POST['zipcode']);
+    $city = cleaner::test_input($_POST['city']);
+    $phone = cleaner::test_input($_POST['phone']);
+    $email = cleaner::test_input($_POST['email']);
     $currentDateTime = date('Y-m-d H:i:s');
 
         //KLAR MEN ADDERA DATECREATED!!!!
@@ -45,15 +45,15 @@ class User
     }
     static public function updateuserorder($userarray)
     {
-        $username = $userarray['username'];
-        $userpassword = $userarray['userpassword'];
-        $uname = $userarray['name'];
-        $uaddress = $userarray['address'];
-        $uzip = $userarray['zipcode'];
-        $ucity = $userarray['city'];
-        $tele = $userarray['phone'];
-        $mail = $userarray['email'];
-        $id = $userarray['user_id'];
+        $username = cleaner::test_input($userarray['username']);
+        $userpassword = cleaner::test_input($userarray['userpassword']);
+        $uname = cleaner::test_input($userarray['name']);
+        $uaddress = cleaner::test_input($userarray['address']);
+        $uzip = cleaner::test_input($userarray['zipcode']);
+        $ucity = cleaner::test_input($userarray['city']);
+        $tele = cleaner::test_input($userarray['phone']);
+        $mail = cleaner::test_input($userarray['email']);
+        $id = cleaner::test_input($userarray['user_id']);
         //Varibles in database sent in by calling function
         // Create connection
         $conn = connect(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
