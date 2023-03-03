@@ -55,6 +55,7 @@ class Order
             die("Connection failed: " . $conn->connect_error);
         }
 
+        //Creates a new order in the database
         $sql = "INSERT INTO `order` (date_created, date_updated) VALUES (NOW(), NOW())";
 
         if ($conn->query($sql) === TRUE) {
@@ -72,6 +73,7 @@ class Order
             $quantity = $this->order_rows[$i]->get_quantity();
             $price = $this->order_rows[$i]->get_price();
 
+            //
             $query = $conn->prepare("INSERT INTO order_row (product_id, order_id, quantity, price) 
             VALUES (?, ?, ?, ?)");
             $query->bind_param(
@@ -82,6 +84,18 @@ class Order
                 $price
             );
             $query->execute();
+
+            //Update stock in database deduct the $quantity from the stock field on the product.
+            $query = $conn->prepare("UPDATE products p SET p.stock= (p.stock-?)
+            WHERE product_id=?");
+            $query->bind_param(
+                'ii',
+                $quantity,
+                $product_id
+            );
+
+            $query->execute();
+
         }
         echo "innan sista insert: ";
         echo $this->order_id;
