@@ -5,7 +5,7 @@ require_once('./config.php');
 $row1 = new Row(3,3,12);
 $row2 = new Row(5,1,123);
 
-$userid = 14;
+$userid = 13;
 $rows = array($row1,$row2);
 var_dump($rows);
 

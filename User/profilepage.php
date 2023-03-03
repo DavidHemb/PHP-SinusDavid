@@ -18,6 +18,7 @@ $useraction = filter_input(INPUT_POST, 'useraction', FILTER_UNSAFE_RAW);
         <title>SINUS PROFILE</title>
     </head>
     <body>
+        <!-- AUDIO -->
     <audio autoplay>
         <source src="../Assets/songs/GIGACHADshort.mp3" type="audio/mpeg">
     </audio>

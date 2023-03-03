@@ -94,13 +94,13 @@ session_start();
                 $products = product::filterproducts($_POST['category_title']);
                 break;
             case 'Clear':
-                $products = Product::ADMINviewProducts();
+                $products = Product::ADMINviewActiveProducts();
                 break;
         }
     }
     //ELSE ALL
     else {
-        $products = Product::ADMINviewProducts();
+        $products = Product::ADMINviewActiveProducts();
     }
     for ($i = 0; $i < count($products); $i++) {
         if ($products[$i]->get_is_published() == 1) { ?>
